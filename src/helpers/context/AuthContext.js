@@ -1,5 +1,5 @@
 import authReducer, { initAuthState, authAction } from "../feature/authSlice";
-import { createContext, useReducer, useEffect, useState } from "react";
+import { createContext, useReducer, useEffect, useState, useRef } from "react";
 import { authService } from "../service/authService";
 export const AuthContext = createContext();
 
@@ -10,24 +10,24 @@ function AuthContextProvider({ children }) {
 		type: "error",
 		message: "fail",
 	});
-	let timeout = null;
+	const timeout = useRef(null);
 	const clearAlert = () => {
-		timeout = null;
+		timeout.current = null;
 		setAlertAuth((pre) => {
 			return { ...pre, show: false };
 		});
 	};
 	const setAlertFail = ({ message }) => {
 		if (timeout) {
-			console.log("clear", timeout);
-			clearTimeout(timeout);
+			console.log("clear", timeout.current);
+			clearTimeout(timeout.current);
 		}
 		setAlertAuth({
 			show: true,
 			type: "error",
 			message,
 		});
-		timeout = setTimeout(() => {
+		timeout.current = setTimeout(() => {
 			clearAlert();
 		}, 3000);
 	};

@@ -29,7 +29,7 @@ const LoginForm = () => {
 		}
 		const loginData = await loginUser(stateForm);
 		console.log("response", loginData);
-		if (loginData.httpStatus === 200) {
+		if (loginData.status === 200) {
 			navigate("/", { replace: true });
 		} else {
 			setAlertFail({ message: loginData.message });
@@ -38,16 +38,7 @@ const LoginForm = () => {
 
 	return (
 		<div className="container-fluid row">
-			<div className="col-sm-6 p-5">
-				<Header className="text-white"> Best ideas</Header>
-				<Header className="text-info"> for best team</Header>
-				<Paragram>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus,
-					expedita iusto veniam atque, magni tempora mollitia dolorum
-					consequatur nulla, neque debitis eos reprehenderit quasi ab ipsum nisi
-					dolorem modi. Quos?
-				</Paragram>
-			</div>
+			<div className="col-sm-6 p-5"></div>
 			<div
 				className="col-sm-6 flex-column d-flex bg-white p-5"
 				style={{ gap: "20px", minHeight: "600px" }}

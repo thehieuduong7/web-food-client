@@ -33,22 +33,6 @@ const authSlice = createSlice({
 				user: null,
 			};
 		},
-		// setAlert(state, action) {
-		// 	const { type, message } = action.payload;
-		// 	return {
-		// 		...state,
-		// 		alertState: {
-		// 			type,
-		// 			message,
-		// 		},
-		// 	};
-		// },
-		// clearAlert(state) {
-		// 	return {
-		// 		...state,
-		// 		alertState: null,
-		// 	};
-		// },
 	},
 });
 
