@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import AlertMsg from "../layout/AlertMessage";
+import { FormControl, Grid, TextField } from "@mui/material";
+import { Box } from "@mui/system";
 const LoginForm = () => {
 	const navigate = useNavigate();
 	const { loginUser, alertAuth, setAlertFail } = useContext(AuthContext);
@@ -23,6 +25,7 @@ const LoginForm = () => {
 	};
 
 	const onClickSubmit = async (e) => {
+		e.preventDefault();
 		if (!isValidate(stateForm)) {
 			setAlertFail({ message: "input invalid" });
 			return;
@@ -37,74 +40,103 @@ const LoginForm = () => {
 	};
 
 	return (
-		<div className="container-fluid row">
-			<div className="col-sm-6 p-5"></div>
-			<div
-				className="col-sm-6 flex-column d-flex bg-white p-5"
-				style={{ gap: "20px", minHeight: "600px" }}
+		<Grid container justifyContent={"center"} sx={{ p: 3 }}>
+			<Grid
+				container
+				sm={7}
+				lg={3}
+				direction="column"
+				rowGap="20px"
+				sx={{
+					p: 5,
+					minHeight: "600px",
+					display: "flex",
+					borderRadius: "16px",
+					background: "white",
+					boxShadow: 3,
+				}}
 			>
-				<div className="d-flex justify-content-center">
-					<Header>SIGN IN</Header>
-				</div>
+				<Grid
+					container
+					sx={{
+						justifyContent: "center",
+					}}
+				>
+					<Header>
+						<span>
+							<i className="fa fa-user me-2" />
+						</span>
+						SIGN IN
+					</Header>
+				</Grid>
+				{/* alert message */}
 				<div>
 					<AlertMsg {...alertAuth} />
 				</div>
-				<div className="form mt-2">
-					<div className="form-floating mt-3 ">
-						<input
-							type="text"
-							className="form-control"
-							id="inputUsr"
-							placeholder="Username"
-							name="username"
-							value={stateForm.username}
-							onChange={onChangeForm}
-						/>
-						<label htmlFor="inputUsr">Username</label>
-					</div>
-					<div className="form-floating mt-3 ">
-						<input
-							type="password"
-							className="form-control"
-							id="inputPwd"
-							placeholder="Password"
-							name="password"
-							value={stateForm.password}
-							onChange={onChangeForm}
-						/>
-						<label htmlFor="inputPwd">Password</label>
-					</div>
-				</div>
-				<div className="d-flex w-100 justify-content-between">
-					<div className="form-check">
-						<input
-							className="form-check-input"
-							type="checkbox"
-							value=""
-							id="checkRemember"
-						/>
-						<label className="form-check-label" htmlFor="checkRemember">
-							Remember
-						</label>
-					</div>
-					<div>
-						<Link to={"/register"}>Create account?</Link>
-					</div>
-				</div>
-				<div className="mb-3 text-center ">
-					<button
-						className="btn btn-primary w-100 rounded"
-						style={{ height: "50px" }}
-						onClick={onClickSubmit}
-					>
-						<span>
-							<i className="fa fa-sign-in me-2" />
-						</span>
-						SIGN IN
-					</button>
-				</div>
-			</div>
-		</div>
+				<FormControl
+					component={"form"}
+					onSubmit={onClickSubmit}
+					noValidate
+					fullWidth
+				>
+					<Grid container direction="column" rowGap={"15px"}>
+						<Grid container direction="column" rowGap={"10px"}>
+							<TextField
+								required
+								fullWidth
+								label="username"
+								name="username"
+								value={stateForm.username}
+								onChange={onChangeForm}
+							/>
+							<TextField
+								required
+								fullWidth
+								type="password"
+								label="password"
+								name="password"
+								value={stateForm.password}
+								onChange={onChangeForm}
+							/>
+						</Grid>
+
+						{/* className="d-flex w-100 justify-content-between" */}
+						<Grid container justifyContent="space-between">
+							<Grid item>
+								<div className="form-check">
+									<input
+										className="form-check-input"
+										type="checkbox"
+										value=""
+										id="checkRemember"
+									/>
+									<label className="form-check-label" htmlFor="checkRemember">
+										Remember
+									</label>
+								</div>{" "}
+							</Grid>
+							<Grid item>
+								<div>
+									<Link to={"/register"}>Create account?</Link>
+								</div>{" "}
+							</Grid>
+						</Grid>
+						<Grid container justifyContent={"center"}>
+							<button
+								type="submit"
+								className="btn btn-primary w-100 rounded"
+								style={{ height: "50px" }}
+							>
+								<span>
+									<i className="fa fa-sign-in me-2" />
+								</span>
+								SIGN IN
+							</button>
+						</Grid>
+					</Grid>
+				</FormControl>
+			</Grid>
+		</Grid>
 	);
 };
 
@@ -112,14 +144,6 @@ const Header = styled.h2`
 	font-weight: 700;
 	font-size: 45px;
 	margin-top: 5px;
-`;
-const Paragram = styled.p`
-	margin-top: 56px;
-	margin-bottom: 56px;
-
-	margin-right: 50px;
-	color: hsl(218, 81%, 85%);
-	text-align: justify;
 `;
 
 export default LoginForm;
