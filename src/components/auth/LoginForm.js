@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
@@ -32,10 +32,10 @@ const LoginForm = () => {
 		}
 		const loginData = await loginUser(stateForm);
 		console.log("response", loginData);
-		if (loginData.status === 200) {
+		if (loginData && loginData.status === 200) {
 			navigate("/", { replace: true });
 		} else {
-			setAlertFail({ message: loginData.message });
+			setAlertFail({ message: loginData.message || "Server off" });
 		}
 	};
 

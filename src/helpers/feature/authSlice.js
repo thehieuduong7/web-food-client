@@ -4,6 +4,7 @@ const initialState = {
 	user: null,
 	authLoading: true,
 	isAuthenticated: false,
+	authorization: null,
 };
 
 const authSlice = createSlice({
@@ -11,12 +12,13 @@ const authSlice = createSlice({
 	initialState,
 	reducers: {
 		setAuth(state, action) {
-			const { user, isAuthenticated } = action.payload;
+			const { user } = action.payload;
 			return {
 				...state,
 				authLoading: false,
-				isAuthenticated,
 				user,
+				isAuthenticated: user != null,
+				authorization: user == null ? null : user.role,
 			};
 		},
 		loadingAuth(state) {
@@ -29,8 +31,8 @@ const authSlice = createSlice({
 			return {
 				...state,
 				authLoading: false,
-				isAuthenticated: false,
 				user: null,
+				authorization: null,
 			};
 		},
 	},

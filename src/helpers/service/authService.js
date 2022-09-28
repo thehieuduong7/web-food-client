@@ -27,7 +27,12 @@ const login = async (userForm) => {
 			localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.data.accessToken);
 		return res.data;
 	} catch (err) {
-		throw err.response.data;
+		throw err.respone
+			? err.respone.data
+			: {
+					status: 500,
+					message: "Server error",
+			  };
 	}
 };
 const loadUser = async () => {
@@ -42,7 +47,12 @@ const loadUser = async () => {
 		return res.data;
 	} catch (err) {
 		logout();
-		throw err.response.data;
+		throw err.respone
+			? err.respone.data
+			: {
+					status: 500,
+					message: "Server error",
+			  };
 	}
 };
 const register = async (userForm) => {
@@ -53,7 +63,12 @@ const register = async (userForm) => {
 		const res = await axios.post(`${API_REGISTER}`, userForm);
 		return res.data;
 	} catch (err) {
-		throw err.response.data;
+		throw err.respone
+			? err.respone.data
+			: {
+					status: 500,
+					message: "Server error",
+			  };
 	}
 };
 export const authService = {

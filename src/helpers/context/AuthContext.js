@@ -50,7 +50,6 @@ function AuthContextProvider({ children }) {
 			const res = await authService.loadUser();
 			dispatch(
 				authAction.setAuth({
-					isAuthenticated: true,
 					user: res.data,
 				})
 			);
@@ -58,7 +57,6 @@ function AuthContextProvider({ children }) {
 		} catch (err) {
 			dispatch(
 				authAction.setAuth({
-					isAuthenticated: false,
 					user: null,
 				})
 			);

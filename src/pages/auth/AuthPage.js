@@ -4,18 +4,14 @@ import { Navigate } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import styled from "@emotion/styled";
-import { CircularProgress } from "@mui/material";
+import Loadding from "../../components/layout/Loadding";
 function AuthPage({ authRoute }) {
 	const {
 		authState: { authLoading, isAuthenticated },
 	} = useContext(AuthContext);
 	let body;
 	if (authLoading) {
-		body = (
-			<div className="d-flex justify-content-center mt-5">
-				<CircularProgress color="info" size={60} thickness={5} />
-			</div>
-		);
+		body = <Loadding />;
 	} else if (isAuthenticated) {
 		return <Navigate to="/" replace />;
 	} else {
