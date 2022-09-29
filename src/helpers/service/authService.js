@@ -27,8 +27,9 @@ const login = async (userForm) => {
 			localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.data.accessToken);
 		return res.data;
 	} catch (err) {
-		throw err.respone
-			? err.respone.data
+		console.log("err", err, err.response);
+		throw err.response.data
+			? err.response.data
 			: {
 					status: 500,
 					message: "Server error",
@@ -47,8 +48,8 @@ const loadUser = async () => {
 		return res.data;
 	} catch (err) {
 		logout();
-		throw err.respone
-			? err.respone.data
+		throw err.response.data
+			? err.response.data
 			: {
 					status: 500,
 					message: "Server error",
@@ -63,8 +64,8 @@ const register = async (userForm) => {
 		const res = await axios.post(`${API_REGISTER}`, userForm);
 		return res.data;
 	} catch (err) {
-		throw err.respone
-			? err.respone.data
+		throw err.response.data
+			? err.response.data
 			: {
 					status: 500,
 					message: "Server error",

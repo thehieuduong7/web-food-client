@@ -3,8 +3,17 @@ import styled from "@emotion/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import AlertMsg from "../layout/AlertMessage";
-import { FormControl, Grid, TextField } from "@mui/material";
-import { Box } from "@mui/system";
+import {
+	Grid,
+	TextField,
+	Container,
+	Avatar,
+	Typography,
+	Box,
+	Button,
+} from "@mui/material";
+import { Face } from "@mui/icons-material";
+import Copyright from "../layout/CopyRight";
 const LoginForm = () => {
 	const navigate = useNavigate();
 	const { loginUser, alertAuth, setAlertFail } = useContext(AuthContext);
@@ -12,9 +21,7 @@ const LoginForm = () => {
 		username: "",
 		password: "",
 	});
-	const isValidate = (form) => {
-		return form.username !== "" && form.password !== "";
-	};
+
 	const onChangeForm = (e) => {
 		setStateForm((pre) => {
 			return {
@@ -26,10 +33,6 @@ const LoginForm = () => {
 
 	const onClickSubmit = async (e) => {
 		e.preventDefault();
-		if (!isValidate(stateForm)) {
-			setAlertFail({ message: "input invalid" });
-			return;
-		}
 		const loginData = await loginUser(stateForm);
 		console.log("response", loginData);
 		if (loginData && loginData.status === 200) {
@@ -40,67 +43,53 @@ const LoginForm = () => {
 	};
 
 	return (
-		<Grid container justifyContent={"center"} sx={{ p: 3 }}>
-			<Grid
-				container
-				sm={7}
-				lg={3}
-				direction="column"
-				rowGap="20px"
-				sx={{
-					p: 5,
-					minHeight: "600px",
-					display: "flex",
-					borderRadius: "16px",
-					background: "white",
-					boxShadow: 3,
-				}}
-			>
-				<Grid
-					container
-					sx={{
-						justifyContent: "center",
-					}}
-				>
-					<Header>
-						<span>
-							<i className="fa fa-user me-2" />
-						</span>
-						SIGN IN
-					</Header>
-				</Grid>
-				{/* alert message */}
-				<div>
-					<AlertMsg {...alertAuth} />
-				</div>
-				<FormControl
-					component={"form"}
-					onSubmit={onClickSubmit}
-					noValidate
-					fullWidth
-				>
-					<Grid container direction="column" rowGap={"15px"}>
-						<Grid container direction="column" rowGap={"10px"}>
-							<TextField
-								required
-								fullWidth
-								label="username"
-								name="username"
-								value={stateForm.username}
-								onChange={onChangeForm}
-							/>
-							<TextField
-								required
-								fullWidth
-								type="password"
-								label="password"
-								name="password"
-								value={stateForm.password}
-								onChange={onChangeForm}
-							/>
+		<Container
+			sx={{
+				backgroundColor: "white",
+				p: 5,
+				minHeight: "600px",
+				borderRadius: "16px",
+				background: "white",
+				boxShadow: 3,
+			}}
+			maxWidth="xs"
+		>
+			<Grid container direction={"column"} alignItems="center">
+				<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+					<Face />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Sign in
+				</Typography>
+				<Box component="form" onSubmit={onClickSubmit} sx={{ mt: 3 }}>
+					<Grid container alignItems={"center"} direction="column" gap={2}>
+						<Grid container>
+							<AlertMsg {...alertAuth} />
 						</Grid>
-
-						{/* className="d-flex w-100 justify-content-between" */}
+						<Grid container spacing={2}>
+							<Grid item xs={12}>
+								<TextField
+									required
+									fullWidth
+									label="username"
+									name="username"
+									value={stateForm.username}
+									onChange={onChangeForm}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<TextField
+									required
+									fullWidth
+									type="password"
+									label="password"
+									name="password"
+									value={stateForm.password}
+									onChange={onChangeForm}
+								/>
+							</Grid>
+						</Grid>
+						{/* option */}
 						<Grid container justifyContent="space-between">
 							<Grid item>
 								<div className="form-check">
@@ -121,29 +110,23 @@ const LoginForm = () => {
 								</div>{" "}
 							</Grid>
 						</Grid>
+
 						<Grid container justifyContent={"center"}>
-							<button
+							<Button
 								type="submit"
-								className="btn btn-primary w-100 rounded"
-								style={{ height: "50px" }}
+								fullWidth
+								variant="contained"
+								sx={{ mt: 3, mb: 2 }}
 							>
-								<span>
-									<i className="fa fa-sign-in me-2" />
-								</span>
-								SIGN IN
-							</button>
+								Sign in
+							</Button>
 						</Grid>
 					</Grid>
-				</FormControl>
+				</Box>
+				<Copyright sx={{ mt: 5 }} />
 			</Grid>
-		</Grid>
+		</Container>
 	);
 };
-
-const Header = styled.h2`
-	font-weight: 700;
-	font-size: 45px;
-	margin-top: 5px;
-`;
 
 export default LoginForm;

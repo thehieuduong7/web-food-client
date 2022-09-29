@@ -30,7 +30,7 @@ const authSlice = createSlice({
 		logout(state) {
 			return {
 				...state,
-				authLoading: false,
+				isAuthenticated: false,
 				user: null,
 				authorization: null,
 			};

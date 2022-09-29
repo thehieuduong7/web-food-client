@@ -24,7 +24,10 @@ function NavBar() {
 
 	const ButtonUser = isAuthenticated ? (
 		<Button
-			onClick={logout}
+			onClick={() => {
+				logout();
+				navigate("/login");
+			}}
 			color="inherit"
 			sx={{
 				borderRadius: "12px",
@@ -34,7 +37,7 @@ function NavBar() {
 				mx: 1,
 			}}
 		>
-			Logout
+			{user.username}, Logout
 		</Button>
 	) : (
 		<Button
