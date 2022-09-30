@@ -58,7 +58,9 @@ function NavBar() {
 	return (
 		<AppBar color={"transparent"} position="fixed">
 			<Container maxWidth={"xl"}>
-				<Toolbar>
+				<Toolbar
+					sx={{ paddingLeft: "0 !important", paddingRight: "0 !important" }}
+				>
 					<IconButton
 						size="large"
 						edge="start"
