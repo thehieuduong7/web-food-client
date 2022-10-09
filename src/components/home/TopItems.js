@@ -35,7 +35,7 @@ const dataTopFood = [
 function TopItems(pros) {
 	return (
 		<Container maxWidth={"xl"}>
-			<Grid container direction={"column"} gap={3} sx={{ height: "1500px" }}>
+			<Grid container direction={"column"} gap={3}>
 				<Grid item>
 					<h1
 						style={{

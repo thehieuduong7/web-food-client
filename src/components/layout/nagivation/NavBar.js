@@ -1,6 +1,4 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../helpers/context/AuthContext";
+import { useContext, useState } from "react";
 import { CardGiftcard } from "@mui/icons-material";
 import {
 	AppBar,
@@ -13,48 +11,9 @@ import {
 	Container,
 } from "@mui/material";
 import { FastfoodRounded } from "@mui/icons-material";
+import ButtonUser from "./ButtonUser";
 
 function NavBar() {
-	const {
-		authState: { isAuthenticated, user },
-		logout,
-	} = useContext(AuthContext);
-	console.log("isAuthenticated", isAuthenticated);
-	const navigate = useNavigate();
-
-	const ButtonUser = isAuthenticated ? (
-		<Button
-			onClick={() => {
-				logout();
-				navigate("/login");
-			}}
-			color="inherit"
-			sx={{
-				borderRadius: "12px",
-				borderColor: "'error.main'",
-				border: 1,
-				py: "12px",
-				mx: 1,
-			}}
-		>
-			{user.username}, Logout
-		</Button>
-	) : (
-		<Button
-			onClick={() => navigate("/login")}
-			color="inherit"
-			sx={{
-				borderRadius: "12px",
-				borderColor: "'error.main'",
-				border: 1,
-				py: "12px",
-				mx: 1,
-			}}
-		>
-			Login/Sign up
-		</Button>
-	);
-
 	return (
 		<AppBar color={"transparent"} position="fixed">
 			<Container maxWidth={"xl"}>
@@ -89,7 +48,7 @@ function NavBar() {
 								<CardGiftcard />
 							</Badge>
 						</IconButton>
-						{ButtonUser}
+						<ButtonUser />
 					</Box>
 				</Toolbar>
 			</Container>

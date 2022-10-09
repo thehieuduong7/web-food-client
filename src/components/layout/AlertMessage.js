@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Alert } from "@mui/material";
 const AlertMsg = (pros) => {
 	return pros.show ? (

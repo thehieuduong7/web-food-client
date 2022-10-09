@@ -17,24 +17,29 @@ function Footer() {
 							className="d-flex justify-content-between"
 							style={{ width: "250px" }}
 						>
-							<a href="" className="link-secondary">
-								<i className="fa fa-facebook-f"></i>
-							</a>
-							<a href="" className="link-secondary">
-								<i className="fa fa-twitter"></i>
-							</a>
-							<a href="" className="link-secondary">
-								<i className="fa fa-google"></i>
-							</a>
-							<a href="" className="link-secondary">
-								<i className="fa fa-instagram"></i>
-							</a>
-							<a href="" className="link-secondary">
-								<i className="fa fa-linkedin"></i>
-							</a>
-							<a href="" className="link-secondary">
+							<span>
+								<i className="fa fa-facebook-f"></i>{" "}
+							</span>
+
+							<span>
+								<i className="fa fa-twitter"></i>{" "}
+							</span>
+
+							<span>
+								<i className="fa fa-google"></i>{" "}
+							</span>
+
+							<span>
+								<i className="fa fa-instagram"></i>{" "}
+							</span>
+
+							<span>
+								<i className="fa fa-linkedin"></i>{" "}
+							</span>
+
+							<span>
 								<i className="fa fa-github"></i>
-							</a>
+							</span>
 						</div>
 						{/* <!-- Right --> */}
 					</section>
