@@ -1,38 +1,7 @@
 import { Container, Grid, Button } from "@mui/material";
 import FoodCard from "../food/FoodCard";
 
-const dataTopFood = [
-	{
-		id: 1,
-		picture:
-			"https://d1sag4ddilekf6.azureedge.net/compressed/merchants/5-C3UGENNJVZBCHA/hero/0e303ff8a893439b8e2a4453b231c853_1664146040308751335.jpg",
-		name: "Bún Bò Huế 65 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 2,
-		picture:
-			"https://d1sag4ddilekf6.azureedge.net/compressed/merchants/5-C3UGENNJVZBCHA/hero/0e303ff8a893439b8e2a4453b231c853_1664146040308751335.jpg",
-		name: "Bún Bò Huế 32 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 3,
-		picture:
-			"https://d1sag4ddilekf6.azureedge.net/compressed/merchants/5-C3UGENNJVZBCHA/hero/0e303ff8a893439b8e2a4453b231c853_1664146040308751335.jpg",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 3,
-		picture:
-			"https://d1sag4ddilekf6.azureedge.net/compressed/merchants/5-C3UGENNJVZBCHA/hero/0e303ff8a893439b8e2a4453b231c853_1664146040308751335.jpg",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-];
-
-function TopItems(pros) {
+function TopItems({ dataTopFood }) {
 	return (
 		<Container maxWidth={"xl"}>
 			<Grid container direction={"column"} gap={3}>

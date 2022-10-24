@@ -19,42 +19,43 @@ const dataCategories = [
 	"Kelly Snyder",
 ];
 
-export default function SelectCategories({ setCategories }) {
+export default function SelectCategories({ categoies, setCategories }) {
 	return (
 		<>
-			<FormControl fullWidth>
-				<Autocomplete
-					onChange={(event, value) => setCategories(value)}
-					multiple
-					options={dataCategories}
-					disableCloseOnSelect
-					limitTags={2}
-					getOptionLabel={(option) => option}
-					renderOption={(props, option, { selected }) => (
-						<li {...props}>
-							<Checkbox
-								icon={icon}
-								checkedIcon={checkedIcon}
-								style={{ marginRight: 8 }}
-								checked={selected}
-							/>
-							{option}
-						</li>
-					)}
-					renderInput={(params) => (
-						<>
-							<TextField
-								{...params}
-								label="Categories"
-								placeholder="Categories"
-								maxRows={2}
-								id="autocomplete-select-categories"
-								// sx={{ overflow: "auto" }}
-							/>
-						</>
-					)}
-				/>
-			</FormControl>
+			<Autocomplete
+				name="categories"
+				onChange={setCategories}
+				multiple
+				options={dataCategories}
+				disableCloseOnSelect
+				limitTags={2}
+				getOptionLabel={(option) => option}
+				value={categoies}
+				renderOption={(props, option, { selected }) => (
+					<li {...props}>
+						<Checkbox
+							icon={icon}
+							checkedIcon={checkedIcon}
+							style={{ marginRight: 8 }}
+							checked={selected}
+						/>
+						{option}
+					</li>
+				)}
+				renderInput={(params) => (
+					<>
+						<TextField
+							{...params}
+							placeholder="Categories"
+							maxRows={2}
+							id="autocomplete-select-categories"
+							variant="standard"
+						/>
+					</>
+				)}
+				fullWidth
+				sx={{ border: 0 }}
+			/>
 		</>
 	);
 }
