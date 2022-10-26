@@ -7,7 +7,6 @@ function DetailFood() {
 		<>
 			<Container maxWidth="xl" sx={{ marginTop: "70px" }}>
 				<InfoFood />
-				<FormFood />
 			</Container>
 		</>
 	);

@@ -6,6 +6,7 @@ import {
 	Button,
 } from "@mui/material";
 import { useState } from "react";
+import CarouselImage from "./CarouselImage";
 const min = 0;
 const max = 10;
 
@@ -16,22 +17,13 @@ function InfoFood() {
 		<>
 			<Grid
 				container
-				spacing={2}
+				spacing={3}
 				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
 			>
-				<Grid item lg={5} md={5} sx={{ border: 1, borderRadius: "16px" }}>
-					<img
-						src="img_girl.jpg"
-						alt=" food"
-						width="100%"
-						style={{
-							aspectRatio: "1 / 1",
-							minHeight: "250px",
-							maxHeight: "300px",
-						}}
-					/>
+				<Grid item lg={5} md={5}>
+					<CarouselImage />
 				</Grid>
-				<Grid item lg={7} md={7}>
+				<Grid item lg={7} md={7} sx={{ pr: 5 }}>
 					<Grid container direction="column" gap={1}>
 						<Typography variant="h3" component="h3">
 							name

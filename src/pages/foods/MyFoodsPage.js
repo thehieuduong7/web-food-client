@@ -1,5 +1,4 @@
 import { Container, Grid, Pagination } from "@mui/material";
-import ButtonCreateFood from "../../components/food/ModalCreateFood";
 import ListFoods from "../../components/food/ListFoods";
 import OptionViewFoods from "../../components/food/OptionViewFood";
 import { useState } from "react";
@@ -83,9 +82,7 @@ function MyFoodsPage() {
 					</Grid>
 				</Grid>
 			</Container>
-			<Grid sx={{ position: "fixed", bottom: "150px", right: "10%" }}>
-				<ButtonCreateFood />
-			</Grid>
+			<Grid sx={{ position: "fixed", bottom: "150px", right: "10%" }}></Grid>
 		</>
 	);
 }

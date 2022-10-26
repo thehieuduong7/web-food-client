@@ -1,13 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Col, Form, Image, Row } from "react-bootstrap";
 
 import { Chip, Avatar, Paper } from "@mui/material";
 
-function UploadImage({ images, setImages }) {
-	const [objURLs, setobjURLs] = useState([]);
-	const handleAppend = () => {};
-
+function UploadImage({ value, setState }) {
+	const InputFileRef = useRef();
 	const [selectedFile, setSelectedFile] = useState(null);
+
+	const handleAppend = () => {
+		if (!selectedFile || selectedFile.name.trim() === "") return;
+		const url = URL.createObjectURL(selectedFile);
+		// const filename = selectedFile.name;
+		setState((pre) => [...pre, { url }]);
+		InputFileRef.current.value = "";
+		setSelectedFile(null);
+	};
+	const handleRemove = (index) => {
+		URL.revokeObjectURL(value[index].url);
+		setState((pre) =>
+			pre.filter((e, i) => {
+				return i !== index;
+			})
+		);
+	};
 	const onSelectFile = (e) => {
 		if (!e.target.files || e.target.files.length === 0) {
 			setSelectedFile(undefined);
@@ -22,29 +37,41 @@ function UploadImage({ images, setImages }) {
 				<div className="d-flex pe-3">
 					<div className="flex-grow-1">
 						<Form.Group controlId="formFileSm" className="w-100 border-0">
-							<Form.Control type="file" size="md" accept="image/*" />
+							<Form.Control
+								type="file"
+								onChange={onSelectFile}
+								size="md"
+								accept="image/*"
+								ref={InputFileRef}
+							/>
+							<div className="invalid-feedback">require file upload</div>
 						</Form.Group>
 					</div>
+
 					<div className="ms-2">
-						<Button>upload</Button>
+						<Button onClick={handleAppend}>upload</Button>
 					</div>
 				</div>
 				<Paper
 					sx={{
 						display: "flex",
-						justifyContent: "center",
 						flexWrap: "wrap",
 						listStyle: "none",
 						p: 0.5,
-						m: 0,
+						mt: 1,
 					}}
 					component="ul"
 				>
-					<Chip
-						avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />}
-						label="Avatar"
-						variant="outlined"
-					/>
+					{value.map((e, index) => (
+						<Chip
+							key={index}
+							avatar={<Avatar alt={e.filename} src={e.url} />}
+							label={"image" + index}
+							variant="outlined"
+							sx={{ maxWidth: "33%" }}
+							onDelete={() => handleRemove(index)}
+						/>
+					))}
 				</Paper>
 			</div>
 		</>

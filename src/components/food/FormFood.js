@@ -11,16 +11,22 @@ import {
 import { useState } from "react";
 import SelectCategories from "../category/SelectCategories";
 import UploadImage from "../form/UploadImage";
+import CreateFood from "./option/CreateFood";
+import UpdateFood from "./option/UploadFood";
 
-const initState = {
+const initFood = {
 	food_name: "",
 	description: "",
 	status: true,
 	money: "",
-	categories: [],
 };
-function FormFood() {
-	const [stateForm, setStateForm] = useState(initState);
+const initCategories = [];
+const initImageURLs = [];
+
+function FormFood({ edit }) {
+	const [stateForm, setStateForm] = useState(initFood);
+	const [categories, setCategories] = useState(initCategories);
+	const [imageURLs, setImageURLs] = useState(initImageURLs);
 
 	const handleChangeText = (e) => {
 		setStateForm((pre) => {
@@ -30,25 +36,9 @@ function FormFood() {
 			};
 		});
 	};
-	const handleChangeAutocomplete = (e, value) => {
-		console.log("e", e);
-		setStateForm((pre) => {
-			return {
-				...pre,
-				categories: value,
-			};
-		});
-	};
-	const handleSaveAndCountinue = (e) => {
-		e.preventDefault();
-		const form = new FormData();
-		for (let i in stateForm) {
-			form.append(i, stateForm[i]);
-		}
-		console.log(stateForm);
-	};
 
-	const [categories, setCategories] = useState();
+	const option = edit ? <UpdateFood /> : <CreateFood />;
+
 	return (
 		<>
 			<Grid
@@ -58,7 +48,7 @@ function FormFood() {
 				component={"form"}
 			>
 				<Grid item lg={5} md={5} sx={{ border: 1, borderRadius: "16px" }}>
-					<UploadImage />
+					<UploadImage value={imageURLs} setState={setImageURLs} />
 				</Grid>
 				<Grid item lg={7} md={7}>
 					<Grid container direction="column" gap={2} sx={{ pr: 2 }}>
@@ -100,10 +90,7 @@ function FormFood() {
 							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
 								<strong>Category:</strong>
 							</Typography>
-							<SelectCategories
-								categoies={stateForm.categories}
-								setCategories={handleChangeAutocomplete}
-							/>
+							<SelectCategories value={categories} setState={setCategories} />
 						</FormControl>
 
 						<FormControl
@@ -116,11 +103,10 @@ function FormFood() {
 							<Select
 								labelId="demo-simple-select-standard-label"
 								name="status"
-								value={true}
+								value={stateForm.status}
 								onChange={handleChangeText}
 								placeholder="Status"
 								variant="standard"
-								defaultValue={true}
 							>
 								<MenuItem value={true}>Available</MenuItem>
 								<MenuItem value={false}>Sold Out</MenuItem>
@@ -145,22 +131,7 @@ function FormFood() {
 								<strong>$</strong>
 							</Typography>
 						</FormControl>
-						<FormControl sx={{ flexDirection: "row", gap: 2 }} fullWidth>
-							<Button variant="outlined" color="inherit">
-								Clear
-							</Button>
-							<Button
-								type={"submit"}
-								onClick={handleSaveAndCountinue}
-								variant="outlined"
-								color="inherit"
-							>
-								Save and continue
-							</Button>
-							<Button type={"submit"} variant="outlined" color="inherit">
-								Save
-							</Button>
-						</FormControl>
+						{option}
 					</Grid>
 				</Grid>
 			</Grid>
