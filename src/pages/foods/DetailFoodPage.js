@@ -1,8 +1,10 @@
 import { Container } from "@mui/material";
-import FormFood from "../../components/food/FormFood";
 import InfoFood from "../../components/food/InfoFood";
+import { useParams } from "react-router-dom";
 
-function DetailFood() {
+function DetailFoodPage() {
+	let { id } = useParams();
+
 	return (
 		<>
 			<Container maxWidth="xl" sx={{ marginTop: "70px" }}>
@@ -12,4 +14,4 @@ function DetailFood() {
 	);
 }
 
-export default DetailFood;
+export default DetailFoodPage;

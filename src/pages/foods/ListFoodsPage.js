@@ -55,12 +55,15 @@ const dataFoods = [
 ];
 
 const MaxPage = 5;
-function MyFoodsPage() {
+function ListFoodsPage() {
 	const [page, setPage] = useState(1);
 	return (
 		<>
 			<Container maxWidth="xl" sx={{ marginTop: "70px" }}>
 				<Grid container>
+					<Grid container lg={3}>
+						<OptionViewFoods />
+					</Grid>
 					<Grid
 						container
 						lg={9}
@@ -68,7 +71,7 @@ function MyFoodsPage() {
 						gap={3}
 						sx={{ pl: 2 }}
 					>
-						<ListFoods data={dataFoods} edit={true} />
+						<ListFoods data={dataFoods} edit={false} />
 						<Grid container justifyContent={"end"}>
 							<Pagination
 								page={page}
@@ -77,9 +80,6 @@ function MyFoodsPage() {
 							/>
 						</Grid>
 					</Grid>
-					<Grid container lg={3}>
-						<OptionViewFoods />
-					</Grid>
 				</Grid>
 			</Container>
 			<Grid sx={{ position: "fixed", bottom: "150px", right: "10%" }}></Grid>
@@ -87,4 +87,4 @@ function MyFoodsPage() {
 	);
 }
 
-export default MyFoodsPage;
+export default ListFoodsPage;

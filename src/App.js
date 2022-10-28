@@ -7,8 +7,10 @@ import DashboardLayout from "./pages/home/HomeLayout";
 import HomePage from "./pages/home/HomePage";
 import HomeTest from "./pages/home/HomeTest";
 import HomeAdminPage from "./pages/homeAdmin/HomeAdminPage";
+import ListFoodsPage from "./pages/foods/ListFoodsPage";
 import MyFoodsPage from "./pages/foods/MyFoodsPage";
-import DetailFood from "./pages/foods/DetailFoodPage";
+import DetailFoodPage from "./pages/foods/DetailFoodPage";
+import CreateFoodPage from "./pages/foods/CreateFoodPage";
 function App() {
 	return (
 		<Routes>
@@ -18,10 +20,14 @@ function App() {
 			<Route path="/" element={<DashboardLayout />}>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/test" element={<HomeTest />} />
-				<Route path="/foods" element={<DetailFood />} />
-				<Route path="/foods/my" element={<MyFoodsPage />} />
+				<Route path="/foods" element={<ListFoodsPage />} />
+				<Route path="/foods/:id" element={<DetailFoodPage />} />
 			</Route>
-			<Route path="/admin" element={<HomeAdminPage />} />
+			<Route path="/admin" element={<HomeAdminPage />}>
+				<Route path="/admin/foods" element={<MyFoodsPage />} />
+				<Route path="/admin/foods/new" element={<CreateFoodPage />} />
+				<Route path="/admin/foods/:id" element={<DetailFoodPage />} />
+			</Route>
 		</Routes>
 	);
 }
