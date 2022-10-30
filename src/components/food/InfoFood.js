@@ -5,14 +5,25 @@ import {
 	TextField,
 	Button,
 } from "@mui/material";
-import { useState } from "react";
 import CarouselImage from "./CarouselImage";
-const min = 0;
-const max = 10;
+import AddCart from "./option/AddCart";
+
+const dataImage = [
+	{
+		id: 1,
+		url: "/image/foodImage.png",
+	},
+	{
+		id: 2,
+		url: "/image/foodImage.png",
+	},
+	{
+		id: 3,
+		url: "/image/foodImage.png",
+	},
+];
 
 function InfoFood() {
-	const [value, setValue] = useState();
-
 	return (
 		<>
 			<Grid
@@ -21,7 +32,7 @@ function InfoFood() {
 				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
 			>
 				<Grid item lg={5} md={5}>
-					<CarouselImage />
+					<CarouselImage value={dataImage} />
 				</Grid>
 				<Grid item lg={7} md={7} sx={{ pr: 5 }}>
 					<Grid container direction="column" gap={1}>
@@ -34,9 +45,7 @@ function InfoFood() {
 							ngấy; có lẽ bởi vậy mà gỏi cuốn đã trở thành món ăn không thể
 							thiếu trong thực đơn của các nhà hàng Việt tại trời Tây. Người...
 						</p>
-						<Typography>
-							<strong>Shop:</strong> hieu
-						</Typography>
+
 						<Typography>
 							<strong>Category:</strong> name-name-name
 						</Typography>
@@ -44,27 +53,7 @@ function InfoFood() {
 							<strong>Status:</strong> available
 						</Typography>
 						<Typography variant="h5">100 $</Typography>
-						<FormControl sx={{ flexDirection: "row" }} fullWidth>
-							<TextField
-								label="Amount"
-								type="number"
-								inputProps={{ min, max }}
-								value={value}
-								onChange={(e) => {
-									var value = parseInt(e.target.value, 10);
-									if (value > max) value = max;
-									if (value < min) value = min;
-									setValue(value);
-								}}
-								variant="outlined"
-								sx={{
-									minWidth: "115px",
-								}}
-							/>
-							<Button variant="outlined" color="inherit" sx={{ ml: 2 }}>
-								Add to your cart
-							</Button>
-						</FormControl>
+						<AddCart />
 					</Grid>
 				</Grid>
 			</Grid>

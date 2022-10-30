@@ -1,15 +1,16 @@
 import axios from "axios";
+import { axiosPrivate } from "../config/axiosConnect";
 
 const LOCAL_STORAGE_TOKEN_NAME = process.env.REACT_APP_LOCAL_STORAGE_TOKEN_NAME;
 const API_VERIFY = process.env.REACT_APP_API_HOST + "/auth";
 const API_LOGIN = process.env.REACT_APP_API_HOST + "/auth/login";
 const API_REGISTER = process.env.REACT_APP_API_HOST + "/auth/register";
 
-const setAuthToken = (token) => {
+const setAuthToken = (connection, token) => {
 	if (token) {
-		axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		axiosPrivate.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 	} else {
-		delete axios.defaults.headers.common["Authorization"];
+		delete axiosPrivate.defaults.headers.common["Authorization"];
 	}
 };
 
@@ -38,13 +39,13 @@ const login = async (userForm) => {
 };
 const loadUser = async () => {
 	if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
-		setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
+		setAuthToken(axiosPrivate, localStorage[LOCAL_STORAGE_TOKEN_NAME]);
 	} else {
 		throw Error("Dont have token");
 	}
 
 	try {
-		const res = await axios.get(`${API_VERIFY}`);
+		const res = await axiosPrivate.get(`${API_VERIFY}`);
 		return res.data;
 	} catch (err) {
 		logout();

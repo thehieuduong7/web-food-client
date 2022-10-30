@@ -42,12 +42,13 @@ const dataCategories = [
 ];
 
 export default function SelectCategories({ value, setState }) {
+	value = value.map((e) => dataCategories.find((cate) => cate.id === e));
 	return (
 		<>
 			<Autocomplete
 				name="categories"
 				onChange={(e, value) => {
-					setState(value);
+					setState(value.map((e) => e.id));
 				}}
 				multiple
 				options={dataCategories}
@@ -81,6 +82,43 @@ export default function SelectCategories({ value, setState }) {
 				fullWidth
 				sx={{ border: 0 }}
 			/>
+			{/* <Autocomplete
+				name="categories"
+				onChange={(e, value) => {
+					setState(value);
+				}}
+				multiple
+				options={dataCategories.map((e) => e.id)}
+				disableCloseOnSelect
+				limitTags={2}
+				// getOptionLabel={(option) => option.category_name}
+				value={value}
+				isOptionEqualToValue
+				renderOption={(props, option, { selected }) => (
+					<li {...props}>
+						<Checkbox
+							icon={icon}
+							checkedIcon={checkedIcon}
+							style={{ marginRight: 8 }}
+							checked={selected}
+						/>
+						{dataCategories.find((e) => e.id === option).category_name}
+					</li>
+				)}
+				renderInput={(params) => (
+					<>
+						<TextField
+							{...params}
+							placeholder="Categories"
+							maxRows={2}
+							id="autocomplete-select-categories"
+							variant="standard"
+						/>
+					</>
+				)}
+				fullWidth
+				sx={{ border: 0 }}
+			/> */}
 		</>
 	);
 }

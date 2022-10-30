@@ -5,31 +5,23 @@ import {
 	CardContent,
 	Typography,
 	CardActions,
-	Button,
 	Grid,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import AddCard from "./option/AddCart";
+import { useNavigate } from "react-router-dom";
 
 function FoodCard(pros) {
-	const option = pros.edit ? (
-		<>
-			<Button size="small" color="primary">
-				Edit
-			</Button>
-			<Button size="small" color="primary">
-				Remove
-			</Button>
-		</>
-	) : (
-		<Button size="small" color="primary">
-			Add cart
-		</Button>
-	);
+	const navigate = useNavigate();
 
+	const handleClickDetail = () => {
+		console.log("hello");
+		navigate(`/foods/${pros.id}`);
+	};
 	return (
 		<WrapperCard>
 			<Card sx={{ height: "auto" }}>
-				<CardActionArea>
+				<CardActionArea onClick={handleClickDetail}>
 					<CardMedia
 						component="img"
 						height="140"
@@ -39,7 +31,7 @@ function FoodCard(pros) {
 					/>
 					<CardContent>
 						<Grid container justifyContent={"space-between"}>
-							<Grid container lg={10}>
+							<Grid item lg={10}>
 								<Typography
 									gutterBottom
 									variant="body1"
@@ -59,7 +51,7 @@ function FoodCard(pros) {
 				</CardActionArea>
 				<CardActions>
 					<Grid container justifyContent={"flex-end"}>
-						{option}
+						{<AddCard />}
 					</Grid>
 				</CardActions>
 			</Card>

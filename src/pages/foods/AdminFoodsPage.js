@@ -1,7 +1,10 @@
 import { Container, Grid, Pagination } from "@mui/material";
-import ListFoods from "../../components/food/ListFoods";
-import OptionViewFoods from "../../components/food/OptionViewFood";
+import OptionViewFoods from "../../components/food/option/OptionViewFood";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
+import DialogCreateFood from "../../components/food/dialog/DialogCreateFood";
+import GridFoods from "../../components/food/GridFoods";
 
 const dataFoods = [
 	{
@@ -54,37 +57,25 @@ const dataFoods = [
 	},
 ];
 
-const MaxPage = 5;
-function MyFoodsPage() {
-	const [page, setPage] = useState(1);
+function AdminFoodsPage() {
+	const [open, setOpen] = useState(false);
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
 	return (
 		<>
-			<Container maxWidth="xl" sx={{ marginTop: "70px" }}>
-				<Grid container>
-					<Grid
-						container
-						lg={9}
-						justifyContent={"center"}
-						gap={3}
-						sx={{ pl: 2 }}
-					>
-						<ListFoods data={dataFoods} edit={true} />
-						<Grid container justifyContent={"end"}>
-							<Pagination
-								page={page}
-								onChange={(e, page) => setPage(page)}
-								count={MaxPage}
-							/>
-						</Grid>
-					</Grid>
-					<Grid container lg={3}>
-						<OptionViewFoods />
-					</Grid>
-				</Grid>
-			</Container>
-			<Grid sx={{ position: "fixed", bottom: "150px", right: "10%" }}></Grid>
+			<GridFoods />
+			<Grid sx={{ position: "fixed", bottom: "10%", right: "10%" }}>
+				<Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+					<AddIcon />
+				</Fab>
+				<DialogCreateFood open={open} handleClose={handleClose} />
+			</Grid>
 		</>
 	);
 }
 
-export default MyFoodsPage;
+export default AdminFoodsPage;

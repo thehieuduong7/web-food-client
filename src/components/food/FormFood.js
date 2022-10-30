@@ -14,16 +14,10 @@ import UploadImage from "../form/UploadImage";
 import CreateFood from "./option/CreateFood";
 import UpdateFood from "./option/UploadFood";
 
-const initFood = {
-	food_name: "",
-	description: "",
-	status: true,
-	money: "",
-};
-const initCategories = [];
-const initImageURLs = [];
-
-function FormFood({ edit }) {
+function FormFood({
+	value: { initFood, initCategories, initImageURLs },
+	edit,
+}) {
 	const [stateForm, setStateForm] = useState(initFood);
 	const [categories, setCategories] = useState(initCategories);
 	const [imageURLs, setImageURLs] = useState(initImageURLs);

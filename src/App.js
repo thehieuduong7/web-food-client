@@ -8,7 +8,7 @@ import HomePage from "./pages/home/HomePage";
 import HomeTest from "./pages/home/HomeTest";
 import HomeAdminPage from "./pages/homeAdmin/HomeAdminPage";
 import ListFoodsPage from "./pages/foods/ListFoodsPage";
-import MyFoodsPage from "./pages/foods/MyFoodsPage";
+import AdminFoodsPage from "./pages/foods/AdminFoodsPage";
 import DetailFoodPage from "./pages/foods/DetailFoodPage";
 import CreateFoodPage from "./pages/foods/CreateFoodPage";
 function App() {
@@ -24,7 +24,7 @@ function App() {
 				<Route path="/foods/:id" element={<DetailFoodPage />} />
 			</Route>
 			<Route path="/admin" element={<HomeAdminPage />}>
-				<Route path="/admin/foods" element={<MyFoodsPage />} />
+				<Route path="/admin/foods" element={<AdminFoodsPage />} />
 				<Route path="/admin/foods/new" element={<CreateFoodPage />} />
 				<Route path="/admin/foods/:id" element={<DetailFoodPage />} />
 			</Route>

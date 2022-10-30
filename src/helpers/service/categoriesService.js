@@ -16,3 +16,18 @@ const getCategories = async () => {
 			  };
 	}
 };
+
+const createFood = async (form) => {
+	try {
+		const res = await axios.post(`${API_CATEGORIES}`);
+		return res.data;
+	} catch (err) {
+		console.log("err", err, err.response);
+		throw err.response.data
+			? err.response.data
+			: {
+					status: 500,
+					message: "Server error",
+			  };
+	}
+};

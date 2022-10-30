@@ -7,7 +7,7 @@ function DetailFoodPage() {
 
 	return (
 		<>
-			<Container maxWidth="xl" sx={{ marginTop: "70px" }}>
+			<Container maxWidth="xl" sx={{ marginTop: "100px" }}>
 				<InfoFood />
 			</Container>
 		</>
