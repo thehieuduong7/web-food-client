@@ -1,7 +1,12 @@
 import { Container, Grid, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import FoodCard from "../food/FoodCard";
 
 function TopItems({ dataTopFood }) {
+	const nagivate = useNavigate();
+	const handleClickFoods = () => {
+		nagivate("/foods");
+	};
 	return (
 		<Container maxWidth={"xl"}>
 			<Grid container direction={"column"} gap={3}>
@@ -28,7 +33,12 @@ function TopItems({ dataTopFood }) {
 					})}
 				</Grid>
 				<Grid container justifyContent="center">
-					<Button color="inherit" size={"large"} fullWidth>
+					<Button
+						color="inherit"
+						size={"large"}
+						fullWidth
+						onClick={handleClickFoods}
+					>
 						See more ...
 					</Button>
 				</Grid>

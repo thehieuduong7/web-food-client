@@ -13,6 +13,13 @@ const setAuthToken = (connection, token) => {
 		delete axiosPrivate.defaults.headers.common["Authorization"];
 	}
 };
+function formatResponse(response) {
+	const { lastName, roleName } = response;
+	return {
+		username: lastName,
+		role: roleName,
+	};
+}
 
 const logout = () => {
 	localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
@@ -20,15 +27,11 @@ const logout = () => {
 };
 
 const login = async (userForm) => {
-	console.log("userForm", userForm);
-
 	try {
 		const res = await axios.post(`${API_LOGIN}`, userForm);
 		if (res.data)
-			localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.data.accessToken);
-		return res.data;
+			localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.accessToken);
 	} catch (err) {
-		console.log("err", err, err.response);
 		throw err.response.data
 			? err.response.data
 			: {
@@ -46,7 +49,7 @@ const loadUser = async () => {
 
 	try {
 		const res = await axiosPrivate.get(`${API_VERIFY}`);
-		return res.data;
+		return formatResponse(res.data);
 	} catch (err) {
 		logout();
 		throw err.response.data

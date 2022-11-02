@@ -8,34 +8,19 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import FormFood from "../FormFood";
 import { Container } from "@mui/system";
-
-const initFood = {
-	food_name: "",
-	description: "",
-	status: true,
-	money: "",
-};
-const initCategories = [];
-const initImageURLs = [
-	{
-		id: 1,
-		url: "/image/foodImage.png",
-	},
-	{
-		id: 2,
-		url: "/image/foodImage.png",
-	},
-	{
-		id: 3,
-		url: "/image/foodImage.png",
-	},
-];
+import { FoodsContext } from "../../../helpers/context/FoodsContext";
+import Loading from "../../layout/Loading";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function DialogUpdateFood({ open, handleClose }) {
+	const {
+		foodsState: { foodSpecific },
+	} = React.useContext(FoodsContext);
+	const { loading } = foodSpecific;
+	console.log(foodSpecific);
 	return (
 		<>
 			<Dialog
@@ -59,10 +44,7 @@ function DialogUpdateFood({ open, handleClose }) {
 					</Toolbar>
 				</AppBar>
 				<Container maxWidth="lg">
-					<FormFood
-						value={{ initFood, initCategories, initImageURLs }}
-						edit={true}
-					/>
+					{loading ? <Loading /> : <FormFood edit={true} />}
 				</Container>
 			</Dialog>
 		</>

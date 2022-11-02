@@ -1,13 +1,17 @@
-import axios from "axios";
+import { axiosPublic } from "../config/axiosConnect";
 
 const API_CATEGORIES = process.env.REACT_APP_API_HOST + "/categories";
 
+function createCategory(pros) {
+	const { cateId, cateName, amount } = pros;
+	return { id: cateId, name: cateName, amount };
+}
+
 const getCategories = async () => {
 	try {
-		const res = await axios.get(`${API_CATEGORIES}`);
-		return res.data;
+		const res = await axiosPublic.get(`${API_CATEGORIES}`);
+		return res.data.map(createCategory);
 	} catch (err) {
-		console.log("err", err, err.response);
 		throw err.response.data
 			? err.response.data
 			: {
@@ -17,17 +21,6 @@ const getCategories = async () => {
 	}
 };
 
-const createFood = async (form) => {
-	try {
-		const res = await axios.post(`${API_CATEGORIES}`);
-		return res.data;
-	} catch (err) {
-		console.log("err", err, err.response);
-		throw err.response.data
-			? err.response.data
-			: {
-					status: 500,
-					message: "Server error",
-			  };
-	}
+export const categoriesService = {
+	getCategories,
 };

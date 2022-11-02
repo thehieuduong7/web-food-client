@@ -17,14 +17,14 @@ const authSlice = createSlice({
 				...state,
 				authLoading: false,
 				user,
-				isAuthenticated: user != null,
-				authorization: user == null ? null : user.role,
+				isAuthenticated: user,
+				authorization: user ? user.role : null,
 			};
 		},
-		loadingAuth(state) {
+		setLoadingAuth(state, action) {
 			return {
 				...state,
-				authLoading: true,
+				authLoading: action.payload,
 			};
 		},
 		logout(state) {

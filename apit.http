@@ -10,3 +10,46 @@ Content-Type: application/json
 ###
 GET  http://localhost:5000/api/auth/ HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mjg5NDk4MmFiY2YyNmYzNzRjYWI0ZWQiLCJ1c2VybmFtZSI6InRoZWhpZXUiLCJpYXQiOjE2NjM4NDMyNzUsImV4cCI6MTY2Mzg0MzU3NX0.zdsVSHsWH5GsUExqkNj7LPP7lpceFgnnqpoI2Q2z2Ss
+
+###login
+post  http://localhost:8080/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "00000000"
+}
+###
+post  http://localhost:8080/api/categories/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3Mjg0NzM2fQ.3ucpSdzkt0rokVPMGgXSSa31YGeKTOp05SF01ToNm-I
+Content-Type: application/json
+
+{
+    "cateName": "rice2",
+    "image": "string"
+}
+
+### categories
+get  http://localhost:8080/api/categories/ HTTP/1.1
+### product
+post  http://localhost:8080/api/products/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3Mzc1MjY2fQ.rMQ5pdq60oKab4kYGi7tyway_AfLnPf73rOaKIRp9O8
+Content-Type: application/json
+
+{
+  "productName": "food5",
+  "description": "Trong ẩm thực Việt, có lẽ chẳng món ăn nào “dễ chịu” như gỏi cuốn. Dùng làm thức ăn nhẹ cũng được, mà ăn no căng bụng cũng không ngấy;",
+  "categoryIds": [5,8],
+  "price": 200,
+   "amount": 0,
+  "imageDtos": [
+    {
+      "imageURL": "string"
+    }
+  ]
+}
+
+###
+get  http://localhost:8080/api/products/8 HTTP/1.1
+###
+get  http://localhost:8080/api/products?page=1&pageSize=3 HTTP/1.1

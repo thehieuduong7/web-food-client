@@ -3,15 +3,34 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
-import { Badge, Collapse } from "@mui/material";
+import { Badge, Collapse, Typography } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { CategoriesContext } from "../../helpers/context/CategoiesContext";
+import Loading from "../layout/Loading";
 
 export default function FilterCategories() {
+	const {
+		categoriesState: { loading, error, categories },
+		getCategories,
+	} = React.useContext(CategoriesContext);
 	const [checked, setChecked] = React.useState([1]);
 	const [open, setOpen] = React.useState(true);
+	React.useEffect(() => {
+		getCategories();
+	}, []);
+	if (loading) return <Loading />;
+	if (error)
+		return (
+			<Typography
+				variant="body1"
+				color="red"
+				justifyContent={"center"}
+				sx={{ width: "100%" }}
+			>
+				{error}
+			</Typography>
+		);
 
 	const handleToggle = (value) => () => {
 		const currentIndex = checked.indexOf(value);
@@ -33,36 +52,32 @@ export default function FilterCategories() {
 					setOpen(!open);
 				}}
 			>
-				<ListItemText>Categories</ListItemText>
+				<ListItemText>
+					<Typography variant="body2" color="black" sx={{ fontWeight: "bold" }}>
+						Categories
+					</Typography>
+				</ListItemText>
 				{open ? <ExpandLess /> : <ExpandMore />}
 			</ListItemButton>
 			<Collapse in={open} timeout="auto" unmountOnExit>
-				{[0, 1, 2, 3].map((value) => {
-					const labelId = `checkbox-list-secondary-label-${value}`;
+				{categories.map((e) => {
 					return (
 						<>
 							<ListItem
-								key={value}
+								key={e.id}
 								secondaryAction={
 									<Checkbox
 										edge="end"
-										onChange={handleToggle(value)}
-										checked={checked.indexOf(value) !== -1}
-										inputProps={{ "aria-labelledby": labelId }}
+										// onChange={handleToggle(value)}
+										// checked={checked.indexOf(value) !== -1}
 									/>
 								}
 							>
 								<ListItemButton>
-									{/* <ListItemAvatar>
-								<Avatar
-									alt={`Avatar n°${value + 1}`}
-									src={`/static/images/avatar/${value + 1}.jpg`}
-								/>
-							</ListItemAvatar> */}
-									<ListItemText id={labelId}>
-										Line item
+									<ListItemText>
+										{e.name}
 										<Badge
-											badgeContent={value + 1}
+											badgeContent={String(e.amount)}
 											color="error"
 											sx={{ ml: 2 }}
 										></Badge>

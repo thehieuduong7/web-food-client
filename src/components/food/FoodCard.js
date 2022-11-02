@@ -6,10 +6,12 @@ import {
 	Typography,
 	CardActions,
 	Grid,
+	Button,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import AddCard from "./option/AddCart";
 import { useNavigate } from "react-router-dom";
+import { AddShoppingCart } from "@mui/icons-material";
 
 function FoodCard(pros) {
 	const navigate = useNavigate();
@@ -51,7 +53,9 @@ function FoodCard(pros) {
 				</CardActionArea>
 				<CardActions>
 					<Grid container justifyContent={"flex-end"}>
-						{<AddCard />}
+						<Button variant="outlined" fullWidth>
+							<AddShoppingCart fontSize="small" />
+						</Button>
 					</Grid>
 				</CardActions>
 			</Card>

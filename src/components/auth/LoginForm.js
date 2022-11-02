@@ -15,7 +15,11 @@ import { Face } from "@mui/icons-material";
 import Copyright from "../layout/CopyRight";
 const LoginForm = () => {
 	const navigate = useNavigate();
-	const { loginUser, alertAuth, setAlertFail } = useContext(AuthContext);
+	const {
+		loginUser,
+		alertAuth,
+		authState: { isAuthenticated },
+	} = useContext(AuthContext);
 	const [stateForm, setStateForm] = useState({
 		username: "",
 		password: "",
@@ -29,16 +33,13 @@ const LoginForm = () => {
 			};
 		});
 	};
+	if (isAuthenticated) {
+		navigate("/", { replace: true });
+	}
 
-	const onClickSubmit = async (e) => {
+	const onClickSubmit = (e) => {
 		e.preventDefault();
-		const loginData = await loginUser(stateForm);
-		console.log("response", loginData);
-		if (loginData && loginData.status === 200) {
-			navigate("/", { replace: true });
-		} else {
-			setAlertFail({ message: loginData.message || "Server off" });
-		}
+		loginUser(stateForm);
 	};
 
 	return (

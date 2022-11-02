@@ -5,6 +5,8 @@ import {
 	TextField,
 	Button,
 } from "@mui/material";
+import { useContext } from "react";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
 import CarouselImage from "./CarouselImage";
 import AddCart from "./option/AddCart";
 
@@ -24,6 +26,14 @@ const dataImage = [
 ];
 
 function InfoFood() {
+	const {
+		foodsState: {
+			foodSpecific: { info, categories, images },
+		},
+	} = useContext(FoodsContext);
+	console.log(info, categories, images);
+	const showCategories = categories.map((e) => e.name).join("-");
+
 	return (
 		<>
 			<Grid
@@ -32,27 +42,23 @@ function InfoFood() {
 				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
 			>
 				<Grid item lg={5} md={5}>
-					<CarouselImage value={dataImage} />
+					<CarouselImage value={images} />
 				</Grid>
 				<Grid item lg={7} md={7} sx={{ pr: 5 }}>
 					<Grid container direction="column" gap={1}>
 						<Typography variant="h3" component="h3">
-							name
+							{info.name}
 						</Typography>
-						<p>
-							Trong ẩm thực Việt, có lẽ chẳng món ăn nào “dễ chịu” như gỏi cuốn.
-							Dùng làm thức ăn nhẹ cũng được, mà ăn no căng bụng cũng không
-							ngấy; có lẽ bởi vậy mà gỏi cuốn đã trở thành món ăn không thể
-							thiếu trong thực đơn của các nhà hàng Việt tại trời Tây. Người...
-						</p>
+						<p>{info.description}</p>
 
 						<Typography>
-							<strong>Category:</strong> name-name-name
+							<strong style={{ marginRight: "3px" }}>Category:</strong>
+							<span>{showCategories}</span>
 						</Typography>
 						<Typography>
-							<strong>Status:</strong> available
+							<strong>Status:</strong> {info.status}
 						</Typography>
-						<Typography variant="h5">100 $</Typography>
+						<Typography variant="h5">{info.price} $</Typography>
 						<AddCart />
 					</Grid>
 				</Grid>

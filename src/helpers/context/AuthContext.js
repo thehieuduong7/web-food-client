@@ -19,7 +19,6 @@ function AuthContextProvider({ children }) {
 	};
 	const setAlertFail = ({ message }) => {
 		if (timeout) {
-			console.log("clear", timeout.current);
 			clearTimeout(timeout.current);
 		}
 		setAlertAuth({
@@ -33,38 +32,33 @@ function AuthContextProvider({ children }) {
 	};
 
 	const loginUser = async (userForm) => {
-		dispatch(authAction.loadingAuth());
+		dispatch(authAction.setLoadingAuth(true));
 		try {
-			const res = await authService.login(userForm);
-			return res;
+			await authService.login(userForm);
+			await loadingUser();
 		} catch (err) {
-			return err;
-		} finally {
-			loaddingUser();
+			setAlertFail(err);
+			dispatch(authAction.setLoadingAuth(false));
 		}
 	};
 
-	const loaddingUser = async () => {
-		dispatch(authAction.loadingAuth());
+	const loadingUser = async () => {
+		dispatch(authAction.setLoadingAuth(true));
 		try {
 			const res = await authService.loadUser();
 			dispatch(
 				authAction.setAuth({
-					user: res.data,
+					user: res,
 				})
 			);
 			return res;
 		} catch (err) {
-			dispatch(
-				authAction.setAuth({
-					user: null,
-				})
-			);
+			dispatch(authAction.setAuth({}));
 			return err;
 		}
 	};
 	const registerUser = async (userForm) => {
-		authAction.loadingAuth();
+		authAction.setLoadingAuth(true);
 		try {
 			const res = await authService.register(userForm);
 			return res;
@@ -77,13 +71,13 @@ function AuthContextProvider({ children }) {
 		dispatch(authAction.logout());
 	};
 	useEffect(() => {
-		loaddingUser();
+		loadingUser();
 	}, []);
 	const authContextData = {
 		authState,
 		dispatch,
 		loginUser,
-		loaddingUser,
+		loadingUser,
 		registerUser,
 		logout,
 		alertAuth,

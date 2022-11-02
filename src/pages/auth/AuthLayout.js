@@ -4,14 +4,14 @@
 // import React, { useContext } from "react";
 // import { AuthContext } from "../../helpers/context/AuthContext";
 // import styled from "@emotion/styled";
-// import Loadding from "../../components/layout/Loadding";
+// import Loading from "../../components/layout/Loading";
 // function AuthLayout() {
 // 	const {
 // 		authState: { authLoading, isAuthenticated },
 // 	} = useContext(AuthContext);
 // 	let body;
 // 	if (authLoading) {
-// 		body = <Loadding />;
+// 		body = <Loading />;
 // 	} else if (isAuthenticated) {
 // 		return <Navigate to="/" replace />;
 // 	} else {

@@ -12,7 +12,8 @@ import {
 
 import { SearchRounded } from "@mui/icons-material";
 import FilterCategories from "../../catetories/FilterCategories";
-
+import { CategoriesContext } from "../../../helpers/context/CategoiesContext";
+import { useContext } from "react";
 function OptionViewFoods() {
 	return (
 		<>

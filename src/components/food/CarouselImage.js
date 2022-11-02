@@ -26,13 +26,13 @@ function CarouselImage({ value }) {
 				animation="slide"
 				style={{ borderRadius: "16px" }}
 			>
-				{value.map((e) => {
+				{value.map((e, index) => {
 					return (
-						<Grid align="center" key={e.id}>
+						<Grid align="center" key={index}>
 							<img
 								width={"100%"}
 								height={"100%"}
-								style={{ borderRadius: "16px" }}
+								style={{ borderRadius: "16px", minHeight: "350px" }}
 								src={e.url}
 								alt={"foods"}
 							/>

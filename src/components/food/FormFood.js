@@ -8,20 +8,23 @@ import {
 	Select,
 	MenuItem,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
 import SelectCategories from "../category/SelectCategories";
 import UploadImage from "../form/UploadImage";
 import CreateFood from "./option/CreateFood";
 import UpdateFood from "./option/UploadFood";
 
-function FormFood({
-	value: { initFood, initCategories, initImageURLs },
-	edit,
-}) {
-	const [stateForm, setStateForm] = useState(initFood);
-	const [categories, setCategories] = useState(initCategories);
-	const [imageURLs, setImageURLs] = useState(initImageURLs);
-
+function FormFood({ edit }) {
+	const {
+		foodsState: { foodSpecific },
+	} = useContext(FoodsContext);
+	const [stateForm, setStateForm] = useState(foodSpecific.info);
+	// const [categories, setCategories] = useState(
+	// 	foodSpecific.categories.map((e) => e.id)
+	// );
+	const [categories, setCategories] = useState(foodSpecific.categories);
+	const [imageURLs, setImageURLs] = useState(foodSpecific.images);
 	const handleChangeText = (e) => {
 		setStateForm((pre) => {
 			return {
@@ -31,7 +34,13 @@ function FormFood({
 		});
 	};
 
-	const option = edit ? <UpdateFood /> : <CreateFood />;
+	const formFood = {
+		info: stateForm,
+		categories,
+		images: imageURLs,
+	};
+
+	const option = edit ? <UpdateFood /> : <CreateFood data={formFood} />;
 
 	return (
 		<>
@@ -56,9 +65,9 @@ function FormFood({
 								variant="standard"
 								required
 								fullWidth
-								name="food_name"
+								name="name"
 								onChange={handleChangeText}
-								value={stateForm.food_name}
+								value={stateForm.name}
 							/>
 						</FormControl>
 						<FormControl
@@ -102,8 +111,8 @@ function FormFood({
 								placeholder="Status"
 								variant="standard"
 							>
-								<MenuItem value={true}>Available</MenuItem>
-								<MenuItem value={false}>Sold Out</MenuItem>
+								<MenuItem value={"active"}>Available</MenuItem>
+								<MenuItem value={"deleted"}>Not now</MenuItem>
 							</Select>
 						</FormControl>
 						<FormControl
@@ -117,9 +126,9 @@ function FormFood({
 								variant="standard"
 								sx={{ width: 115 }}
 								required
-								name="money"
+								name="price"
 								onChange={handleChangeText}
-								value={stateForm.money}
+								value={stateForm.price}
 							/>
 							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
 								<strong>$</strong>

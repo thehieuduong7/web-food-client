@@ -14,7 +14,7 @@ import { MenuBook } from "@mui/icons-material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import PermitDeniedPage from "../error/PermitDeniedPage";
-import Loadding from "../../components/layout/Loadding";
+import Loading from "../../components/layout/Loading";
 
 const drawerWidth = 240;
 
@@ -22,16 +22,15 @@ export default function HomeAdminPage() {
 	const {
 		authState: { authLoading, authorization },
 	} = React.useContext(AuthContext);
-
-	// if (authLoading) {
-	// 	return <Loadding />;
-	// } else if (authorization !== "admin") {
-	// 	return <PermitDeniedPage />;
-	// }
 	const nagivate = useNavigate();
 	const handleClickMenu = () => {
 		nagivate("/admin/foods");
 	};
+	// if (authLoading) {
+	// 	return <Loading />;
+	// } else if (authorization !== "admin") {
+	// 	return <PermitDeniedPage />;
+	// }
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />

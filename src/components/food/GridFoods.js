@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { Grid, Pagination, TableSortLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DialogUpdateFood from "./dialog/DialogUpdateFood";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
 
 const columns = [
 	{ id: "id", label: "ID", minWidth: 20 },
@@ -81,18 +82,20 @@ function createData(pros, index) {
 }
 
 export default function GridFoods() {
+	const { loadSpecific } = React.useContext(FoodsContext);
 	const [sort, setSort] = React.useState({
 		field: null,
 		order: null,
 	});
 	const handleUpdate = (id) => {
 		return (e) => {
+			loadSpecific(6);
 			setOpen(true);
 		};
 	};
 	const [open, setOpen] = React.useState(false);
 	return (
-		<Paper sx={{ mr: 5, px: 5, overflow: "hidden" }}>
+		<>
 			<DialogUpdateFood open={open} handleClose={() => setOpen(false)} />
 			<TableContainer sx={{ maxHeight: 440 }}>
 				<Table stickyHeader aria-label="sticky table">
@@ -166,6 +169,6 @@ export default function GridFoods() {
 				page={1}
 				rowsPerPageOptions={[]}
 			/>
-		</Paper>
+		</>
 	);
 }
