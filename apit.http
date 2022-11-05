@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### categories
-get  http://localhost:8080/api/categories/ HTTP/1.1
+get  http://localhost:8080/api/products/24 HTTP/1.1
 ### product
 post  http://localhost:8080/api/products/ HTTP/1.1
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3Mzc1MjY2fQ.rMQ5pdq60oKab4kYGi7tyway_AfLnPf73rOaKIRp9O8
@@ -50,6 +50,25 @@ Content-Type: application/json
 }
 
 ###
-get  http://localhost:8080/api/products/8 HTTP/1.1
+get http://localhost:8080/api/products?page=0&size=3 HTTP/1.1
+###?page=1&pageSize=3
+
 ###
-get  http://localhost:8080/api/products?page=1&pageSize=3 HTTP/1.1
+put  http://localhost:8080/api/products/24 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3NjY4OTk0fQ.4bwSKp65o5HRZm8UD9b4qeuiTOxyXAGTbCZKmrzelJk
+Content-Type: application/json
+
+{
+  "productName": "mi tom hao hao",
+  "description": "ngon qua troi",
+  "categoryIds": [
+    5
+  ],
+  "price": 21,
+  "status": "DELETED",
+    "imageDtos": [
+    {
+      "imageURL": "string"
+    }
+  ]
+}

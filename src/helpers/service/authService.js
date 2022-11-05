@@ -1,5 +1,6 @@
 import axios from "axios";
 import { axiosPrivate } from "../config/axiosConnect";
+import { ResponseError } from "../ulti/ResponseError";
 
 const LOCAL_STORAGE_TOKEN_NAME = process.env.REACT_APP_LOCAL_STORAGE_TOKEN_NAME;
 const API_VERIFY = process.env.REACT_APP_API_HOST + "/auth";
@@ -32,12 +33,7 @@ const login = async (userForm) => {
 		if (res.data)
 			localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.accessToken);
 	} catch (err) {
-		throw err.response.data
-			? err.response.data
-			: {
-					status: 500,
-					message: "Server error",
-			  };
+		throw ResponseError(err);
 	}
 };
 const loadUser = async () => {
@@ -52,12 +48,7 @@ const loadUser = async () => {
 		return formatResponse(res.data);
 	} catch (err) {
 		logout();
-		throw err.response.data
-			? err.response.data
-			: {
-					status: 500,
-					message: "Server error",
-			  };
+		throw ResponseError(err);
 	}
 };
 const register = async (userForm) => {
@@ -68,12 +59,7 @@ const register = async (userForm) => {
 		const res = await axios.post(`${API_REGISTER}`, userForm);
 		return res.data;
 	} catch (err) {
-		throw err.response.data
-			? err.response.data
-			: {
-					status: 500,
-					message: "Server error",
-			  };
+		throw ResponseError(err);
 	}
 };
 export const authService = {

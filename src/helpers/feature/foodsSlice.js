@@ -6,8 +6,21 @@ const initialState = {
 		categories: {},
 		images: {},
 		loading: true,
-		loadingCreate: false,
-		messageError: undefined,
+		loaddingAction: false,
+	},
+	listFoods: {
+		data: [
+			{
+				info: {},
+				categories: {},
+				images: {},
+			},
+		],
+		loading: true,
+		filter: {},
+		sort: {},
+		page: 0,
+		size: 100,
 	},
 };
 
@@ -30,11 +43,23 @@ const foodsSlice = createSlice({
 		loadingSpecific(state, action) {
 			state.foodSpecific.loading = action.payload;
 		},
-		loadingCreate(state, action) {
-			state.foodSpecific.loadingCreate = action.payload;
+		loaddingAction(state, action) {
+			state.foodSpecific.loaddingAction = action.payload;
 		},
-		setError(state, action) {
-			state.foodSpecific.messageError = action.message;
+		setList(state, action) {
+			const { data, filter, sort, page, size } = action.payload;
+			state.listFoods = {
+				...state.listFoods,
+				loading: false,
+				data,
+				filter,
+				sort,
+				page,
+				size,
+			};
+		},
+		setLoadingList(state, action) {
+			state.listFoods.loading = action.payload;
 		},
 	},
 });

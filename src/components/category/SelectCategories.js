@@ -21,7 +21,6 @@ export default function SelectCategories({ value, setState }) {
 	React.useEffect(() => {
 		getCategories();
 	}, []);
-	console.log("value init", loading);
 
 	// value = value.map((e) => categories.find((cate) => cate.id === e));
 

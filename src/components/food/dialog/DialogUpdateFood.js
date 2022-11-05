@@ -20,7 +20,6 @@ function DialogUpdateFood({ open, handleClose }) {
 		foodsState: { foodSpecific },
 	} = React.useContext(FoodsContext);
 	const { loading } = foodSpecific;
-	console.log(foodSpecific);
 	return (
 		<>
 			<Dialog

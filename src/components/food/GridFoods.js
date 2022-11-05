@@ -11,6 +11,7 @@ import { Grid, Pagination, TableSortLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DialogUpdateFood from "./dialog/DialogUpdateFood";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
+import Loading from "../layout/Loading";
 
 const columns = [
 	{ id: "id", label: "ID", minWidth: 20 },
@@ -39,57 +40,39 @@ const columns = [
 	},
 ];
 
-const rows = [
-	{
-		id: 1,
-		name: "food",
-		isActive: true,
-		totalSold: 10,
-		price: 50,
-	},
-	{
-		id: 2,
-		name: "food",
-		isActive: true,
-		totalSold: 10,
-		price: 50,
-	},
-	{
-		id: 3,
-		name: "food",
-		isActive: true,
-		totalSold: 10,
-		price: 50,
-	},
-	{
-		id: 4,
-		name: "food",
-		isActive: true,
-		totalSold: 10,
-		price: 50,
-	},
-].map(createData);
-
 function createData(pros, index) {
-	const { id, name, isActive, totalSold, price } = pros;
+	const {
+		info: { id, name, status, totalSold, price },
+	} = pros;
 	return {
 		id,
 		name,
-		status: isActive ? "Available" : "Sold Out",
+		status,
 		totalSold,
 		price,
 	};
 }
 
 export default function GridFoods() {
-	const { loadSpecific } = React.useContext(FoodsContext);
+	const { loadSpecific, loadListFoods, foodsState } =
+		React.useContext(FoodsContext);
+
+	let rows = [];
+	if (foodsState.listFoods.data) {
+		rows = foodsState.listFoods.data.map(createData);
+		console.log(foodsState.listFoods.data);
+	}
+	React.useEffect(() => {
+		loadListFoods(0, 100);
+	}, []);
+
 	const [sort, setSort] = React.useState({
 		field: null,
 		order: null,
 	});
 	const handleUpdate = (id) => {
 		return (e) => {
-			loadSpecific(6);
+			loadSpecific(id);
 			setOpen(true);
 		};
 	};
@@ -128,29 +111,33 @@ export default function GridFoods() {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{rows.map((row) => {
-							return (
-								<TableRow
-									hover
-									role="checkbox"
-									tabIndex={-1}
-									key={row.id}
-									sx={{ cursor: "pointer" }}
-									onClick={handleUpdate(row.id)}
-								>
-									{columns.map((column) => {
-										const value = row[column.id];
-										return (
-											<TableCell key={column.id} align={column.align}>
-												{column.format && typeof value === "number"
-													? column.format(value)
-													: value}
-											</TableCell>
-										);
-									})}
-								</TableRow>
-							);
-						})}
+						{foodsState.listFoods.loading ? (
+							<Loading />
+						) : (
+							rows.map((row) => {
+								return (
+									<TableRow
+										hover
+										role="checkbox"
+										tabIndex={-1}
+										key={row.id}
+										sx={{ cursor: "pointer" }}
+										onClick={handleUpdate(row.id)}
+									>
+										{columns.map((column) => {
+											const value = row[column.id];
+											return (
+												<TableCell key={column.id} align={column.align}>
+													{column.format && typeof value === "number"
+														? column.format(value)
+														: value}
+												</TableCell>
+											);
+										})}
+									</TableRow>
+								);
+							})
+						)}
 					</TableBody>
 				</Table>
 			</TableContainer>

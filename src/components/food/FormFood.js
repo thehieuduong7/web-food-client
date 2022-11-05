@@ -7,22 +7,21 @@ import {
 	InputLabel,
 	Select,
 	MenuItem,
+	Alert,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import SelectCategories from "../category/SelectCategories";
 import UploadImage from "../form/UploadImage";
 import CreateFood from "./option/CreateFood";
-import UpdateFood from "./option/UploadFood";
+import UpdateFood from "./option/UpdateFood";
 
 function FormFood({ edit }) {
 	const {
 		foodsState: { foodSpecific },
+		alert,
 	} = useContext(FoodsContext);
 	const [stateForm, setStateForm] = useState(foodSpecific.info);
-	// const [categories, setCategories] = useState(
-	// 	foodSpecific.categories.map((e) => e.id)
-	// );
 	const [categories, setCategories] = useState(foodSpecific.categories);
 	const [imageURLs, setImageURLs] = useState(foodSpecific.images);
 	const handleChangeText = (e) => {
@@ -40,7 +39,11 @@ function FormFood({ edit }) {
 		images: imageURLs,
 	};
 
-	const option = edit ? <UpdateFood /> : <CreateFood data={formFood} />;
+	const option = edit ? (
+		<UpdateFood data={formFood} />
+	) : (
+		<CreateFood data={formFood} />
+	);
 
 	return (
 		<>
@@ -55,6 +58,13 @@ function FormFood({ edit }) {
 				</Grid>
 				<Grid item lg={7} md={7}>
 					<Grid container direction="column" gap={2} sx={{ pr: 2 }}>
+						<Grid container>
+							{alert.show && (
+								<Alert severity={alert.type} sx={{ width: "100%" }}>
+									{alert.message}
+								</Alert>
+							)}
+						</Grid>
 						<FormControl
 							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
 						>
@@ -111,8 +121,8 @@ function FormFood({ edit }) {
 								placeholder="Status"
 								variant="standard"
 							>
-								<MenuItem value={"active"}>Available</MenuItem>
-								<MenuItem value={"deleted"}>Not now</MenuItem>
+								<MenuItem value={"ACTIVE"}>ACTIVE</MenuItem>
+								<MenuItem value={"DELETED"}>Not now</MenuItem>
 							</Select>
 						</FormControl>
 						<FormControl

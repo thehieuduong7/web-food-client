@@ -1,8 +1,12 @@
 import { FormControl, Button } from "@mui/material";
+import { useContext } from "react";
+import { FoodsContext } from "../../../helpers/context/FoodsContext";
 
-function UpdateFood({ value, onReset, onClose }) {
+function UpdateFood({ data, onReset, onClose }) {
+	const { updateFood } = useContext(FoodsContext);
 	const handleSubmitAndContinue = (e) => {
 		e.preventDefault();
+		updateFood(data);
 	};
 	return (
 		<>
@@ -10,7 +14,12 @@ function UpdateFood({ value, onReset, onClose }) {
 				<Button variant="outlined" color="inherit">
 					Cancel
 				</Button>
-				<Button type={"submit"} variant="outlined" color="inherit">
+				<Button
+					type={"submit"}
+					onClick={handleSubmitAndContinue}
+					variant="outlined"
+					color="inherit"
+				>
 					Save
 				</Button>
 			</FormControl>
