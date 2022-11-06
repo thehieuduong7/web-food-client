@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Grid, Pagination, TableSortLabel } from "@mui/material";
+import { Chip, Grid, Pagination, TableSortLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import DialogUpdateFood from "./dialog/DialogUpdateFood";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
@@ -21,7 +21,9 @@ const columns = [
 		label: "Status",
 		minWidth: 170,
 		align: "right",
-		format: (value) => (value ? "Available" : "Sold Out"),
+		format: (value) => (
+			<Chip label={value} color={value === "ACTIVE" ? "success" : "error"} />
+		),
 	},
 	{
 		id: "totalSold",
@@ -63,7 +65,7 @@ export default function GridFoods() {
 		console.log(foodsState.listFoods.data);
 	}
 	React.useEffect(() => {
-		loadListFoods(0, 100);
+		loadListFoods({ page: 0, size: 100 });
 	}, []);
 
 	const [sort, setSort] = React.useState({
@@ -128,9 +130,7 @@ export default function GridFoods() {
 											const value = row[column.id];
 											return (
 												<TableCell key={column.id} align={column.align}>
-													{column.format && typeof value === "number"
-														? column.format(value)
-														: value}
+													{column.format ? column.format(value) : value}
 												</TableCell>
 											);
 										})}

@@ -95,6 +95,7 @@ const createFood = async (food) => {
 const updateFood = async (food) => {
 	try {
 		let formFood = formatRequest(food);
+		console.log(formFood);
 		const res = await axiosPrivate.put(
 			`${API_FOODS}/${formFood.productId}`,
 			formFood

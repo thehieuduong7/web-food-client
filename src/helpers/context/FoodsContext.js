@@ -73,7 +73,7 @@ function FoodsContextProvider({ children }) {
 		await loadListFoods(foodsState.listFoods);
 	};
 	const loadListFoods = async ({ page, size, filter }) => {
-		dispatch(foodsAction.loaddingAction(true));
+		dispatch(foodsAction.setLoadingList(true));
 		try {
 			const data = await foodsService.getFoods(page, size);
 			const list = {
@@ -86,6 +86,7 @@ function FoodsContextProvider({ children }) {
 		} catch (err) {
 			setAlertResponse({ type: "error", message: err.message });
 		}
+		dispatch(foodsAction.setLoadingList(false));
 	};
 
 	const value = {

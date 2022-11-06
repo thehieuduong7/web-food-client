@@ -18,7 +18,7 @@ function formatResponse(response) {
 	const { lastName, roleName } = response;
 	return {
 		username: lastName,
-		role: roleName,
+		role: roleName === "ROLE_ADMIN" ? "admin" : "customer",
 	};
 }
 

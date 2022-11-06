@@ -1,3 +1,4 @@
+import { Pages } from "@mui/icons-material";
 import {
 	FormControl,
 	Grid,
@@ -8,6 +9,7 @@ import {
 	Select,
 	MenuItem,
 	Alert,
+	Paper,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
@@ -32,7 +34,6 @@ function FormFood({ edit }) {
 			};
 		});
 	};
-
 	const formFood = {
 		info: stateForm,
 		categories,
@@ -47,107 +48,109 @@ function FormFood({ edit }) {
 
 	return (
 		<>
-			<Grid
-				container
-				spacing={2}
-				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
-				component={"form"}
-			>
-				<Grid item lg={5} md={5} sx={{ border: 1, borderRadius: "16px" }}>
-					<UploadImage value={imageURLs} setState={setImageURLs} />
-				</Grid>
-				<Grid item lg={7} md={7}>
-					<Grid container direction="column" gap={2} sx={{ pr: 2 }}>
-						<Grid container>
-							{alert.show && (
-								<Alert severity={alert.type} sx={{ width: "100%" }}>
-									{alert.message}
-								</Alert>
-							)}
-						</Grid>
-						<FormControl
-							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
-						>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>Food name:</strong>
-							</Typography>
-							<TextField
-								variant="standard"
-								required
-								fullWidth
-								name="name"
-								onChange={handleChangeText}
-								value={stateForm.name}
-							/>
-						</FormControl>
-						<FormControl
-							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
-							required
-						>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>Description:</strong>
-							</Typography>
-							<TextField
-								name="description"
-								variant="standard"
-								multiline
-								maxRows={5}
-								fullWidth
-								onChange={handleChangeText}
-								value={stateForm.description}
-							/>
-						</FormControl>
-						<FormControl
-							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
-						>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>Category:</strong>
-							</Typography>
-							<SelectCategories value={categories} setState={setCategories} />
-						</FormControl>
-
-						<FormControl
-							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
-						>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>Status:</strong>
-							</Typography>
-
-							<Select
-								labelId="demo-simple-select-standard-label"
-								name="status"
-								value={stateForm.status}
-								onChange={handleChangeText}
-								placeholder="Status"
-								variant="standard"
+			<Paper elevation={6} sx={{ px: 2 }}>
+				<Grid
+					container
+					spacing={2}
+					sx={{ minHeight: "350px", paddingY: 5, mx: 0 }}
+					component={"form"}
+				>
+					<Grid item lg={5} md={5} sx={{ border: 1, borderRadius: "16px" }}>
+						<UploadImage value={imageURLs} setState={setImageURLs} />
+					</Grid>
+					<Grid item lg={7} md={7}>
+						<Grid container direction="column" gap={2} sx={{ pr: 2 }}>
+							<Grid container>
+								{alert.show && (
+									<Alert severity={alert.type} sx={{ width: "100%" }}>
+										{alert.message}
+									</Alert>
+								)}
+							</Grid>
+							<FormControl
+								sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
 							>
-								<MenuItem value={"ACTIVE"}>ACTIVE</MenuItem>
-								<MenuItem value={"DELETED"}>Not now</MenuItem>
-							</Select>
-						</FormControl>
-						<FormControl
-							sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
-						>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>Money:</strong>
-							</Typography>
-
-							<TextField
-								variant="standard"
-								sx={{ width: 115 }}
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>Food name:</strong>
+								</Typography>
+								<TextField
+									variant="standard"
+									required
+									fullWidth
+									name="name"
+									onChange={handleChangeText}
+									value={stateForm.name}
+								/>
+							</FormControl>
+							<FormControl
+								sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
 								required
-								name="price"
-								onChange={handleChangeText}
-								value={stateForm.price}
-							/>
-							<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
-								<strong>$</strong>
-							</Typography>
-						</FormControl>
-						{option}
+							>
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>Description:</strong>
+								</Typography>
+								<TextField
+									name="description"
+									variant="standard"
+									multiline
+									maxRows={5}
+									fullWidth
+									onChange={handleChangeText}
+									value={stateForm.description}
+								/>
+							</FormControl>
+							<FormControl
+								sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
+							>
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>Category:</strong>
+								</Typography>
+								<SelectCategories value={categories} setState={setCategories} />
+							</FormControl>
+
+							<FormControl
+								sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
+							>
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>Status:</strong>
+								</Typography>
+
+								<Select
+									labelId="demo-simple-select-standard-label"
+									name="status"
+									value={stateForm.status}
+									onChange={handleChangeText}
+									placeholder="Status"
+									variant="standard"
+								>
+									<MenuItem value={"ACTIVE"}>ACTIVE</MenuItem>
+									<MenuItem value={"DELETED"}>Not now</MenuItem>
+								</Select>
+							</FormControl>
+							<FormControl
+								sx={{ flexDirection: "row", alignItems: "flex-start", pr: 2 }}
+							>
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>Money:</strong>
+								</Typography>
+
+								<TextField
+									variant="standard"
+									sx={{ width: 115 }}
+									required
+									name="price"
+									onChange={handleChangeText}
+									value={stateForm.price}
+								/>
+								<Typography sx={{ mr: 1, my: 0.5, minWidth: "115px" }}>
+									<strong>$</strong>
+								</Typography>
+							</FormControl>
+							{option}
+						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
+			</Paper>
 		</>
 	);
 }

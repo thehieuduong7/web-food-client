@@ -26,8 +26,6 @@ function ButtonUser() {
 	switch (authorization) {
 		case "admin":
 			OptionMenu = <MenuItemsAdmin />;
-
-			// OptionMenu = <MenuItemsCustomer />;
 			break;
 		case "seller":
 			OptionMenu = <MenuItemsSeller />;
@@ -36,7 +34,6 @@ function ButtonUser() {
 			OptionMenu = <MenuItemsCustomer />;
 			break;
 	}
-	OptionMenu = <MenuItemsAdmin />;
 
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = useState(null);
