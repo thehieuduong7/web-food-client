@@ -14,6 +14,7 @@ const setAuthToken = (connection, token) => {
 		delete axiosPrivate.defaults.headers.common["Authorization"];
 	}
 };
+
 function formatResponse(response) {
 	const { lastName, roleName } = response;
 	return {

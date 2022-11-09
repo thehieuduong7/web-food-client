@@ -18,57 +18,6 @@ import GridFoods from "../../components/food/GridFoods";
 import { SearchRounded } from "@mui/icons-material";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 
-const dataFoods = [
-	{
-		id: 1,
-		picture: "#",
-		name: "Bún Bò Huế 65 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 2,
-		picture: "#",
-		name: "Bún Bò Huế 32 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 3,
-		picture: "#",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 3,
-		picture: "#",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 4,
-		picture: "#",
-		name: "Bún Bò Huế 65 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 5,
-		picture: "#",
-		name: "Bún Bò Huế 32 - Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 6,
-		picture: "#",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-	{
-		id: 7,
-		picture: "#",
-		name: "Bún Bò Huế 32- Khâm Thiên",
-		category: ["Bún", "Phở Mì", " Hủ tiếu"],
-	},
-];
-
 function AdminFoodsPage() {
 	const { initSpecific } = useContext(FoodsContext);
 	const [open, setOpen] = useState(false);
@@ -84,7 +33,7 @@ function AdminFoodsPage() {
 			<Paper levation={3} sx={{ mr: 3, px: 3, py: 2 }}>
 				<Grid container direction={"column"}>
 					<Grid container>
-						<Typography variant="h6" color="black">
+						<Typography variant="h4" color="black" sx={{ fontWeight: "bold" }}>
 							Menu foods
 						</Typography>
 					</Grid>

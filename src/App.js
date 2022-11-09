@@ -10,7 +10,7 @@ import HomeAdminPage from "./pages/homeAdmin/HomeAdminPage";
 import ListFoodsPage from "./pages/foods/ListFoodsPage";
 import AdminFoodsPage from "./pages/foods/AdminFoodsPage";
 import DetailFoodPage from "./pages/foods/DetailFoodPage";
-import CreateFoodPage from "./pages/foods/CreateFoodPage";
+import AdminOrderPage from "./pages/order/AdminOrderPage";
 function App() {
 	return (
 		<Routes>
@@ -25,8 +25,7 @@ function App() {
 			</Route>
 			<Route path="/admin" element={<HomeAdminPage />}>
 				<Route path="/admin/foods" element={<AdminFoodsPage />} />
-				<Route path="/admin/foods/new" element={<CreateFoodPage />} />
-				<Route path="/admin/foods/:id" element={<DetailFoodPage />} />
+				<Route path="/admin/orders" element={<AdminOrderPage />} />
 			</Route>
 		</Routes>
 	);

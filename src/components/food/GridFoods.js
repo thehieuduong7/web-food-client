@@ -14,7 +14,7 @@ import { FoodsContext } from "../../helpers/context/FoodsContext";
 import Loading from "../layout/Loading";
 
 const columns = [
-	{ id: "id", label: "ID", minWidth: 20 },
+	{ id: "id", label: "ID", minWidth: 20, format: (value) => `#${value}` },
 	{ id: "name", label: "Food\u00a0Name", minWidth: 150, sortable: true },
 	{
 		id: "status",
@@ -90,7 +90,11 @@ export default function GridFoods() {
 								<TableCell
 									key={column.id}
 									align={column.align}
-									style={{ minWidth: column.minWidth }}
+									style={{
+										minWidth: column.minWidth,
+										fontWeight: "bold",
+										fontSize: "16px",
+									}}
 								>
 									{column.sortable ? (
 										<TableSortLabel
@@ -141,14 +145,7 @@ export default function GridFoods() {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			{/* <Grid container justifyContent={"end"}>
-				<Pagination
-					page={page}
-					onChange={(e, page) => setPage(page)}
 
-					count={5}
-				/>
-			</Grid> */}
 			<TablePagination
 				component="div"
 				count={rows.length}

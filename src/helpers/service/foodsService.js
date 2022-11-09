@@ -3,7 +3,7 @@ import { ResponseError } from "../ulti/ResponseError";
 
 const API_FOODS = process.env.REACT_APP_API_HOST + "/products";
 const API_FOODS_SPECIFIC = `${API_FOODS}`;
-function formatResponse(response) {
+export function formatResponse(response) {
 	if (!response) {
 		response = {
 			productName: "",

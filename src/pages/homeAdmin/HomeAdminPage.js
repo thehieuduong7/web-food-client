@@ -10,7 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Logout, MenuBook, Store } from "@mui/icons-material";
+import { ListAlt, Logout, MenuBook, Store } from "@mui/icons-material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import PermitDeniedPage from "../error/PermitDeniedPage";
@@ -27,6 +27,9 @@ export default function HomeAdminPage() {
 	const nagivate = useNavigate();
 	const handleClickMenu = () => {
 		nagivate("/admin/foods");
+	};
+	const handleClickListOrder = () => {
+		nagivate("/admin/orders");
 	};
 	const handleClickStore = () => {
 		nagivate("/");
@@ -84,6 +87,14 @@ export default function HomeAdminPage() {
 									<MenuBook />
 								</ListItemIcon>
 								<ListItemText primary={"Menu"} />
+							</ListItemButton>
+						</ListItem>
+						<ListItem disablePadding>
+							<ListItemButton onClick={handleClickListOrder}>
+								<ListItemIcon>
+									<ListAlt />
+								</ListItemIcon>
+								<ListItemText primary={"List Order"} />
 							</ListItemButton>
 						</ListItem>
 					</List>

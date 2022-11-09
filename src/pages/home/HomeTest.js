@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
-import { FoodsContext } from "../../helpers/context/FoodsContext";
-import { foodsService } from "../../helpers/service/foodsService";
-function HomeTest() {
-	const { loadListFoods, foodsState } = useContext(FoodsContext);
-	useEffect(() => {
-		loadListFoods(0, 10);
-	}, []);
-	console.log(foodsState);
+import { OrdersContext } from "../../helpers/context/OrdersContext";
 
+function HomeTest() {
+	// console.log(axiosPrivate.defaults.headers.common);
+	const { acceptOrder, ordersState } = useContext(OrdersContext);
+	useEffect(() => {
+		acceptOrder(33);
+	}, []);
+	console.log("order", ordersState);
 	return <>test</>;
 }
 

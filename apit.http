@@ -50,12 +50,29 @@ Content-Type: application/json
 }
 
 ###
-get http://localhost:8080/api/products?page=0&size=3 HTTP/1.1
+get http://localhost:8080/api/orders?page=0&size=3 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3OTA4NjI1fQ.0gMsa5ih6DJXdgB25OQwG57gewSCq5Wnd9OQdrh9U_E
 ###?page=1&pageSize=3
+post http://localhost:8080/api/orders HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3ODkwNDg3fQ.HbJkQ_EJINKu54CuKNVCl9Yyt2iYvgBZGi77mpn6r50
+Content-Type: application/json
 
+{
+  "customerId": 3,
+  "orderDetails": [
+    {
+      "productId": 6,
+      "amount": 3
+    },
+    {
+      "productId": 9,
+      "amount": 2
+    }
+  ]
+}
 ###
 put  http://localhost:8080/api/products/24 HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3NjY4OTk0fQ.4bwSKp65o5HRZm8UD9b4qeuiTOxyXAGTbCZKmrzelJk
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3NzE0ODgwfQ.UJ_Qdx3WnHagCctHCSAnoDO6Bg0kBQIGO5NWgXFYpkU
 Content-Type: application/json
 
 {
@@ -64,11 +81,21 @@ Content-Type: application/json
   "categoryIds": [
     5
   ],
-  "price": 21,
+  "price": 22,
   "status": "DELETED",
     "imageDtos": [
     {
       "imageURL": "string"
     }
   ]
+}
+
+###
+
+PATCH http://localhost:8080/api/orders/33 HTTP/1.1
+Authorization: Basic eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY4MDEwODA2fQ.vl4o5qOV0oX_OLYTc45OgXoi5uf7d5QY0WODzkqrFD0
+Content-Type: application/json
+
+{
+  "orderStatus" :"ORDERED"
 }
