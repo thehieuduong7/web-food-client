@@ -16,13 +16,13 @@ function AdminOrderPage() {
 					<Divider sx={{ my: 2, borderColor: "grey.500" }} />
 					<Grid container spacing={4} justifyContent="flex-end">
 						<Grid item lg={2}>
-							<CardStatistic title={"Total order"} data={"12"} />
+							<CardStatistic status={"ORDERED"} />
 						</Grid>
 						<Grid item lg={2}>
-							<CardStatistic title={"Total order"} data={"12"} />
+							<CardStatistic status={"ACCEPTED"} />
 						</Grid>
 						<Grid item lg={2}>
-							<CardStatistic title={"Total order"} data={"12"} />
+							<CardStatistic status={"REJECTED"} />
 						</Grid>
 					</Grid>
 

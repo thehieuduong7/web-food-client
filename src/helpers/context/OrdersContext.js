@@ -20,6 +20,10 @@ function OrdersContextProvider({ children }) {
 				size,
 				filter,
 			};
+			const statistic = ordersService.statisticStatusOrder(
+				data.map((e) => e.statusOrder)
+			);
+			dispatch(ordersAction.setStatistic(statistic));
 			dispatch(ordersAction.setData(list));
 		} catch (err) {
 			console.log("err", err);

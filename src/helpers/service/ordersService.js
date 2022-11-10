@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosPrivate } from "../config/axiosConnect";
 import { ResponseError } from "../ulti/ResponseError";
 const API_ORDERS = process.env.REACT_APP_API_HOST + "/orders";
@@ -53,6 +52,17 @@ const getOrders = async (page, size) => {
 		throw ResponseError(err);
 	}
 };
+const statisticStatusOrder = (statuses) => {
+	const statistic = {
+		ORDERED: 0,
+		ACCEPTED: 0,
+		REJECTED: 0,
+	};
+	statuses.forEach((e) => {
+		statistic[e] += 1;
+	});
+	return statistic;
+};
 
 const setRejectOrder = async (id) => {
 	const body = {
@@ -79,4 +89,5 @@ export const ordersService = {
 	getOrders,
 	setRejectOrder,
 	setAcceptOrder,
+	statisticStatusOrder,
 };

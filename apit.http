@@ -93,7 +93,7 @@ Content-Type: application/json
 ###
 
 PATCH http://localhost:8080/api/orders/33 HTTP/1.1
-Authorization: Basic eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY4MDEwODA2fQ.vl4o5qOV0oX_OLYTc45OgXoi5uf7d5QY0WODzkqrFD0
+Authorization: Basic eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY4MDY4Nzc5fQ.Hx0la_-zYJXl-F8ax31JOHPZSQbakitTP2aYh7lhMKU
 Content-Type: application/json
 
 {
