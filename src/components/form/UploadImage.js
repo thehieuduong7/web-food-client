@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Button, Col, Form, Image, Row } from "react-bootstrap";
 import { ProductContext } from "../../helpers/context/productContext";
 import { Chip, Avatar, Paper } from "@mui/material";
-import { ImageUtil } from "../../helpers/ulti/uploadImage";
+import { ImageUtil } from "../../helpers/util/uploadImage";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";

@@ -14,7 +14,7 @@ import { Autocomplete, Checkbox } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { CategoryService } from "../../helpers/service/categoryService";
-import { ImageUtil } from "../../helpers/ulti/uploadImage";
+import { ImageUtil } from "../../helpers/util/uploadImage";
 import { ProductService } from "../../helpers/service/productService";
 import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
