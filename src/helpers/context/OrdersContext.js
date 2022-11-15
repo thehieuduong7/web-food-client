@@ -10,8 +10,11 @@ export const OrdersContext = createContext();
 function OrdersContextProvider({ children }) {
 	const [ordersState, dispatch] = useReducer(orderReducer, initOrdersState);
 
+
 	const loadListOrders = async ({ page, size, filter }) => {
-		dispatch(ordersAction.setLoading(true));
+		dispatch(ordersAction.setLoading(true));		// ordersState.loading=  true
+
+
 		try {
 			const data = await ordersService.getOrders(page, size);
 			const list = {

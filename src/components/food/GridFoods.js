@@ -62,7 +62,6 @@ export default function GridFoods() {
 	let rows = [];
 	if (foodsState.listFoods.data) {
 		rows = foodsState.listFoods.data.map(createData);
-		console.log(foodsState.listFoods.data);
 	}
 	React.useEffect(() => {
 		loadListFoods({ page: 0, size: 100 });
