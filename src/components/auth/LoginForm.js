@@ -92,17 +92,11 @@ const LoginForm = () => {
 						{/* option */}
 						<Grid container justifyContent="space-between">
 							<Grid item>
-								<div className="form-check">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										value=""
-										id="checkRemember"
-									/>
-									<label className="form-check-label" htmlFor="checkRemember">
-										Remember
-									</label>
-								</div>{" "}
+								<Grid item>
+									<div>
+										<Link to={"/forget-password"}>Forget Password</Link>
+									</div>{" "}
+								</Grid>
 							</Grid>
 							<Grid item>
 								<div>

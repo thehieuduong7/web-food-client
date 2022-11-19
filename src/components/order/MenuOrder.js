@@ -33,7 +33,7 @@ function MenuOrder({ data }) {
 		rejectOrder(data.id);
 	};
 	if (id === data.id && loading) {
-		console.log("loadding");
+		console.log("loading");
 		return <Loading />;
 	}
 	if (data.statusOrder !== "ORDERED") {

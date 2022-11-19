@@ -5,13 +5,7 @@ import { Divider } from "@mui/material";
 import { Outlet } from "react-router-dom";
 function HomeLayout() {
 	return (
-		<Grid
-			container
-			direction="column"
-			// sx={{
-			// 	background: " rgba(255, 0, 0, 0.5);",
-			// }}
-		>
+		<Grid container direction="column">
 			<Navbar />
 			<Outlet />
 			<Divider sx={{ my: 8, borderBottom: 2 }} />

@@ -63,7 +63,6 @@ const statisticStatusOrder = (statuses) => {
 	});
 	return statistic;
 };
-
 const setRejectOrder = async (id) => {
 	const body = {
 		orderStatus: "REJECTED",

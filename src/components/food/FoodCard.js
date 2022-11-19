@@ -8,6 +8,8 @@ import {
 	Grid,
 	Button,
 } from "@mui/material";
+import HoverRating from "./Rating";
+
 import styled from "@emotion/styled";
 import AddCard from "./option/AddCart";
 import { useNavigate } from "react-router-dom";
@@ -41,13 +43,16 @@ function FoodCard(pros) {
 									lineHeight={1.1}
 									whiteSpace={0.5}
 								>
-									{pros.name}
+									{pros.productName}
 								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									{pros.category.join(" - ")}
+								<Typography variant="body2" color="text.secondary" width={200}>
+									{pros.categories
+										.map((category) => category.cateName)
+										.join("- ")}
 								</Typography>
 							</Grid>
-							<Grid item>100$</Grid>
+							<Grid item>{pros.price}$</Grid>
+							<HoverRating rate={pros.rating} />
 						</Grid>
 					</CardContent>
 				</CardActionArea>

@@ -4,7 +4,6 @@ import Carousel from "react-material-ui-carousel";
 
 function CarouselImage({ value }) {
 	const [activeChild, setActiveChild] = useState(0);
-
 	const handleChange = (prev) => {
 		setActiveChild(prev);
 	};

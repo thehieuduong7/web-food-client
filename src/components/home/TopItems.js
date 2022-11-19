@@ -1,14 +1,20 @@
 import { Container, Grid, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FoodCard from "../food/FoodCard";
+import { ProductContext } from "../../helpers/context/productContext";
+import { useContext } from "react";
 
 function TopItems({ dataTopFood }) {
-	const nagivate = useNavigate();
-	const handleClickFoods = () => {
-		nagivate("/foods");
+	const navigate = useNavigate();
+	const { ListProduct, loadProducts } = useContext(ProductContext);
+	const onclickViewAll = () => {
+		navigate("/foods");
+		loadProducts(0);
+		console.log("click view all");
 	};
+
 	return (
-		<Container maxWidth={"xl"}>
+		<Container>
 			<Grid container direction={"column"} gap={3}>
 				<Grid item>
 					<h1
@@ -37,7 +43,7 @@ function TopItems({ dataTopFood }) {
 						color="inherit"
 						size={"large"}
 						fullWidth
-						onClick={handleClickFoods}
+						onClick={onclickViewAll}
 					>
 						See more ...
 					</Button>

@@ -97,6 +97,39 @@ export default function HomeAdminPage() {
 								<ListItemText primary={"List Order"} />
 							</ListItemButton>
 						</ListItem>
+						{/* 						<ListItemButton onClick={handleClickCategories}>
+							<ListItemIcon>
+								<MenuIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Categories"} />
+						</ListItemButton>
+
+						<ListItemButton onClick={handleClickMenu}>
+							<ListItemIcon>
+								<LunchDiningIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Products"} />
+						</ListItemButton>
+
+						<ListItemButton onClick={handleClickCustomers}>
+							<ListItemIcon>
+								<GroupIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Customers"} />
+						</ListItemButton>
+
+						<ListItemButton onClick={handleClickOrder}>
+							<ListItemIcon>
+								<LocalMallIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Orders"} />
+						</ListItemButton>
+						<ListItemButton onClick={handleClickMenu}>
+							<ListItemIcon>
+								<SellIcon />
+							</ListItemIcon>
+							<ListItemText primary={"Vouchers"} />
+						</ListItemButton> */}
 					</List>
 				</Box>
 			</Drawer>

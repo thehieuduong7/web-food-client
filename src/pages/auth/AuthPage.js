@@ -2,9 +2,10 @@ import LoginForm from "../../components/auth/LoginForm";
 import RegisterForm from "../../components/auth/RegisterForm";
 import { Navigate } from "react-router-dom";
 import React, { useContext } from "react";
-import { AuthContext } from "../../helpers/context/AuthContext";
+import { AuthContext } from "../../helpers/context/authContext";
 import styled from "@emotion/styled";
 import Loading from "../../components/layout/Loading";
+import ForgetPasswordForm from "../../components/auth/ForgetPasswordForm";
 function AuthPage({ authRoute }) {
 	const {
 		authState: { authLoading, isAuthenticated },
@@ -15,7 +16,13 @@ function AuthPage({ authRoute }) {
 	} else if (isAuthenticated) {
 		return <Navigate to="/" replace />;
 	} else {
-		body = authRoute === "login" ? <LoginForm /> : <RegisterForm />;
+		if (authRoute === "login") {
+			body = <LoginForm />;
+		} else if (authRoute === "forget-password") {
+			body = <ForgetPasswordForm />;
+		} else {
+			body = <RegisterForm />;
+		}
 	}
 	return <Wrapper className="container-fluid">{body}</Wrapper>;
 }

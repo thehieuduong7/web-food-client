@@ -1,14 +1,18 @@
-import AuthContextProvider from "./AuthContext";
-import CategoriesContextProvider from "./CategoiesContext";
-import FoodsContextProvider from "./FoodsContext";
+import AuthContextProvider from "./authContext";
+import { OrderProvider } from "./orderContext";
 import OrdersContextProvider from "./OrdersContext";
+import CategoriesContextProvider from "./CategoiesContext";
+import { ProductProvider } from "./productContext";
+
 function ContextProvider({ children }) {
 	return (
 		<AuthContextProvider>
 			<CategoriesContextProvider>
-				<FoodsContextProvider>
-					<OrdersContextProvider>{children}</OrdersContextProvider>
-				</FoodsContextProvider>
+				<OrdersContextProvider>
+					<OrderProvider>
+						<ProductProvider>{children}</ProductProvider>
+					</OrderProvider>
+				</OrdersContextProvider>
 			</CategoriesContextProvider>
 		</AuthContextProvider>
 	);
