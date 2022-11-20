@@ -41,8 +41,7 @@ function App() {
 					path="/carts/my"
 					element={
 						<UserRouteRole>
-							{" "}
-							<OrderPage />{" "}
+							<OrderPage />
 						</UserRouteRole>
 					}
 				/>
@@ -50,8 +49,7 @@ function App() {
 					path="/orders/my"
 					element={
 						<UserRouteRole>
-							{" "}
-							<OrderDetailPage />{" "}
+							<OrderDetailPage />
 						</UserRouteRole>
 					}
 				/>
@@ -59,23 +57,14 @@ function App() {
 					path="/orders/history"
 					element={
 						<UserRouteRole>
-							{" "}
-							<OrderHistoryPAge />{" "}
+							<OrderHistoryPAge />
 						</UserRouteRole>
 					}
 				/>
 				<Route path="/foods/:id/rating" element={<RatingPage />} />
 				<Route path="/foods/:id" element={<DetailFoodPage />} />
 			</Route>
-			<Route
-				path="/admin"
-				element={
-					<AdminRouteRole>
-						{" "}
-						<HomeAdminPage />{" "}
-					</AdminRouteRole>
-				}
-			>
+			<Route path="/admin" element={<HomeAdminPage />}>
 				<Route path="/admin/order" element={<AdminOrderPage />} />
 				<Route path="/admin/foods" element={<AdminFoodsPage />} />
 				<Route path="/admin/foods/new" element={<CreateFoodPage />} />

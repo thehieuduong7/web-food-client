@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../helpers/context/authContext";
+import { AuthContext } from "../../helpers/context/AuthContext";
 import AlertMsg from "../layout/AlertMessage";
 import {
 	Grid,
@@ -15,11 +15,11 @@ import { Face } from "@mui/icons-material";
 import Copyright from "../layout/CopyRight";
 
 export default function ForgetPasswordForm() {
-    const [stateForm, setStateForm] = useState({
+	const [stateForm, setStateForm] = useState({
 		username: "",
 		password: "",
 	});
-    const onChangeForm = (e) => {
+	const onChangeForm = (e) => {
 		setStateForm((pre) => {
 			return {
 				...pre,
@@ -28,11 +28,9 @@ export default function ForgetPasswordForm() {
 		});
 	};
 
-    const onClickSubmit = async (e) => {
-		
-	};
-  return (
-    <Container
+	const onClickSubmit = async (e) => {};
+	return (
+		<Container
 			sx={{
 				backgroundColor: "white",
 				p: 5,
@@ -57,7 +55,7 @@ export default function ForgetPasswordForm() {
 								<TextField
 									required
 									fullWidth
-                                    type="email"
+									type="email"
 									label="Email"
 									name="email"
 									value={stateForm.username}
@@ -68,7 +66,6 @@ export default function ForgetPasswordForm() {
 								<TextField
 									required
 									fullWidth
-									
 									label="password"
 									name="password"
 									value={stateForm.password}
@@ -79,11 +76,11 @@ export default function ForgetPasswordForm() {
 						{/* option */}
 						<Grid container justifyContent="space-between">
 							<Grid item>
-							<Grid item>
-								<div>
-									<Link to={"/forget-password"}>Forget Password</Link>
-								</div>{" "}
-							</Grid>
+								<Grid item>
+									<div>
+										<Link to={"/forget-password"}>Forget Password</Link>
+									</div>{" "}
+								</Grid>
 							</Grid>
 							<Grid item>
 								<div>
@@ -107,5 +104,5 @@ export default function ForgetPasswordForm() {
 				<Copyright sx={{ mt: 5 }} />
 			</Grid>
 		</Container>
-  );
+	);
 }

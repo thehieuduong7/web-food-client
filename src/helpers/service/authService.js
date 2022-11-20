@@ -7,7 +7,7 @@ const API_VERIFY = process.env.REACT_APP_API_HOST + "/auth";
 const API_LOGIN = process.env.REACT_APP_API_HOST + "/auth/login";
 const API_REGISTER = process.env.REACT_APP_API_HOST + "/auth/register";
 
-const setAuthToken = (connection, token) => {
+const setAuthToken = (token) => {
 	if (token) {
 		axiosPrivate.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 	} else {
@@ -16,10 +16,16 @@ const setAuthToken = (connection, token) => {
 };
 
 function formatResponse(response) {
-	const { lastName, roleName } = response;
+	const { lastName, firstName, roleName, customerId, phone, email, address } =
+		response;
 	return {
 		username: lastName,
+		fullname: `${firstName} ${lastName}`,
 		role: roleName === "ROLE_ADMIN" ? "admin" : "customer",
+		id: customerId,
+		phone,
+		email,
+		address,
 	};
 }
 
@@ -39,7 +45,7 @@ const login = async (userForm) => {
 };
 const loadUser = async () => {
 	if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
-		setAuthToken(axiosPrivate, localStorage[LOCAL_STORAGE_TOKEN_NAME]);
+		setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
 	} else {
 		throw Error("Dont have token");
 	}

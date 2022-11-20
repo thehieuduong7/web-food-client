@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-	const [customerId, setCustomerId] = useState()
+	const [customerId, setCustomerId] = useState();
 	const [authState, dispatch] = useReducer(authReducer, initAuthState);
-	const nagivate =useNavigate()
+	const nagivate = useNavigate();
 	const [alertAuth, setAlertAuth] = useState({
 		show: false,
 		type: "error",
@@ -36,11 +36,16 @@ function AuthContextProvider({ children }) {
 	};
 
 	const loginUser = async (userForm) => {
-		dispatch(authAction.loadingAuth());
+		dispatch(authAction.setLoadingAuth(true));
 		try {
 			const res = await authService.login(userForm);
 			return res;
 		} catch (err) {
+			setAlertAuth({
+				show: true,
+				type: "error",
+				message: err.message,
+			});
 			return err;
 		} finally {
 			loaddingUser();
@@ -48,7 +53,7 @@ function AuthContextProvider({ children }) {
 	};
 
 	const loaddingUser = async () => {
-		dispatch(authAction.loadingAuth());
+		dispatch(authAction.setLoadingAuth(true));
 		try {
 			const res = await authService.loadUser();
 			dispatch(
@@ -67,7 +72,7 @@ function AuthContextProvider({ children }) {
 		}
 	};
 	const registerUser = async (userForm) => {
-		authAction.loadingAuth();
+		authAction.setLoadingAuth(true);
 		try {
 			const res = await authService.register(userForm);
 			return res;
@@ -76,16 +81,15 @@ function AuthContextProvider({ children }) {
 		}
 	};
 	const logout = async () => {
-		await authService.logout()
-		dispatch(authAction.logout())
-		nagivate("/")
-
+		await authService.logout();
+		dispatch(authAction.logout());
 	};
 	useEffect(() => {
 		loaddingUser();
 	}, []);
 	const authContextData = {
-		customerId, setCustomerId,
+		customerId,
+		setCustomerId,
 		authState,
 		dispatch,
 		loginUser,

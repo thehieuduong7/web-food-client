@@ -8,8 +8,8 @@ Content-Type: application/json
 
 
 ###
-GET  http://localhost:5000/api/auth/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mjg5NDk4MmFiY2YyNmYzNzRjYWI0ZWQiLCJ1c2VybmFtZSI6InRoZWhpZXUiLCJpYXQiOjE2NjM4NDMyNzUsImV4cCI6MTY2Mzg0MzU3NX0.zdsVSHsWH5GsUExqkNj7LPP7lpceFgnnqpoI2Q2z2Ss
+GET  http://localhost:8080/api/auth/ HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE2Njg4Nzg5NDF9.qvnm_WQHVS0NJsKbhUp68O7gVaxEsZg8FYTFAvVjbXI
 
 ###login
 post  http://localhost:8080/api/auth/login HTTP/1.1
@@ -98,4 +98,16 @@ Content-Type: application/json
 
 {
   "orderStatus" :"ORDERED"
+}
+
+
+###
+api update carts
+
+{
+  customerId,
+  carts: [{
+    productId,
+    amount,
+  }]
 }

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { CardGiftcard } from "@mui/icons-material";
-import { AuthContext } from "../../../helpers/context/authContext";
+import { AuthContext } from "../../../helpers/context/AuthContext";
 import {
 	AppBar,
 	Button,
@@ -17,7 +17,9 @@ import { useNavigate } from "react-router-dom";
 import { OrderContext } from "../../../helpers/context/orderContext";
 
 function NavBar() {
-	const { CartQuantity } = useContext(OrderContext);
+	const {
+		cartsState: { amount },
+	} = useContext(OrderContext);
 	const navigation = useNavigate();
 	const foodIconClick = () => {
 		navigation("/");
@@ -25,7 +27,6 @@ function NavBar() {
 
 	const cartIconClick = () => {
 		navigation("/carts/my");
-		window.location.reload(false);
 	};
 
 	return (
@@ -64,7 +65,7 @@ function NavBar() {
 							}}
 							onClick={cartIconClick}
 						>
-							<Badge badgeContent={CartQuantity} color="error">
+							<Badge badgeContent={amount} color="error">
 								<CardGiftcard />
 							</Badge>
 						</IconButton>

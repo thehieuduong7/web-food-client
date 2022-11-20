@@ -1,11 +1,12 @@
 import Banner from "../../components/home/Banner";
-import { Divider } from "@mui/material";
+import { Alert, Divider, Snackbar, Typography } from "@mui/material";
 import TopItems from "../../components/home/TopItems";
 import Information from "../../components/home/Information";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductService } from "../../helpers/service/productService";
 import { CategoryService } from "../../helpers/service/categoryService";
 import ListCategory from "../../components/home/ListCategory";
+import { OrderContext } from "../../helpers/context/orderContext";
 
 function HomePage() {
 	const [dataTopFood, setData] = useState([]);
@@ -20,6 +21,8 @@ function HomePage() {
 		fetchApi();
 	}, []);
 
+	const { alert, clearAlert } = useContext(OrderContext);
+
 	return (
 		<>
 			<Banner />
@@ -27,6 +30,21 @@ function HomePage() {
 			<TopItems dataTopFood={dataTopFood} />
 			<ListCategory dataCategory={dataCategory} />
 			<Information />
+			<Snackbar
+				open={alert.show}
+				anchorOrigin={{ vertical: "top", horizontal: "right" }}
+				sx={{ minWidth: 350, mt: 2 }}
+			>
+				<Alert
+					onClose={clearAlert}
+					severity={alert.type}
+					sx={{ width: "100%" }}
+				>
+					<Typography variant="body1" color="initial">
+						{alert.message}
+					</Typography>
+				</Alert>
+			</Snackbar>
 		</>
 	);
 }

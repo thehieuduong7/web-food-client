@@ -14,13 +14,18 @@ import styled from "@emotion/styled";
 import AddCard from "./option/AddCart";
 import { useNavigate } from "react-router-dom";
 import { AddShoppingCart } from "@mui/icons-material";
+import { useContext } from "react";
+import { OrderContext } from "../../helpers/context/orderContext";
 
 function FoodCard(pros) {
+	const { addCarts } = useContext(OrderContext);
 	const navigate = useNavigate();
-
+	const handleAddCart = () => {
+		addCarts({ productId: pros.productId, amount: 1 });
+	};
 	const handleClickDetail = () => {
 		console.log("hello");
-		navigate(`/foods/${pros.id}`);
+		navigate(`/foods/${pros.productId}`);
 	};
 	return (
 		<WrapperCard>
@@ -58,7 +63,7 @@ function FoodCard(pros) {
 				</CardActionArea>
 				<CardActions>
 					<Grid container justifyContent={"flex-end"}>
-						<Button variant="outlined" fullWidth>
+						<Button variant="outlined" fullWidth onClick={handleAddCart}>
 							<AddShoppingCart fontSize="small" />
 						</Button>
 					</Grid>

@@ -8,17 +8,23 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Grid, TableSortLabel } from "@mui/material";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { CustomersService } from "../../../helpers/service/customerService";
-import moment from 'moment';
+import moment from "moment";
 import { useContext } from "react";
-import { AuthContext } from "../../../helpers/context/authContext";
+import { AuthContext } from "../../../helpers/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 
 const columns = [
 	{ id: "id", label: "ID" },
-	{ id: "firstName", label: "First\u00a0Name", minWidth: 70, sortable: true, align: "right" },
+	{
+		id: "firstName",
+		label: "First\u00a0Name",
+		minWidth: 70,
+		sortable: true,
+		align: "right",
+	},
 	{
 		id: "lastName",
 		label: "Last Name",
@@ -42,8 +48,7 @@ const columns = [
 		label: "Created At",
 		sortable: true,
 		align: "right",
-		valueFormatter: params =>
-			moment(params?.value).format("DD/MM/YYYY"),
+		valueFormatter: (params) => moment(params?.value).format("DD/MM/YYYY"),
 	},
 	{
 		id: "gender",
@@ -62,14 +67,14 @@ const columns = [
 		label: "Options",
 		align: "center",
 		sortable: true,
-	}
+	},
 ];
 
 export default function GridsCustomers() {
 	const [ListCustomers, setListCustomer] = React.useState([]);
-	const {customerId,setCustomerId} = useContext(AuthContext)
-	const nagivate = useNavigate()
-	const [page, setPage] = React.useState(0)
+	const { customerId, setCustomerId } = useContext(AuthContext);
+	const nagivate = useNavigate();
+	const [page, setPage] = React.useState(0);
 	const MaxPage = 5;
 	const [sort, setSort] = React.useState({
 		field: null,
@@ -78,57 +83,53 @@ export default function GridsCustomers() {
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const paginCustomer = (e, page) => {
-		CustomersService.getListCustomers(page-1).then(res=>{
-			setListCustomer(res)
-		})
-		console.log(page)
-	}
+		CustomersService.getListCustomers(page - 1).then((res) => {
+			setListCustomer(res);
+		});
+		console.log(page);
+	};
 
 	const handleClick = (event) => {
-		setCustomerId(event.currentTarget.value)
+		setCustomerId(event.currentTarget.value);
 		setAnchorEl(event.currentTarget);
 	};
 
-	const editClick = async (event)=>{
-		const setId = async () =>{
-			setCustomerId(event.currentTarget.value)
+	const editClick = async (event) => {
+		const setId = async () => {
+			setCustomerId(event.currentTarget.value);
 			const cusId = event.currentTarget.value;
-			nagivate(`/admin/customers/update/${cusId}`)
-		}
-		setId()
-	}
-	
+			nagivate(`/admin/customers/update/${cusId}`);
+		};
+		setId();
+	};
 
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
 
 	const cacelClick = () => {
-		console.log("noooo")
-		setAnchorEl(null)
-	}
-	const deleteClick = async () =>{
-		CustomersService.deleteCustomerById(customerId).then(res =>{
-			CustomersService.getListCustomers().then(res => {
-				setListCustomer(res)
-			})
-		})
-		setAnchorEl(null)
-	}
+		console.log("noooo");
+		setAnchorEl(null);
+	};
+	const deleteClick = async () => {
+		CustomersService.deleteCustomerById(customerId).then((res) => {
+			CustomersService.getListCustomers().then((res) => {
+				setListCustomer(res);
+			});
+		});
+		setAnchorEl(null);
+	};
 
 	const open = Boolean(anchorEl);
 	const id = open ? "simple-popover" : undefined;
 
 	React.useEffect(() => {
-		CustomersService.getListCustomers(page).then(res => {
-			setListCustomer(res)
-		})
-	}, [])
+		CustomersService.getListCustomers(page).then((res) => {
+			setListCustomer(res);
+		});
+	}, []);
 
-
-	const handleUpdate = () => {
-		
-	};
+	const handleUpdate = () => {};
 	return (
 		<>
 			<TableContainer sx={{ maxHeight: 700 }}>
@@ -177,47 +178,57 @@ export default function GridsCustomers() {
 											const value = row[column.id];
 
 											return (
-
 												<TableCell key={column.id} align={column.align}>
-													{column.format && typeof value === "number" 
+													{column.format && typeof value === "number"
 														? column.format(value)
-														: value
-													}
-													{
-														column.id === "options" ? (
-															<Grid container direction="row" variant="text" aria-label="text button group">
-																<div>
-																	<Button value={row.id} size="small" sx={{ color: "red" }} onClick={handleClick}>
-																		DELETE
-																	</Button>
-																	<Popover
-																		id={id}
-																		open={open}
-																		anchorEl={anchorEl}
-																		onClose={handleClose}
-																		anchorOrigin={{
-																			vertical: "bottom",
-																			horizontal: "left"
-																		}}
-																	>
-																		<Grid >
-
-																			<Button onClick={deleteClick}>Yes</Button>
-																			<Button onClick={cacelClick}>No</Button>
-																		</Grid>
-																	</Popover>
-																</div>
-																<Button value={row.id} onClick={editClick} size="small" sx={{ color: "green" }}>EDIT</Button>
-															</Grid>
-														) : ""
-													}
-
+														: value}
+													{column.id === "options" ? (
+														<Grid
+															container
+															direction="row"
+															variant="text"
+															aria-label="text button group"
+														>
+															<div>
+																<Button
+																	value={row.id}
+																	size="small"
+																	sx={{ color: "red" }}
+																	onClick={handleClick}
+																>
+																	DELETE
+																</Button>
+																<Popover
+																	id={id}
+																	open={open}
+																	anchorEl={anchorEl}
+																	onClose={handleClose}
+																	anchorOrigin={{
+																		vertical: "bottom",
+																		horizontal: "left",
+																	}}
+																>
+																	<Grid>
+																		<Button onClick={deleteClick}>Yes</Button>
+																		<Button onClick={cacelClick}>No</Button>
+																	</Grid>
+																</Popover>
+															</div>
+															<Button
+																value={row.id}
+																onClick={editClick}
+																size="small"
+																sx={{ color: "green" }}
+															>
+																EDIT
+															</Button>
+														</Grid>
+													) : (
+														""
+													)}
 												</TableCell>
-
-
 											);
 										})}
-
 									</TableRow>
 								</>
 							);
@@ -226,13 +237,8 @@ export default function GridsCustomers() {
 				</Table>
 			</TableContainer>
 			<Grid container justifyContent={"end"}>
-				<Pagination
-					page={page}
-					onChange={paginCustomer}
-					count={MaxPage}
-				/>
+				<Pagination page={page} onChange={paginCustomer} count={MaxPage} />
 			</Grid>
-			
 		</>
 	);
 }

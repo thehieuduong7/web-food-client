@@ -17,7 +17,7 @@ const authSlice = createSlice({
 				...state,
 				authLoading: false,
 				user,
-				isAuthenticated: user,
+				isAuthenticated: !!user,
 				authorization: user ? user.role : null,
 			};
 		},

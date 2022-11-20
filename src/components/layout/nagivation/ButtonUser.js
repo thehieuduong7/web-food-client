@@ -22,7 +22,6 @@ function ButtonUser() {
 	} = useContext(AuthContext);
 	console.log("isAuthenticated authorization", isAuthenticated, authorization);
 	let OptionMenu = null;
-
 	switch (authorization) {
 		case "admin":
 			OptionMenu = <MenuItemsAdmin />;
@@ -45,6 +44,7 @@ function ButtonUser() {
 	};
 
 	const handleLogout = () => {
+		console.log("logout------");
 		logout();
 	};
 	const handleLogin = () => navigate("/login");
@@ -110,7 +110,7 @@ function ButtonUser() {
 						anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 					>
 						<MenuItem>
-							<Avatar /> Welcome, {user.username}!
+							<Avatar /> Welcome, {user.fullname}!
 						</MenuItem>
 
 						<Divider />
