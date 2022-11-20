@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { ProductService } from "../../helpers/service/productService";
 import { CategoryService } from "../../helpers/service/categoryService";
 import ListCategory from "../../components/home/ListCategory";
-import { OrderContext } from "../../helpers/context/orderContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 
 function HomePage() {
 	const [dataTopFood, setData] = useState([]);
@@ -21,7 +21,7 @@ function HomePage() {
 		fetchApi();
 	}, []);
 
-	const { alert, clearAlert } = useContext(OrderContext);
+	const { alert, clearAlert } = useContext(CartsContext);
 
 	return (
 		<>

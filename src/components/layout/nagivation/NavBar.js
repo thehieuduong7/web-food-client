@@ -14,12 +14,12 @@ import {
 import { FastfoodRounded } from "@mui/icons-material";
 import ButtonUser from "./ButtonUser";
 import { useNavigate } from "react-router-dom";
-import { OrderContext } from "../../../helpers/context/orderContext";
+import { CartsContext } from "../../../helpers/context/CartsContext";
 
 function NavBar() {
 	const {
 		cartsState: { amount },
-	} = useContext(OrderContext);
+	} = useContext(CartsContext);
 	const navigation = useNavigate();
 	const foodIconClick = () => {
 		navigation("/");

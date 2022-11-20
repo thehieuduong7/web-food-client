@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosPrivate } from "../config/axiosConnect";
 
 const API_CART = process.env.REACT_APP_API_HOST;
 
@@ -37,7 +38,7 @@ const getListCart = async (customerId) => {
 
 const deleteCartById = async (cartId) => {
 	try {
-		const res = await axios.delete(`${API_CART}/carts/${cartId}`);
+		const res = await axiosPrivate.delete(`${API_CART}/carts/${cartId}`);
 
 		return res.data;
 	} catch (err) {
@@ -67,7 +68,7 @@ const appendCarts = async (cart) => {
 	}
 };
 
-export const cartService = {
+export const cartsService = {
 	getCartQuantity,
 	appendCarts,
 	getListCart,

@@ -11,12 +11,25 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ProductService } from "../../helpers/service/productService";
-import { OrderContext } from "../../helpers/context/orderContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 
-export default function OrderItem(pros) {
-	console.log(pros);
-
+export default function OrderItem({ cart }) {
+	const { addCarts, removeCart, setSelected } = React.useContext(CartsContext);
+	const handleSelected = () => {
+		setSelected({ id: cart.id, selected: !cart.selected });
+	};
+	const handleAddCart = () => {
+		addCarts({ productId: cart.productId, amount: 1 });
+	};
+	const handleMinusCart = () => {
+		if (cart.amount == 1) handleRemoveCart();
+		else {
+			addCarts({ productId: cart.productId, amount: -1 });
+		}
+	};
+	const handleRemoveCart = () => {
+		removeCart({ id: cart.id });
+	};
 	return (
 		<Card
 			className="OrderItem"
@@ -30,8 +43,10 @@ export default function OrderItem(pros) {
 			<Box sx={{ display: "flex" }}>
 				{/* <Checkbox {...label } /> */}
 				<Checkbox
+					onChange={handleSelected}
 					edge="end"
 					sx={{ borderRadius: 0 }}
+					value={!!cart.selected}
 					// inputProps={{ "aria-labelledby": labelId }}
 				/>
 				<CardMedia
@@ -41,18 +56,14 @@ export default function OrderItem(pros) {
 					alt="Live from space album cover"
 				/>
 				<CardContent sx={{ flex: "1 0 auto" }}>
-					<Typography component="div" variant="h5">
-						{pros ? pros.productName : "ok"}
-					</Typography>
+					<Typography component="div" variant="h5"></Typography>
 					<Typography
 						variant="subtitle1"
 						color="text.secondary"
 						component="div"
 						maxWidth={170}
 						overflow="hidden"
-					>
-						{pros ? pros.description : "ok"}
-					</Typography>
+					></Typography>
 				</CardContent>
 			</Box>
 
@@ -79,17 +90,19 @@ export default function OrderItem(pros) {
 					}}
 				>
 					<ButtonGroup variant="outlined" aria-label="outlined button group">
-						<Button size="small">
+						<Button size="small" onClick={handleMinusCart}>
 							<RemoveIcon />
 						</Button>
-						<Button size="small">{pros.cart.amount}</Button>
-						<Button size="small">
+						<Button size="small">{cart.amount}</Button>
+						<Button size="small" onClick={handleAddCart}>
 							<AddIcon />
 						</Button>
 					</ButtonGroup>
-					<label>{pros.cart.cartPrice} VND</label>
+					<label style={{ width: 150, textAlign: "center" }}>
+						{cart.cartPrice} VND
+					</label>
 				</Box>
-				<IconButton aria-label="delete">
+				<IconButton aria-label="delete" onClick={handleRemoveCart}>
 					<DeleteIcon />
 				</IconButton>
 			</Box>

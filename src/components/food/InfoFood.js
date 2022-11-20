@@ -9,7 +9,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import { ProductContext } from "../../helpers/context/productContext";
 import { useNavigate } from "react-router-dom";
-import { OrderContext } from "../../helpers/context/orderContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 import CarouselImage from "./CarouselImage";
 const min = 0;
 const max = 10;
@@ -22,7 +22,7 @@ function InfoFood() {
 	} = useContext(AuthContext);
 	const navigate = useNavigate();
 	const { ProductDetail, loadProductDetail } = useContext(ProductContext);
-	const { CartQuantity, loadQuantity, loadListCart } = useContext(OrderContext);
+	const { CartQuantity, loadQuantity, loadListCart } = useContext(CartsContext);
 
 	console.log(products.ProductDetail.images);
 	const addToCartClick = () => {

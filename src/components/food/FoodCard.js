@@ -15,10 +15,10 @@ import AddCard from "./option/AddCart";
 import { useNavigate } from "react-router-dom";
 import { AddShoppingCart } from "@mui/icons-material";
 import { useContext } from "react";
-import { OrderContext } from "../../helpers/context/orderContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 
 function FoodCard(pros) {
-	const { addCarts } = useContext(OrderContext);
+	const { addCarts } = useContext(CartsContext);
 	const navigate = useNavigate();
 	const handleAddCart = () => {
 		addCarts({ productId: pros.productId, amount: 1 });

@@ -65,7 +65,6 @@ function App() {
 				<Route path="/foods/:id" element={<DetailFoodPage />} />
 			</Route>
 			<Route path="/admin" element={<HomeAdminPage />}>
-				<Route path="/admin/order" element={<AdminOrderPage />} />
 				<Route path="/admin/foods" element={<AdminFoodsPage />} />
 				<Route path="/admin/foods/new" element={<CreateFoodPage />} />
 				<Route path="/admin/foods/update/:id" element={<UpdateFoodsPage />} />
@@ -86,6 +85,7 @@ function App() {
 					path="/admin/customers/update/:id"
 					element={<UpdateCustomerPage />}
 				/>
+				<Route path="/admin/orders" element={<AdminOrderPage />} />
 			</Route>
 		</Routes>
 	);

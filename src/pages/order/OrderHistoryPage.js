@@ -1,26 +1,29 @@
 import * as React from "react";
 import { Container, Divider, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
-import { OrderContext } from "../../helpers/context/orderContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 import OrderItemHitory from "../../components/order/OrderItemHistory";
 import { CustomersService } from "../../helpers/service/customerService";
 import { AuthContext } from "../../helpers/context/AuthContext";
+import { OrdersContext } from "../../helpers/context/OrdersContext";
+import Loading from "../../components/layout/Loading";
 
-function OrderHistoryPAge() {
-	const { ListCart, ListCartOrderPending } = useContext(OrderContext);
-	const [ListOrder, setListOrder] = useState([]);
+function OrderHistoryPage() {
+	const { loadCarts } = useContext(CartsContext);
+	const {
+		setOrderSuccess,
+		ordersState: { data, loading },
+		loadSpecifyOrder,
+	} = useContext(OrdersContext);
 	const {
 		authState: { user },
 	} = useContext(AuthContext);
-
 	useEffect(() => {
-		CustomersService.getOrderByCustomer(user.customerId).then((res) => {
-			setListOrder(res);
-			console.log(res);
-		});
+		setOrderSuccess(false);
+		loadCarts();
+		loadSpecifyOrder(user.id);
 	}, []);
 
-	console.log(ListCart);
 	return (
 		<>
 			<Container sx={{ marginTop: "150px" }}>
@@ -30,25 +33,29 @@ function OrderHistoryPAge() {
 
 				<Divider />
 				<Grid container spacing={5} paddingX={15}>
-					{ListOrder.map((e) => {
-						return (
-							<Grid item xs={10}>
-								<br />
-								<h5> Đơn Hàng: {e.id} </h5>
-								<p></p>
-								{e.oderDetails.map((item) => {
-									return <OrderItemHitory cart={item} />;
-								})}
-								<br />
-								<h5>TOTAL: {e.totalPrice} VNĐ</h5>
-								<Divider />
-							</Grid>
-						);
-					})}
+					{loading ? (
+						<Loading />
+					) : (
+						data.map((e) => {
+							return (
+								<Grid item xs={10}>
+									<br />
+									<h5> Đơn Hàng: {e.id} </h5>
+									<p></p>
+									{e.oderDetails.map((item) => {
+										return <OrderItemHitory cart={item} />;
+									})}
+									<br />
+									<h5>TOTAL: {e.totalPrice} VNĐ</h5>
+									<Divider />
+								</Grid>
+							);
+						})
+					)}
 				</Grid>
 			</Container>
 		</>
 	);
 }
 
-export default OrderHistoryPAge;
+export default OrderHistoryPage;

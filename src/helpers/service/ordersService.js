@@ -1,7 +1,8 @@
 import { axiosPrivate } from "../config/axiosConnect";
 import { ResponseError } from "../ulti/ResponseError";
+import { cartsService } from "./cartsService";
 const API_ORDERS = process.env.REACT_APP_API_HOST + "/orders";
-
+const API_CUSTOMER = process.env.REACT_APP_API_HOST + "/customers";
 function formatOrderDetail(detail) {
 	const {
 		id,
@@ -41,7 +42,25 @@ function formatResponse(response) {
 		orderDetails: oderDetails.map(formatOrderDetail),
 	};
 }
-
+const saveOrder = async (order) => {
+	console.log(order);
+	try {
+		const res = await axiosPrivate.post(`${API_ORDERS}`, order);
+		const { orderDetails } = order;
+		await orderDetails.forEach(async (e) => {
+			await cartsService.deleteCartById(e.id);
+		});
+		return res.data;
+	} catch (err) {
+		console.log("err", err, err.response);
+		throw err.response.data
+			? err.response.data
+			: {
+					status: 500,
+					message: "Server",
+			  };
+	}
+};
 const getOrders = async (page, size) => {
 	const params = { page, size };
 	const query = "?" + new URLSearchParams(params).toString();
@@ -84,9 +103,32 @@ const setAcceptOrder = async (id) => {
 		throw ResponseError(err);
 	}
 };
+
+const getOrderByCustomer = async (id) => {
+	try {
+		const res = await axiosPrivate.get(`${API_CUSTOMER}/${id}/orders`, {
+			params: {
+				page: 0,
+				size: 8,
+			},
+		});
+		console.log(res);
+		return res.data;
+	} catch (err) {
+		console.log("err", err, err.response);
+		throw err.response.data
+			? err.response.data
+			: {
+					status: 500,
+					message: "Server",
+			  };
+	}
+};
 export const ordersService = {
 	getOrders,
 	setRejectOrder,
 	setAcceptOrder,
 	statisticStatusOrder,
+	saveOrder,
+	getOrderByCustomer,
 };

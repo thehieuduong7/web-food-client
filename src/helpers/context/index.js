@@ -1,5 +1,5 @@
 import AuthContextProvider from "./AuthContext";
-import { OrderProvider } from "./orderContext";
+import CartsContextProvider from "./CartsContext";
 import OrdersContextProvider from "./OrdersContext";
 import CategoriesContextProvider from "./CategoiesContext";
 import { ProductProvider } from "./productContext";
@@ -9,9 +9,9 @@ function ContextProvider({ children }) {
 		<AuthContextProvider>
 			<CategoriesContextProvider>
 				<OrdersContextProvider>
-					<OrderProvider>
+					<CartsContextProvider>
 						<ProductProvider>{children}</ProductProvider>
-					</OrderProvider>
+					</CartsContextProvider>
 				</OrdersContextProvider>
 			</CategoriesContextProvider>
 		</AuthContextProvider>

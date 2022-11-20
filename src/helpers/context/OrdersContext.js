@@ -1,5 +1,5 @@
 import { ordersService } from "../service/ordersService";
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import orderReducer, {
 	initOrdersState,
 	ordersAction,
@@ -9,17 +9,35 @@ export const OrdersContext = createContext();
 
 function OrdersContextProvider({ children }) {
 	const [ordersState, dispatch] = useReducer(orderReducer, initOrdersState);
-
+	const orderFoods = async ({ customerId, orderDetails }) => {
+		dispatch(ordersAction.setLoading(true));
+		try {
+			await ordersService.saveOrder({
+				customerId,
+				orderDetails,
+			});
+			setOrderSuccess(true);
+		} catch (err) {}
+		dispatch(ordersAction.setLoading(false));
+	};
+	const setOrderSuccess = (success) => {
+		dispatch(ordersAction.setOrderSuccess(success));
+	};
 	const loadSpecifyOrder = async (userId) => {
 		dispatch(ordersAction.setLoading(true));
 		try {
+			const data = await ordersService.getOrderByCustomer(userId);
+			const list = {
+				data,
+			};
+			dispatch(ordersAction.setData(list));
 		} catch (err) {
 			console.log("err", err);
 		}
 		dispatch(ordersAction.setLoading(false));
 	};
 	const loadListOrders = async ({ page, size, filter }) => {
-		dispatch(ordersAction.setLoading(true)); // ordersState.loading=  true
+		dispatch(ordersAction.setLoading(true));
 		try {
 			const data = await ordersService.getOrders(page, size);
 			const list = {
@@ -69,6 +87,9 @@ function OrdersContextProvider({ children }) {
 		refreshList,
 		acceptOrder,
 		rejectOrder,
+		orderFoods,
+		setOrderSuccess,
+		loadSpecifyOrder,
 	};
 	return (
 		<OrdersContext.Provider value={value}>{children}</OrdersContext.Provider>

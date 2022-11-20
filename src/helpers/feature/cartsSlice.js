@@ -19,13 +19,30 @@ const cartsSlice = createSlice({
 			};
 		},
 		appendAmount(state, action) {
-			state.amount += action.payload;
+			const { productId, amount } = action.payload;
+			state.amount += amount;
+			state.carts = state.carts.map((e) => {
+				if (e.productId === productId) {
+					e.cartPrice = (e.cartPrice / e.amount) * (e.amount + amount);
+					e.amount += amount;
+				}
+				return e;
+			});
 		},
 		setLoading(state, action) {
 			return {
 				...state,
 				loading: action.payload,
 			};
+		},
+		setSelected(state, action) {
+			const { id, selected } = action.payload;
+			state.carts = state.carts.map((e) => {
+				if (e.id === id) {
+					e.selected = selected;
+				}
+				return e;
+			});
 		},
 	},
 });

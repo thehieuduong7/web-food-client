@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	data: [],
-	loading: true,
+	loading: false,
+	orderSuccess: false,
 	filter: {},
 	sort: {},
 	page: 0,
@@ -51,6 +52,9 @@ const ordersSlice = createSlice({
 				ACCEPTED,
 				REJECTED,
 			};
+		},
+		setOrderSuccess(state, action) {
+			state.orderSuccess = action.payload;
 		},
 	},
 });
