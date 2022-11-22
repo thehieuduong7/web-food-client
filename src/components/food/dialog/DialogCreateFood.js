@@ -16,7 +16,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function DialogCreateFood({ open, handleClose }) {
-	const { loading } = React.useContext(FoodsContext);
+	const {
+		foodsState: {
+			foodSpecific: { loading },
+		},
+	} = React.useContext(FoodsContext);
+
 	return (
 		<>
 			<Dialog

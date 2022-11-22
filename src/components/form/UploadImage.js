@@ -1,18 +1,27 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Col, Form, Image, Row } from "react-bootstrap";
-import { ProductContext } from "../../helpers/context/productContext";
+
 import { Chip, Avatar, Paper } from "@mui/material";
 import { ImageUtil } from "../../helpers/util/uploadImage";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
-import { green } from "@mui/material/colors";
 
 function UploadImage({ value, setState }) {
 	const InputFileRef = useRef();
-	const { selectedFile, setSelectedFile } = useContext(ProductContext);
+	const [selectedFile, setSelectedFile] = useState(null);
 
+	const handleAppend = async () => {
+		if (!selectedFile || selectedFile.name.trim() === "") return;
+		const res = await ImageUtil.uploadImage(selectedFile);
+		const { url } = res;
+		// const url = URL.createObjectURL(selectedFile[0]);
+		// const filename = selectedFile.name;
+
+		console.log("res", res);
+		setState((pre) => [...pre, { url }]);
+		InputFileRef.current.value = "";
+		setSelectedFile(null);
+	};
 	const handleRemove = (index) => {
-		URL.revokeObjectURL(value[index].url);
+		// URL.revokeObjectURL(value[index].url);
 		setState((pre) =>
 			pre.filter((e, i) => {
 				return i !== index;
@@ -24,39 +33,8 @@ function UploadImage({ value, setState }) {
 			setSelectedFile(undefined);
 			return;
 		}
+		// I've kept this example simple by using the first image instead of multiple
 		setSelectedFile(e.target.files[0]);
-	};
-
-	const [loading, setLoading] = React.useState(false);
-	const [success, setSuccess] = React.useState(false);
-	const timer = React.useRef();
-
-	const buttonSx = {
-		...(success && {
-			bgcolor: green[500],
-			"&:hover": {
-				bgcolor: green[700],
-			},
-		}),
-	};
-
-	React.useEffect(() => {
-		return () => {
-			clearTimeout(timer.current);
-		};
-	}, []);
-
-	const handleButtonClick = () => {
-		if (!selectedFile || selectedFile.name.trim() === "") return;
-		setLoading(true);
-		ImageUtil.uploadImage(selectedFile).then((res) => {
-			setSelectedFile(res.url);
-			const url = URL.createObjectURL(selectedFile);
-			setState((pre) => [...pre, { url }]);
-			InputFileRef.current.value = "";
-			setLoading(false);
-			setSuccess(true);
-		});
 	};
 	return (
 		<>
@@ -75,31 +53,9 @@ function UploadImage({ value, setState }) {
 						</Form.Group>
 					</div>
 
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						<Box sx={{ m: 1, position: "relative" }}></Box>
-						<Box sx={{ m: 1, position: "relative" }}>
-							<Button
-								sx={buttonSx}
-								disabled={loading}
-								onClick={handleButtonClick}
-							>
-								Upload
-							</Button>
-							{loading && (
-								<CircularProgress
-									size={24}
-									sx={{
-										color: green[500],
-										position: "absolute",
-										top: "50%",
-										left: "50%",
-										marginTop: "-12px",
-										marginLeft: "-12px",
-									}}
-								/>
-							)}
-						</Box>
-					</Box>
+					<div className="ms-2">
+						<Button onClick={handleAppend}>upload</Button>
+					</div>
 				</div>
 				<Paper
 					sx={{
@@ -117,6 +73,7 @@ function UploadImage({ value, setState }) {
 							avatar={<Avatar alt={e.filename} src={e.url} />}
 							label={"image" + index}
 							variant="outlined"
+							sx={{ maxWidth: "33%" }}
 							onDelete={() => handleRemove(index)}
 						/>
 					))}

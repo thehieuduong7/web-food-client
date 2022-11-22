@@ -11,7 +11,6 @@ import {
 import HoverRating from "./Rating";
 
 import styled from "@emotion/styled";
-import AddCard from "./option/AddCart";
 import { useNavigate } from "react-router-dom";
 import { AddShoppingCart } from "@mui/icons-material";
 import { useContext } from "react";

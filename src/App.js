@@ -24,10 +24,13 @@ import UserRouteRole from "./components/auth/UserRouteRole";
 import OrderHistoryPAge from "./pages/order/OrderHistoryPage";
 import RatingPage from "./pages/rating/RatingPage";
 import AdminOrderPage from "./pages/order/AdminOrderPage";
+import HomeTest from "./pages/home/HomeTest";
 
 function App() {
 	return (
 		<Routes>
+			<Route path="/test" element={<HomeTest />} />
+
 			<Route path="/login" element={<AuthPage authRoute="login" />} />
 			<Route path="/register" element={<AuthPage authRoute="register" />} />
 			<Route

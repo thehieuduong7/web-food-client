@@ -17,6 +17,14 @@ const columns = [
 	{ id: "id", label: "ID", minWidth: 20, format: (value) => `#${value}` },
 	{ id: "name", label: "Food\u00a0Name", minWidth: 150, sortable: true },
 	{
+		id: "price",
+		label: "Price",
+		minWidth: 170,
+		align: "right",
+		sortable: true,
+		format: (value) => value.toFixed(2),
+	},
+	{
 		id: "status",
 		label: "Status",
 		minWidth: 170,
@@ -24,21 +32,6 @@ const columns = [
 		format: (value) => (
 			<Chip label={value} color={value === "ACTIVE" ? "success" : "error"} />
 		),
-	},
-	{
-		id: "totalSold",
-		label: "Total Sold",
-		minWidth: 170,
-		sortable: true,
-		align: "right",
-	},
-	{
-		id: "price",
-		label: "Price",
-		minWidth: 170,
-		align: "right",
-		sortable: true,
-		format: (value) => value.toFixed(2),
 	},
 ];
 

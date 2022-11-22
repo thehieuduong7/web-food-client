@@ -63,7 +63,6 @@ function AdminFoodsPage() {
 					<GridFoods />
 				</Grid>
 			</Paper>
-
 			<Grid sx={{ position: "fixed", bottom: "10%", right: "10%" }}>
 				<Fab color="primary" aria-label="add" onClick={handleClickOpen}>
 					<AddIcon />
