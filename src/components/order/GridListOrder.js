@@ -29,7 +29,7 @@ const columns = [
 		label: "Amout",
 		minWidth: 170,
 		sortable: true,
-		format: (value) => value.toFixed(0),
+		format: (value) => `${value.toFixed(0)} VND`,
 	},
 	{
 		id: "statusOrder",
