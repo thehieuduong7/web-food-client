@@ -100,9 +100,11 @@ export default function OrderItemHitory(pros) {
 				>
 					<label>{pros.cart.orderItemPrice} VND</label>
 				</Box>
-				<Button onClick={rateClick} variant="outlined">
-					Đánh giá
-				</Button>
+				{pros.status === "ACCEPTED" && (
+					<Button onClick={rateClick} variant="outlined">
+						Đánh giá
+					</Button>
+				)}
 				<label></label>
 			</Box>
 		</Card>

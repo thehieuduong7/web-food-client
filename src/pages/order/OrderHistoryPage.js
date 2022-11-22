@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Container, Divider, Grid } from "@mui/material";
+import { Chip, Container, Divider, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import { CartsContext } from "../../helpers/context/CartsContext";
 import OrderItemHitory from "../../components/order/OrderItemHistory";
@@ -24,6 +24,15 @@ function OrderHistoryPage() {
 		loadSpecifyOrder(user.id);
 	}, []);
 
+	const format = (value) => {
+		const listColor = {
+			ORDERED: "warning",
+			ACCEPTED: "success",
+			REJECTED: "error",
+		};
+		return <Chip label={value} color={listColor[value]} />;
+	};
+
 	return (
 		<>
 			<Container sx={{ marginTop: "150px" }}>
@@ -33,25 +42,24 @@ function OrderHistoryPage() {
 
 				<Divider />
 				<Grid container spacing={5} paddingX={15}>
-					{loading ? (
-						<Loading />
-					) : (
-						data.map((e) => {
-							return (
-								<Grid item xs={10}>
-									<br />
-									<h5> Đơn Hàng: {e.id} </h5>
-									<p></p>
-									{e.oderDetails.map((item) => {
-										return <OrderItemHitory cart={item} />;
-									})}
-									<br />
-									<h5>TOTAL: {e.totalPrice} VNĐ</h5>
-									<Divider />
-								</Grid>
-							);
-						})
-					)}
+					{data.map((e) => {
+						return (
+							<Grid item xs={10}>
+								<br />
+								<h5>
+									{" "}
+									Đơn Hàng: {e.id} {format(e.status)}
+								</h5>
+								<p></p>
+								{e.oderDetails.map((item) => {
+									return <OrderItemHitory cart={item} status={e.status} />;
+								})}
+								<br />
+								<h5>TOTAL: {e.totalPrice} VNĐ</h5>
+								<Divider />
+							</Grid>
+						);
+					})}
 				</Grid>
 			</Container>
 		</>

@@ -43,13 +43,7 @@ const columns = [
 		sortable: true,
 		align: "right",
 	},
-	{
-		id: "createdAt",
-		label: "Created At",
-		sortable: true,
-		align: "right",
-		valueFormatter: (params) => moment(params?.value).format("DD/MM/YYYY"),
-	},
+
 	{
 		id: "gender",
 		label: "Gender",
