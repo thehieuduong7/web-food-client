@@ -7,28 +7,30 @@ import { ProductService } from "../../helpers/service/productService";
 import { CategoryService } from "../../helpers/service/categoryService";
 import ListCategory from "../../components/home/ListCategory";
 import { CartsContext } from "../../helpers/context/CartsContext";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
+import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 
 function HomePage() {
-	const [dataTopFood, setData] = useState([]);
-	const [dataCategory, setCate] = useState([]);
-	useEffect(() => {
-		const fetchApi = async () => {
-			const food = await ProductService.getProduct(0);
-			setData(food);
-			const cate = await CategoryService.getCategory(0);
-			setCate(cate);
-		};
-		fetchApi();
-	}, []);
+	const {
+		foodsState: { listFoods },
+		loadListFoods,
+	} = useContext(FoodsContext);
+	const { categoriesState } = useContext(CategoriesContext);
 
 	const { alert, clearAlert } = useContext(CartsContext);
 
+	useEffect(() => {
+		loadListFoods({ page: 0, size: 8 });
+	}, []);
 	return (
 		<>
 			<Banner />
 			<Divider sx={{ my: 8, borderBottom: 2 }} />
-			<TopItems dataTopFood={dataTopFood} />
-			<ListCategory dataCategory={dataCategory} />
+			<TopItems dataTopFood={listFoods.data} loading={listFoods.loading} />
+			<ListCategory
+				dataCategory={categoriesState.categories}
+				loading={categoriesState.loading}
+			/>
 			<Information />
 			<Snackbar
 				open={alert.show}

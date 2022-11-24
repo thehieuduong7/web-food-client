@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { categoriesService } from "../service/categoriesService";
 import categoriesReducer, {
 	categoriesAction,
@@ -23,6 +23,9 @@ function CategoriesContextProvider({ children }) {
 			return err;
 		}
 	};
+	useEffect(() => {
+		getCategories();
+	}, []);
 	const categoriesValue = { categoriesState, getCategories };
 	return (
 		<CategoriesContext.Provider value={categoriesValue}>

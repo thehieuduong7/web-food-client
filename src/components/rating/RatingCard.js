@@ -11,8 +11,12 @@ import {
 	Typography,
 	Button,
 	TextField,
+	Snackbar,
+	Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
+import Loading from "../layout/Loading";
 const initFood = {
 	point: 0,
 	content: "",
@@ -22,7 +26,15 @@ export default function RatingCard() {
 		authState: { user },
 	} = React.useContext(AuthContext);
 	const [stateForm, setStateForm] = React.useState(initFood);
-	const { productId } = React.useContext(ProductContext);
+	const {
+		foodsState: { foodSpecific },
+	} = React.useContext(FoodsContext);
+	const [loading, setLoading] = React.useState(false);
+	const [alert, setAlert] = React.useState({
+		type: "",
+		show: null,
+		message: "",
+	});
 	const nagivate = useNavigate();
 	const ratingChange = (event, value) => {
 		console.log(value);
@@ -34,20 +46,6 @@ export default function RatingCard() {
 		});
 	};
 
-	const ratingSubmit = () => {
-		console.log(productId);
-		localStorage.setItem("productId", productId);
-
-		RatingService.saveRating({
-			...stateForm,
-			customerDtoId: user.customerId,
-			productDtoId: productId,
-		}).then((res) => {
-			console.log(res);
-			nagivate("/foods/" + productId);
-		});
-	};
-
 	const handleChangeText = (e) => {
 		setStateForm((pre) => {
 			return {
@@ -56,6 +54,30 @@ export default function RatingCard() {
 			};
 		});
 	};
+
+	const handleSubmit = async () => {
+		setLoading(true);
+		try {
+			await RatingService.saveRating({
+				...stateForm,
+				customerDtoId: user.id,
+				productDtoId: foodSpecific.info.id,
+			});
+			setAlert({
+				type: "success",
+				message: "rating success",
+				show: true,
+			});
+		} catch (err) {
+			setAlert({
+				type: "error",
+				message: "rating fail",
+				show: true,
+			});
+		}
+		setLoading(false);
+	};
+	if (loading) return <Loading />;
 	return (
 		<>
 			<Grid
@@ -74,22 +96,12 @@ export default function RatingCard() {
 					sx={{ paddingX: 10, paddingTop: 5, my: 0.5, minWidth: "1030px" }}
 				>
 					<Typography sx={{ mr: 1, my: 0.5, minWidth: "130px" }}>
-						<strong>Account Info </strong>
+						Account Info:
+						<strong style={{ fontSize: 25, marginLeft: 5 }}>
+							{user.fullname}
+						</strong>
 					</Typography>
-					<TextField
-						disabled
-						required
-						id="outlined-required"
-						label="Required"
-						defaultValue={user ? user.firstName : ""}
-						value={
-							user
-								? user.firstName
-								: "" + " " + user.lastName !== null
-								? user.lastName
-								: ""
-						}
-					/>
+
 					<Typography sx={{ mr: 1, my: 0.5, minWidth: "130px" }}>
 						<strong>Rating Point</strong>
 					</Typography>
@@ -118,10 +130,31 @@ export default function RatingCard() {
 						/>
 					</FormControl>
 					<br />
-					<Button onClick={ratingSubmit} variant="contained">
+					<Button onClick={handleSubmit} variant="contained">
 						Submit
 					</Button>
 				</Stack>
+				<Snackbar
+					open={alert.show}
+					autoHideDuration={6000}
+					onClose={() =>
+						setAlert((pre) => {
+							return { ...pre, show: false };
+						})
+					}
+				>
+					<Alert
+						onClose={() =>
+							setAlert((pre) => {
+								return { ...pre, show: false };
+							})
+						}
+						severity={alert.type}
+						sx={{ width: "100%" }}
+					>
+						{alert.message}
+					</Alert>
+				</Snackbar>
 			</Grid>
 		</>
 	);

@@ -3,14 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import FoodCard from "../food/FoodCard";
 import { ProductContext } from "../../helpers/context/productContext";
 import { useContext } from "react";
+import Loading from "../layout/Loading";
 
-function TopItems({ dataTopFood }) {
+function TopItems({ dataTopFood, loading }) {
 	const navigate = useNavigate();
-	const { ListProduct, loadProducts } = useContext(ProductContext);
 	const onclickViewAll = () => {
 		navigate("/foods");
-		loadProducts(0);
-		console.log("click view all");
 	};
 
 	return (
@@ -30,13 +28,17 @@ function TopItems({ dataTopFood }) {
 					</h1>
 				</Grid>
 				<Grid container spacing={2} columnSpacing={4}>
-					{dataTopFood.map((e) => {
-						return (
-							<Grid item md={3} xs={6}>
-								<FoodCard {...e} />
-							</Grid>
-						);
-					})}
+					{loading ? (
+						<Loading />
+					) : (
+						dataTopFood.map((e) => {
+							return (
+								<Grid item md={3} xs={6}>
+									<FoodCard {...e} />
+								</Grid>
+							);
+						})
+					)}
 				</Grid>
 				<Grid container justifyContent="center">
 					<Button

@@ -10,7 +10,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { ListAlt, Logout, MenuBook, Store } from "@mui/icons-material";
+import {
+	Category,
+	Group,
+	ListAlt,
+	Logout,
+	MenuBook,
+	Store,
+} from "@mui/icons-material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import PermitDeniedPage from "../error/PermitDeniedPage";
@@ -18,19 +25,38 @@ import Loading from "../../components/layout/Loading";
 import { Grid, Button, MenuItem } from "@mui/material";
 
 const drawerWidth = 240;
-
+const MenuOptions = [
+	{
+		name: "Foods",
+		icon: <MenuBook />,
+		redirect: "/admin/foods",
+	},
+	{
+		name: "List Orders",
+		icon: <ListAlt />,
+		redirect: "/admin/orders",
+	},
+	{
+		name: "Categories",
+		icon: <Category />,
+		redirect: "/admin/categories",
+	},
+	{
+		name: "Customer",
+		icon: <Group />,
+		redirect: "/admin/customers",
+	},
+];
 export default function HomeAdminPage() {
 	const {
 		authState: { authLoading, authorization },
 		logout,
 	} = React.useContext(AuthContext);
 	const nagivate = useNavigate();
-	const handleClickMenu = () => {
-		nagivate("/admin/foods");
+	const handleClickOption = (redirect) => {
+		return () => nagivate(redirect);
 	};
-	const handleClickListOrder = () => {
-		nagivate("/admin/orders");
-	};
+
 	const handleClickStore = () => {
 		nagivate("/");
 	};
@@ -53,12 +79,12 @@ export default function HomeAdminPage() {
 					<Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
 						Good food
 					</Typography>
-					<MenuItem onClick={handleClickStore}>
+					{/* <MenuItem onClick={handleClickStore}>
 						<ListItemIcon>
 							<Store fontSize="small" />
 						</ListItemIcon>
 						Store
-					</MenuItem>
+					</MenuItem> */}
 					<MenuItem onClick={handleLogout}>
 						<ListItemIcon>
 							<Logout fontSize="small" />
@@ -81,30 +107,16 @@ export default function HomeAdminPage() {
 				<Toolbar />
 				<Box sx={{ overflow: "auto" }}>
 					<List>
-						<ListItem disablePadding>
-							<ListItemButton onClick={handleClickMenu}>
-								<ListItemIcon>
-									<MenuBook />
-								</ListItemIcon>
-								<ListItemText primary={"Menu"} />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding>
-							<ListItemButton onClick={handleClickListOrder}>
-								<ListItemIcon>
-									<ListAlt />
-								</ListItemIcon>
-								<ListItemText primary={"List Order"} />
-							</ListItemButton>
-						</ListItem>
-						{/* 						<ListItemButton onClick={handleClickCategories}>
-							<ListItemIcon>
-								<MenuIcon />
-							</ListItemIcon>
-							<ListItemText primary={"Categories"} />
-						</ListItemButton>
+						{MenuOptions.map((e, index) => (
+							<ListItem disablePadding key={index}>
+								<ListItemButton onClick={handleClickOption(e.redirect)}>
+									<ListItemIcon>{e.icon}</ListItemIcon>
+									<ListItemText primary={e.name} />
+								</ListItemButton>
+							</ListItem>
+						))}
 
-						<ListItemButton onClick={handleClickMenu}>
+						{/* <ListItemButton onClick={handleClickMenu}>
 							<ListItemIcon>
 								<LunchDiningIcon />
 							</ListItemIcon>

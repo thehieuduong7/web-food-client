@@ -16,25 +16,27 @@ import { AddShoppingCart } from "@mui/icons-material";
 import { useContext } from "react";
 import { CartsContext } from "../../helpers/context/CartsContext";
 
-function FoodCard(pros) {
+function FoodCard({ info, categories, images }) {
 	const { addCarts } = useContext(CartsContext);
 	const navigate = useNavigate();
 	const handleAddCart = () => {
-		addCarts({ productId: pros.productId, amount: 1 });
+		addCarts({ productId: info.id, amount: 1 });
 	};
 	const handleClickDetail = () => {
 		console.log("hello");
-		navigate(`/foods/${pros.productId}`);
+		navigate(`/foods/${info.id}`);
 	};
 	return (
 		<WrapperCard>
-			<Card sx={{ height: "auto" }}>
-				<CardActionArea onClick={handleClickDetail}>
+			<Card sx={{ minHeight: "308" }}>
+				<CardActionArea onClick={handleClickDetail} sx={{ minHeight: 270 }}>
 					<CardMedia
 						component="img"
 						height="140"
-						image={pros.picture}
-						alt="image food"
+						image={
+							images.length === 0 ? "/image/foodImage.png" : images[0].imageURL
+						}
+						alt="/image/foodImage.png"
 						sx={{ p: 3 }}
 					/>
 					<CardContent>
@@ -47,16 +49,14 @@ function FoodCard(pros) {
 									lineHeight={1.1}
 									whiteSpace={0.5}
 								>
-									{pros.productName}
+									{info.name}
 								</Typography>
 								<Typography variant="body2" color="text.secondary" width={200}>
-									{pros.categories
-										.map((category) => category.cateName)
-										.join("- ")}
+									{categories.map((category) => category.name).join("- ")}
 								</Typography>
 							</Grid>
-							<Grid item>{pros.price} VNĐ</Grid>
-							<HoverRating rate={pros.rating} />
+							<Grid item>{info.price} VNĐ</Grid>
+							<HoverRating rate={info.rating} />
 						</Grid>
 					</CardContent>
 				</CardActionArea>

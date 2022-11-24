@@ -8,13 +8,16 @@ import Loading from "../../components/layout/Loading";
 import ForgetPasswordForm from "../../components/auth/ForgetPasswordForm";
 function AuthPage({ authRoute }) {
 	const {
-		authState: { authLoading, isAuthenticated },
+		authState: { authLoading, isAuthenticated, authorization },
 	} = useContext(AuthContext);
 	let body;
 	if (authLoading) {
 		body = <Loading />;
 	} else if (isAuthenticated) {
-		return <Navigate to="/" replace />;
+		if (authorization === "customer") return <Navigate to="/" replace />;
+		else if (authorization === "admin") {
+			return <Navigate to="/admin" replace />;
+		}
 	} else {
 		if (authRoute === "login") {
 			body = <LoginForm />;

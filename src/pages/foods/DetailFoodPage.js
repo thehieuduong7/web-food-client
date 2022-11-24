@@ -5,9 +5,21 @@ import ListFoods from "../../components/food/ListFoods";
 import { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../helpers/context/productContext";
 import ListRating from "../../components/rating/ListRating";
+import { useParams } from "react-router-dom";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
 
 function DetailFoodPage() {
-	const products = useContext(ProductContext);
+	let { id } = useParams();
+	const {
+		foodsState: { foodSpecific, listFoods },
+		loadSpecific,
+		loadListFoods,
+	} = useContext(FoodsContext);
+
+	useEffect(() => {
+		loadSpecific(id);
+		loadListFoods({ page: 0, size: 4 });
+	}, []);
 	return (
 		<>
 			<Container sx={{ marginTop: "150px" }}>
@@ -29,7 +41,7 @@ function DetailFoodPage() {
 				</Grid>
 				<br></br>
 
-				<ListFoods data={products.ListProduct} />
+				<ListFoods data={listFoods.data} />
 				<br />
 				<br />
 				<Grid item>

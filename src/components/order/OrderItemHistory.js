@@ -45,7 +45,7 @@ export default function OrderItemHitory(pros) {
 				justifyContent: "space-between",
 			}}
 		>
-			<Box sx={{ display: "flex" }}>
+			<Box sx={{ display: "flex", minHeight: 100 }}>
 				{/* <Checkbox {...label } /> */}
 
 				<CardMedia
@@ -64,7 +64,7 @@ export default function OrderItemHitory(pros) {
 							? pros.cart.product.productName
 							: "ok"}
 					</Typography>
-					<Typography
+					{/* <Typography
 						variant="subtitle1"
 						color="text.secondary"
 						component="div"
@@ -72,7 +72,7 @@ export default function OrderItemHitory(pros) {
 						{pros.cart.product.description
 							? pros.cart.product.description
 							: "ok"}
-					</Typography>
+					</Typography> */}
 				</CardContent>
 			</Box>
 

@@ -1,112 +1,51 @@
-import {
-	FormControl,
-	Grid,
-	Typography,
-	TextField,
-	Button,
-} from "@mui/material";
-import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../helpers/context/AuthContext";
-import { ProductContext } from "../../helpers/context/productContext";
-import { useNavigate } from "react-router-dom";
-import { CartsContext } from "../../helpers/context/CartsContext";
+import { Grid, Typography } from "@mui/material";
+import { useContext } from "react";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
+import Loading from "../layout/Loading";
 import CarouselImage from "./CarouselImage";
-const min = 0;
-const max = 10;
+import AddCart from "./option/AddCart";
 
 function InfoFood() {
-	const products = useContext(ProductContext);
-	const [value, setValue] = useState(1);
 	const {
-		authState: { isAuthenticated, user, authorization },
-	} = useContext(AuthContext);
-	const navigate = useNavigate();
-	const { ProductDetail, loadProductDetail } = useContext(ProductContext);
-	const { CartQuantity, loadQuantity, loadListCart } = useContext(CartsContext);
+		foodsState: {
+			foodSpecific: { loading, info, categories, images, error },
+		},
+	} = useContext(FoodsContext);
+	if (loading) return <Loading />;
+	else if (error)
+		return (
+			<Grid container justifyContent="center">
+				404
+			</Grid>
+		);
+	let showCategories = loading ? "" : categories.map((e) => e.name).join("-");
 
-	console.log(products.ProductDetail.images);
-	const addToCartClick = () => {
-		if (isAuthenticated) {
-			const cart = {
-				customerId: user.customerId,
-				productId: products.ProductDetail.productId,
-				amount: value,
-			};
-			console.log(user.customerId);
-
-			loadListCart(cart);
-			loadQuantity(user.customerId);
-		} else console.log("add not ok");
-		console.log(products.ProductDetail);
-		console.log(CartQuantity);
-	};
-	const data = products.ProductDetail.images;
 	return (
 		<>
 			<Grid
 				container
 				spacing={3}
-				sx={{
-					minHeight: "350px",
-					border: 1,
-					borderRadius: 5,
-					paddingY: 1,
-					borderColor: "#E5E3E2",
-				}}
+				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
 			>
 				<Grid item lg={5} md={5}>
-					<CarouselImage value={data} />
+					<CarouselImage value={images} />
 				</Grid>
 				<Grid item lg={7} md={7} sx={{ pr: 5 }}>
 					<Grid container direction="column" gap={1}>
-						<Typography variant="h5" component="h5">
-							<strong>{products.ProductDetail.productName}</strong>
+						<Typography variant="h3" component="h3">
+							{info.name}
 						</Typography>
-						<p>{products.ProductDetail.description}</p>
+						<p>{info.description}</p>
 
 						<Typography>
-							<strong>Category:</strong>{" "}
-							{products.ProductDetail?.categories
-								?.map((category) => category.cateName)
-								.join("-")}
+							<strong style={{ marginRight: "3px" }}>Category:</strong>
+							<span>{showCategories}</span>
 						</Typography>
 						<Typography>
-							<strong>Status:</strong> available
+							<strong>Status:</strong> {info.status}
 						</Typography>
-						<Typography variant="h5">
-							{" "}
-							{products.ProductDetail.price} VNĐ
-						</Typography>
-						<FormControl sx={{ flexDirection: "column" }}>
-							<TextField
-								type="number"
-								inputProps={{ min, max }}
-								value={value}
-								onChange={(e) => {
-									var value = parseInt(e.target.value, 10);
-									if (value > max) value = max;
-									if (value < min) value = min;
-									setValue(value);
-								}}
-								variant="outlined"
-								sx={{
-									minWidth: "15px",
-									maxWidth: "100px",
-								}}
-							/>
-							<br />
-							<Button
-								variant="outlined"
-								sx={{
-									maxWidth: "200px",
-									color: "#16802C",
-									borderColor: "#16802C",
-								}}
-								onClick={addToCartClick}
-							>
-								<strong>Add to cart</strong>
-							</Button>
-						</FormControl>
+						<Typography variant="h5">{info.price} $</Typography>
+						<AddCart />
 					</Grid>
 				</Grid>
 			</Grid>

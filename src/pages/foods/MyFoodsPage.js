@@ -1,58 +1,43 @@
 import { Container, Grid, Pagination } from "@mui/material";
 import ListFoods from "../../components/food/ListFoods";
 import OptionViewFoods from "../../components/food/option/OptionViewFood";
-import { useState, useContext, useEffect  } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ProductContext } from "../../helpers/context/productContext";
+import { FoodsContext } from "../../helpers/context/FoodsContext";
+import { CategoriesContext } from "../../helpers/context/CategoriesContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 const MaxPage = 5;
 function MyFoodsPage() {
-	const { ProductFilter, ListProduct, loadProductFilter } = useContext(ProductContext)
-	
-	console.log(ListProduct)
-	const [page, setPage] = useState(1);
+	const {
+		foodsState: { listFoods },
+		loadListFoods,
+	} = useContext(FoodsContext);
+	const { categoriesState } = useContext(CategoriesContext);
 
-	// useEffect(()=>{
-	// 	const filter = { 
-    //         ...ProductFilter, 
-    //         page:page-1
-    //     }
-	// 	setPage(ProductFilter.page+1)
-		
-	// 	loadProductFilter(filter)
-	// },[])
+	const { alert, clearAlert } = useContext(CartsContext);
 
-	const paginProduct = (e, page) =>{
-		const filter = { 
-            ...ProductFilter, 
-            page:page-1
-        }
-        loadProductFilter(filter)
-		setPage(page)
-		console.log(page)
-	}
-	
+	useEffect(() => {
+		loadListFoods({ page: 0, size: 8 });
+	}, []);
+
 	return (
 		<>
-			<Container maxWidth="xl" sx={{ marginTop: "100px",marginLeft:"50px"}}>
-				<br/>
+			<Container
+				maxWidth="xl"
+				sx={{
+					marginTop: "100px",
+					justifyContent: "center",
+					display: "flex",
+				}}
+			>
 				<Grid container>
-					<Grid container lg={2}>
+					<Grid item lg={2}>
 						<OptionViewFoods />
 					</Grid>
-					<br/>
-					<Grid
-						container
-						lg={9}
-						justifyContent={"center"}
-						gap={3}
-						sx={{ pl: 2 }}
-					>
-						<ListFoods data={ListProduct} />
+					<Grid item lg={10} justifyContent={"center"} gap={3} sx={{ pl: 2 }}>
+						<ListFoods data={listFoods.data} />
 						<Grid container justifyContent={"end"}>
-							<Pagination
-								page={page}
-								onChange={paginProduct}
-								count={MaxPage}
-							/>
+							<Pagination page={0} onChange={null} count={MaxPage} />
 						</Grid>
 					</Grid>
 				</Grid>

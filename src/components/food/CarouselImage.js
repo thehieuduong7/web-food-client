@@ -7,7 +7,7 @@ function CarouselImage({ value }) {
 	const handleChange = (prev) => {
 		setActiveChild(prev);
 	};
-	if (!value) {
+	if (!value || value.length === 0) {
 		value = [
 			{
 				id: -1,

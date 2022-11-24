@@ -43,8 +43,12 @@ function FoodsContextProvider({ children }) {
 
 	const loadSpecific = async (id) => {
 		dispatch(foodsAction.loadingSpecific(true));
-		const food = await foodsService.getSpecific(id);
-		dispatch(foodsAction.setSpecific({ ...food }));
+		try {
+			const food = await foodsService.getSpecific(id);
+			dispatch(foodsAction.setSpecific({ ...food }));
+		} catch (err) {
+			dispatch(foodsAction.setSpecific({ error: err }));
+		}
 	};
 
 	const createFood = async (food) => {

@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import { Badge, Collapse, Typography } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { CategoriesContext } from "../../helpers/context/CategoiesContext";
+import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 import Loading from "../layout/Loading";
 
 export default function FilterCategories() {

@@ -20,7 +20,7 @@ function formatResponse(response) {
 		response;
 	return {
 		username: lastName,
-		fullname: `${firstName} ${lastName}`,
+		fullname: `${firstName} ${lastName}`.toUpperCase(),
 		role: roleName === "ROLE_ADMIN" ? "admin" : "customer",
 		id: customerId,
 		phone,

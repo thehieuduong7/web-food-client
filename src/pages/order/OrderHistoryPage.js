@@ -32,6 +32,7 @@ function OrderHistoryPage() {
 		};
 		return <Chip label={value} color={listColor[value]} />;
 	};
+	if (loading) return <Loading />;
 
 	return (
 		<>
@@ -47,7 +48,6 @@ function OrderHistoryPage() {
 							<Grid item xs={10}>
 								<br />
 								<h5>
-									{" "}
 									Đơn Hàng: {e.id} {format(e.status)}
 								</h5>
 								<p></p>

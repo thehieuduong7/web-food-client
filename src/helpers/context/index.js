@@ -1,7 +1,7 @@
 import AuthContextProvider from "./AuthContext";
 import CartsContextProvider from "./CartsContext";
 import OrdersContextProvider from "./OrdersContext";
-import CategoriesContextProvider from "./CategoiesContext";
+import CategoriesContextProvider from "./CategoriesContext";
 import { ProductProvider } from "./productContext";
 import FoodsContextProvider from "./FoodsContext";
 

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { CategoriesContext } from "../../helpers/context/CategoiesContext";
+import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;

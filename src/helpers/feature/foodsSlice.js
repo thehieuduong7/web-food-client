@@ -3,17 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	foodSpecific: {
 		info: {},
-		categories: {},
-		images: {},
+		categories: [],
+		images: [],
 		loading: true,
 		loaddingAction: false,
+		error: null,
 	},
 	listFoods: {
 		data: [
 			{
 				info: {},
-				categories: {},
-				images: {},
+				categories: [],
+				images: [],
 			},
 		],
 		loading: true,
@@ -29,7 +30,7 @@ const foodsSlice = createSlice({
 	initialState,
 	reducers: {
 		setSpecific(state, action) {
-			const { info, categories, images } = action.payload;
+			const { info, categories, images, error } = action.payload;
 			let { foodSpecific } = state;
 			foodSpecific = {
 				...foodSpecific,
@@ -37,6 +38,7 @@ const foodsSlice = createSlice({
 				categories,
 				images,
 				loading: false,
+				error,
 			};
 			state.foodSpecific = foodSpecific;
 		},

@@ -1,13 +1,17 @@
 import { IconButton, Button, FormControl, TextField } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartsContext } from "../../../helpers/context/CartsContext";
 const min = 0;
 const max = 10;
 
-function AddCart() {
-	const [value, setValue] = useState();
-
+function AddCart({ id }) {
+	const [value, setValue] = useState(0);
+	const { addCarts } = useContext(CartsContext);
+	const handleAddCart = () => {
+		addCarts({ productId: id, amount: value });
+	};
 	return (
 		<>
 			<FormControl sx={{ flexDirection: "row" }} fullWidth>
@@ -29,7 +33,7 @@ function AddCart() {
 						maxWidth: "324px",
 					}}
 				/>
-				<Button variant="outlined">
+				<Button variant="outlined" onClick={handleAddCart}>
 					<AddShoppingCartIcon fontSize="small" />
 				</Button>
 			</FormControl>
