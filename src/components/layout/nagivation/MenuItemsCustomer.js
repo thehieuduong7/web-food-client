@@ -1,5 +1,5 @@
 import { MenuItem, ListItemIcon } from "@mui/material";
-import { Timeline } from "@mui/icons-material";
+import { Chat, Timeline } from "@mui/icons-material";
 import { Store, Grading } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,9 @@ function MenuItemsCustomer() {
 	const navigate = useNavigate();
 	const orderClick = () => {
 		navigate("/orders/history");
+	};
+	const chatClick = () => {
+		navigate("/chat");
 	};
 	return (
 		<>
@@ -16,11 +19,11 @@ function MenuItemsCustomer() {
 				</ListItemIcon>
 				Your Order
 			</MenuItem>
-			<MenuItem>
+			<MenuItem onClick={chatClick}>
 				<ListItemIcon>
-					<Timeline fontSize="small" />
+					<Chat fontSize="small" />
 				</ListItemIcon>
-				History
+				Chat
 			</MenuItem>
 		</>
 	);

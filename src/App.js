@@ -25,6 +25,10 @@ import OrderHistoryPAge from "./pages/order/OrderHistoryPage";
 import RatingPage from "./pages/rating/RatingPage";
 import AdminOrderPage from "./pages/order/AdminOrderPage";
 import HomeTest from "./pages/home/HomeTest";
+import AdminRatingPage from "./pages/rating/AdminRatingPage";
+import Chat from "./components/chatExample/Chat/Chat";
+import AdminChatsPage from "./pages/chat/AdminChatsPage";
+import ClientChatsPage from "./pages/chat/ClientChatsPage";
 
 function App() {
 	return (
@@ -64,8 +68,17 @@ function App() {
 						</UserRouteRole>
 					}
 				/>
+
 				<Route path="/foods/:id/rating" element={<RatingPage />} />
 				<Route path="/foods/:id" element={<DetailFoodPage />} />
+				<Route
+					path="/chat"
+					element={
+						<UserRouteRole>
+							<ClientChatsPage />
+						</UserRouteRole>
+					}
+				/>
 			</Route>
 			<Route path="/admin" element={<HomeAdminPage />}>
 				<Route path="/admin/foods" element={<AdminFoodsPage />} />
@@ -89,6 +102,8 @@ function App() {
 					element={<UpdateCustomerPage />}
 				/>
 				<Route path="/admin/orders" element={<AdminOrderPage />} />
+				<Route path="/admin/rating" element={<AdminRatingPage />} />
+				<Route path="/admin/chat/" element={<AdminChatsPage />} />
 			</Route>
 		</Routes>
 	);

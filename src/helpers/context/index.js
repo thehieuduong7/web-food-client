@@ -4,6 +4,7 @@ import OrdersContextProvider from "./OrdersContext";
 import CategoriesContextProvider from "./CategoriesContext";
 import { ProductProvider } from "./productContext";
 import FoodsContextProvider from "./FoodsContext";
+import ChatOnlineContextProvider from "./ChatOnlineContext";
 
 function ContextProvider({ children }) {
 	return (
@@ -12,7 +13,11 @@ function ContextProvider({ children }) {
 				<OrdersContextProvider>
 					<CartsContextProvider>
 						<FoodsContextProvider>
-							<ProductProvider>{children}</ProductProvider>
+							<ProductProvider>
+								<ChatOnlineContextProvider>
+									{children}
+								</ChatOnlineContextProvider>
+							</ProductProvider>
 						</FoodsContextProvider>
 					</CartsContextProvider>
 				</OrdersContextProvider>

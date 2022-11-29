@@ -19,7 +19,7 @@ function formatResponse(response) {
 	const { lastName, firstName, roleName, customerId, phone, email, address } =
 		response;
 	return {
-		username: lastName,
+		username: email === "" ? "admin" : email,
 		fullname: `${firstName} ${lastName}`.toUpperCase(),
 		role: roleName === "ROLE_ADMIN" ? "admin" : "customer",
 		id: customerId,

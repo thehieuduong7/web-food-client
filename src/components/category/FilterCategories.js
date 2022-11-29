@@ -15,36 +15,35 @@ import { ProductContext } from "../../helpers/context/productContext";
 export default function FilterCategories() {
 	const [checked, setChecked] = React.useState([1]);
 	const [open, setOpen] = React.useState(true);
-	const [categories, setCategory] = React.useState([])
-	const {ProductFilter,ListProduct,loadProductFilter} = React.useContext(ProductContext)
+	const [categories, setCategory] = React.useState([]);
+	const { ProductFilter, loadProductFilter } = React.useContext(ProductContext);
 
 	React.useEffect(() => {
-		CategoryService.getCategory(0).then(res => {
-			setCategory(res)
-		})
-	}, [])
+		CategoryService.getCategory(0).then((res) => {
+			setCategory(res);
+		});
+	}, []);
 
 	const handleToggle = (value) => () => {
 		const currentIndex = checked.indexOf(value);
 		const newChecked = [...checked];
-		
+
 		if (currentIndex === -1) {
 			newChecked.push(value);
 			const arr = ProductFilter.category;
-			arr.push(value)
-			
-			const filter = {...ProductFilter,category:arr}
-			loadProductFilter(filter)
+			arr.push(value);
 
+			const filter = { ...ProductFilter, category: arr };
+			loadProductFilter(filter);
 		} else {
 			const arr = ProductFilter.category;
-			if(arr.includes(value)){          
-				arr.splice(arr.indexOf(value), 1);             
+			if (arr.includes(value)) {
+				arr.splice(arr.indexOf(value), 1);
 			}
-			const filter = {...ProductFilter,category:arr}
-			loadProductFilter(filter)
+			const filter = { ...ProductFilter, category: arr };
+			loadProductFilter(filter);
 			newChecked.splice(currentIndex, 1);
-			console.log("f")
+			console.log("f");
 		}
 		setChecked(newChecked);
 	};

@@ -3,7 +3,6 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import { RatingService } from "../../helpers/service/ratingService";
-import { ProductContext } from "../../helpers/context/productContext";
 
 import {
 	FormControl,

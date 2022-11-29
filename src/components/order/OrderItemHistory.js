@@ -10,15 +10,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ProductService } from "../../helpers/service/productService";
 import { CartsContext } from "../../helpers/context/CartsContext";
 import Button from "@mui/material/Button";
-import { ProductContext } from "../../helpers/context/productContext";
 import { useNavigate } from "react-router-dom";
 
 export default function OrderItemHitory(pros) {
 	const label = { inputProps: { "aria-label": "Checkbox demo" } };
 	const [Product, setProduct] = React.useState();
-	const [checked, setChecked] = React.useState([1]);
-	const { ProductDetail, loadProductDetail, productId, setProductId } =
-		React.useContext(ProductContext);
 	const nagivate = useNavigate();
 
 	React.useEffect(() => {
@@ -28,9 +24,7 @@ export default function OrderItemHitory(pros) {
 	}, []);
 
 	const rateClick = () => {
-		setProductId(pros.cart.product.productId);
-		loadProductDetail(pros.cart.product.productId);
-		nagivate(`/foods/${pros.cart.product.productId}/rating`);
+		nagivate(`/foods/${1}/rating`);
 	};
 
 	console.log(pros);
@@ -64,15 +58,6 @@ export default function OrderItemHitory(pros) {
 							? pros.cart.product.productName
 							: "ok"}
 					</Typography>
-					{/* <Typography
-						variant="subtitle1"
-						color="text.secondary"
-						component="div"
-					>
-						{pros.cart.product.description
-							? pros.cart.product.description
-							: "ok"}
-					</Typography> */}
 				</CardContent>
 			</Box>
 

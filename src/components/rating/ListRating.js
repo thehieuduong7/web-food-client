@@ -3,7 +3,6 @@ import FoodCard from "../food/FoodCard";
 import RatingItem from "./RatingItem";
 import { ProductService } from "../../helpers/service/productService";
 import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "../../helpers/context/productContext";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import Loading from "../layout/Loading";
 function ListRating() {

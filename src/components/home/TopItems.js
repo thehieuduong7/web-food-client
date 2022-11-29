@@ -1,8 +1,6 @@
 import { Container, Grid, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FoodCard from "../food/FoodCard";
-import { ProductContext } from "../../helpers/context/productContext";
-import { useContext } from "react";
 import Loading from "../layout/Loading";
 
 function TopItems({ dataTopFood, loading }) {

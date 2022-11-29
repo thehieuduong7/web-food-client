@@ -12,11 +12,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import {
 	Category,
+	Chat,
 	Group,
 	ListAlt,
 	Logout,
 	MenuBook,
 	Store,
+	ThumbUpAltSharp,
 } from "@mui/icons-material";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/context/AuthContext";
@@ -45,6 +47,11 @@ const MenuOptions = [
 		name: "Customer",
 		icon: <Group />,
 		redirect: "/admin/customers",
+	},
+	{
+		name: "Chat",
+		icon: <Chat />,
+		redirect: "/admin/chat",
 	},
 ];
 export default function HomeAdminPage() {

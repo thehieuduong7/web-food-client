@@ -3,7 +3,6 @@ import FormFood from "../../components/food/FormFood";
 import InfoFood from "../../components/food/InfoFood";
 import ListFoods from "../../components/food/ListFoods";
 import { useState, useContext, useEffect } from "react";
-import { ProductContext } from "../../helpers/context/productContext";
 import ListRating from "../../components/rating/ListRating";
 import { useParams } from "react-router-dom";
 import { FoodsContext } from "../../helpers/context/FoodsContext";

@@ -2,7 +2,6 @@ import { Container, Grid, Pagination } from "@mui/material";
 import ListFoods from "../../components/food/ListFoods";
 import OptionViewFoods from "../../components/food/option/OptionViewFood";
 import { useState, useContext, useEffect } from "react";
-import { ProductContext } from "../../helpers/context/productContext";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 import { CartsContext } from "../../helpers/context/CartsContext";
