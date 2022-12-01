@@ -1,7 +1,7 @@
 const sockets = {};
 
 const addSocket = ({ socketId, room, from }) => {
-	if (!room) throw { error: "not foudn room." };
+	if (!room) throw { error: "not found room." };
 	sockets[socketId] = { room, from: from === "admin" ? from : room.username };
 	return sockets[socketId];
 };
