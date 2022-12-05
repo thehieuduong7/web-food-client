@@ -37,7 +37,7 @@ function FormCustomerUpdate({ edit }) {
         nagivate("/admin/customers")
     }
     const onSaveClick = () => {
-        console.log(customerId)
+        console.log(stateForm)
         CustomersService.updateCustomerById(stateForm).then(res =>{
             nagivate("/admin/customers")
         })

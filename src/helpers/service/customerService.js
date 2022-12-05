@@ -13,12 +13,6 @@ const setAuthToken = (token) => {
 
 const updateCustomerById = async (customer) => {
     const cookies = new Cookies();
-    if (cookies.get(LOCAL_STORAGE_TOKEN_NAME)) {
-		setAuthToken(cookies.get(LOCAL_STORAGE_TOKEN_NAME));
-		console.log(cookies.get(LOCAL_STORAGE_TOKEN_NAME))
-	} else {
-		throw Error("Dont have token");
-	}
     try {
         const res = await axios.put(`${API_CUSTOMER}/${customer.id}`,customer);
         return res.data;

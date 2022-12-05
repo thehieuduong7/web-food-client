@@ -1,13 +1,59 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+import {
+    Box,
+    Grid,
+    Typography,
+    Button,
+    TextField
+} from "@mui/material";
 import Card from "@mui/material/Card";
-import { Button } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../helpers/context/authContext";
+import { CustomersService } from "../../helpers/service/customerService";
+
+const initCustomer = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "abc123",
+    address: "00000000",
+    gender: "MALE",
+    dayOfBirth: Date.now()
+};
 
 export default function CustomerInfo() {
+    const {customerId} = useContext(AuthContext)
+    const [stateForm, setStateForm] =React.useState(initCustomer);
+    const [fullName,setFullname] = React.useState(stateForm.firstName+" "+stateForm.lastName);
     const {authState: { user },
     } = useContext(AuthContext);
+    React.useEffect(() => {
+        console.log(user)
+        CustomersService.getCustomerById(user.customerId).then(res => {
+            setStateForm(res)
+            console.log(res)
+            setFullname(res.firstName+" "+res.lastName)
+        })
+    },[useContext.customerId])
+    
+    const updateClick =(e) =>{
+        console.log(stateForm)
+        stateForm.password ="abc123"
+        stateForm.gender ="MALE"
+        stateForm.dayOfBirth ="2022-12-04T16:36:14.157Z"
+        CustomersService.updateCustomerById(stateForm).then(res =>{
+            console.log(res)
+        })
+    }
+    const handleChangeText = (e) => {
+        setStateForm((pre) => {
+            return {
+                ...pre,
+                [e.target.name]: e.target.value,
+            };
+        });
+    };
     return (
         <Card className="OrderItem" sx={{ border: 0.5, flexDirection: "column", borderColor: "#EBE7F3", display: "flex", marginTop: 0.5, justifyContent: 'flex-start' }}>
             
@@ -24,13 +70,21 @@ export default function CustomerInfo() {
                     <Box  sx={{width:150}}>
                         <strong >Customer Name  </strong>
                     </Box>
-                    <Box
+                    <TextField
+                        required
+                        name="address"
+                        size="small"
+                        multiline ={true}
+                        maxRows={5}
+                        fullWidth
+                        onChange={handleChangeText}
+                        value={fullName}
                         sx={{
                             flexDirection: "row",
                         }}
                     >
-                        <strong >{user?user.firstName:"fisrt name"} {user?user.lastName:"last name"}  </strong>
-                    </Box>
+                        <strong >{} {}  </strong>
+                    </TextField>
                 </Box>
                 <Box
                     sx={{
@@ -44,13 +98,21 @@ export default function CustomerInfo() {
                     <Box  sx={{width:150}}>
                         <strong >Address  </strong>
                     </Box>
-                    <Box
+                    <TextField
+                        required
+                        name="address"
+                        size="small"
+                        multiline ={true}
+                        maxRows={5}
+                        fullWidth
+                        onChange={handleChangeText}
+                        value={stateForm?stateForm.address:"no"}
                         sx={{
                             flexDirection: "row",
                         }}
                     >
-                        <strong >{user?user.address:"no"}  </strong>
-                    </Box>
+                    </TextField>
+                    
                 </Box>
                 <Box
                     sx={{
@@ -64,13 +126,21 @@ export default function CustomerInfo() {
                     <Box  sx={{width:150}}>
                         <strong >Phone  </strong>
                     </Box>
-                    <Box
+                    <TextField
+                        required
+                        name="phone"
+                        size="small"
+                        multiline ={true}
+                        maxRows={5}
+                        fullWidth
+                        onChange={handleChangeText}
+                        value={stateForm?stateForm.phone:"00000000"}
                         sx={{
                             flexDirection: "row",
                         }}
                     >
-                        <strong >{user?user.phone:"00000000"}  </strong>
-                    </Box>
+                    </TextField>
+                    
                 </Box>
                 <Box
                     sx={{
@@ -84,13 +154,22 @@ export default function CustomerInfo() {
                     <Box  sx={{width:150}}>
                         <strong >Gmail  </strong>
                     </Box>
-                    <Box
+
+                    <TextField
+                        required
+                        name="description"
+                        size="small"
+                        multiline ={true}
+                        maxRows={5}
+                        fullWidth
+                        // onChange={handleChangeText}
+                        value={stateForm?stateForm.email:"email"}
                         sx={{
                             flexDirection: "row",
                         }}
                     >
-                        <strong >{user?user.email:"email"}  </strong>
-                    </Box>
+                    </TextField>
+                    
                 </Box>
 
                 <Box
@@ -102,7 +181,7 @@ export default function CustomerInfo() {
                         marginBottom:1.5
                     }}
                 >
-                    <Button variant="outlined" sx={{
+                    <Button onClick={updateClick} variant="outlined" sx={{
                     maxWidth: "400px",
                     width: 150,
                     height: 40,
@@ -111,7 +190,7 @@ export default function CustomerInfo() {
                     borderColor: "#16802C",
                 }}
                 >
-                    <strong>CHANGE INFO</strong>
+                    <strong>UPDATE</strong>
                     </Button>
                 </Box>
            
