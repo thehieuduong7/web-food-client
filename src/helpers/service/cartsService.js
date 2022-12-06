@@ -1,5 +1,6 @@
 import axios from "axios";
 import { axiosPrivate } from "../config/axiosConnect";
+import { foodsService } from "./foodsService";
 
 const API_CART = process.env.REACT_APP_API_HOST;
 
@@ -23,8 +24,16 @@ const getCartQuantity = async (customerId) => {
 const getListCart = async (customerId) => {
 	try {
 		const res = await axios.get(`${API_CART}/carts/customers/${customerId}`);
-
-		return res.data;
+		let fill = await Promise.all(
+			res.data.map(async (e) => {
+				let pro = await foodsService.getSpecific(e.productId);
+				return {
+					...e,
+					food: pro,
+				};
+			})
+		);
+		return fill;
 	} catch (err) {
 		console.log("err", err, err.response);
 		throw err.response.data

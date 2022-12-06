@@ -132,3 +132,6 @@ api update carts
     amount,
   }]
 }
+###
+
+get http://localhost:8080/api/carts/customers/3

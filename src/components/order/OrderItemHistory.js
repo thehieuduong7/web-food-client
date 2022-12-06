@@ -13,21 +13,12 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function OrderItemHitory(pros) {
-	const label = { inputProps: { "aria-label": "Checkbox demo" } };
-	const [Product, setProduct] = React.useState();
 	const nagivate = useNavigate();
 
-	React.useEffect(() => {
-		ProductService.getProductById(pros.cart.productId).then((res) => {
-			setProduct(res);
-		});
-	}, []);
-
 	const rateClick = () => {
-		nagivate(`/foods/${1}/rating`);
+		nagivate(`/foods/${pros.cart.product.productId}/rating`);
 	};
 
-	console.log(pros);
 	return (
 		<Card
 			className="OrderItem"

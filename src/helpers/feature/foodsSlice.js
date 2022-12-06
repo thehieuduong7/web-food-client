@@ -10,13 +10,7 @@ const initialState = {
 		error: null,
 	},
 	listFoods: {
-		data: [
-			{
-				info: {},
-				categories: [],
-				images: [],
-			},
-		],
+		data: [],
 		loading: true,
 		filter: {},
 		sort: {},

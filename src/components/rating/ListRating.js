@@ -21,15 +21,13 @@ function ListRating() {
 
 	return (
 		<Grid container direction={"column"} gap={3}>
-			<Grid container spacing={2} columnSpacing={4}>
-				{ListRating.map((e) => {
-					return (
-						<Grid item md={10} xs={6}>
-							<RatingItem value={e} />
-						</Grid>
-					);
-				})}
-			</Grid>
+			{ListRating.map((e) => {
+				return (
+					<Grid item>
+						<RatingItem value={e} />
+					</Grid>
+				);
+			})}
 		</Grid>
 	);
 }

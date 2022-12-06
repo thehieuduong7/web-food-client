@@ -23,7 +23,6 @@ function FoodCard({ info, categories, images }) {
 		addCarts({ productId: info.id, amount: 1 });
 	};
 	const handleClickDetail = () => {
-		console.log("hello");
 		navigate(`/foods/${info.id}`);
 	};
 	return (
@@ -33,9 +32,7 @@ function FoodCard({ info, categories, images }) {
 					<CardMedia
 						component="img"
 						height="140"
-						image={
-							images.length === 0 ? "/image/foodImage.png" : images[0].imageURL
-						}
+						image={images.length === 0 ? "/image/foodImage.png" : images[0].url}
 						alt="/image/foodImage.png"
 						sx={{ p: 3 }}
 					/>

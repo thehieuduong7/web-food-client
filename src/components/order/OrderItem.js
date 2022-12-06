@@ -14,6 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { CartsContext } from "../../helpers/context/CartsContext";
 
 export default function OrderItem({ cart }) {
+	console.log({ cart });
 	const { addCarts, removeCart, setSelected } = React.useContext(CartsContext);
 	const handleSelected = () => {
 		setSelected({ id: cart.id, selected: !cart.selected });
@@ -52,11 +53,13 @@ export default function OrderItem({ cart }) {
 				<CardMedia
 					component="img"
 					sx={{ width: 151 }}
-					image=""
+					image={cart.food.images[0].url}
 					alt="Live from space album cover"
 				/>
-				<CardContent sx={{ flex: "1 0 auto" }}>
-					<Typography component="div" variant="h5"></Typography>
+				<CardContent>
+					<Typography component="div" variant="h5">
+						{cart.food.info.name}
+					</Typography>
 					<Typography
 						variant="subtitle1"
 						color="text.secondary"

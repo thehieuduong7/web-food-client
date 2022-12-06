@@ -12,21 +12,20 @@ function InfoFood() {
 		},
 	} = useContext(FoodsContext);
 	if (loading) return <Loading />;
-	else if (error)
+	else if (error) {
+		console.log({ error });
 		return (
 			<Grid container justifyContent="center">
 				404
 			</Grid>
 		);
+	}
+
 	let showCategories = loading ? "" : categories.map((e) => e.name).join("-");
 
 	return (
 		<>
-			<Grid
-				container
-				spacing={3}
-				sx={{ minHeight: "350px", border: 1, paddingY: 5 }}
-			>
+			<Grid container spacing={3} sx={{ minHeight: "350px", paddingY: 5 }}>
 				<Grid item lg={5} md={5}>
 					<CarouselImage value={images} />
 				</Grid>

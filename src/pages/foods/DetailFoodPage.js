@@ -1,4 +1,11 @@
-import { Container, Divider, Grid } from "@mui/material";
+import {
+	Alert,
+	Container,
+	Divider,
+	Grid,
+	Snackbar,
+	Typography,
+} from "@mui/material";
 import FormFood from "../../components/food/FormFood";
 import InfoFood from "../../components/food/InfoFood";
 import ListFoods from "../../components/food/ListFoods";
@@ -6,6 +13,7 @@ import { useState, useContext, useEffect } from "react";
 import ListRating from "../../components/rating/ListRating";
 import { useParams } from "react-router-dom";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
+import { CartsContext } from "../../helpers/context/CartsContext";
 
 function DetailFoodPage() {
 	let { id } = useParams();
@@ -14,13 +22,29 @@ function DetailFoodPage() {
 		loadSpecific,
 		loadListFoods,
 	} = useContext(FoodsContext);
+	const { alert, clearAlert } = useContext(CartsContext);
 
 	useEffect(() => {
 		loadSpecific(id);
 		loadListFoods({ page: 0, size: 4 });
-	}, []);
+	}, [id]);
 	return (
 		<>
+			<Snackbar
+				open={alert.show}
+				anchorOrigin={{ vertical: "top", horizontal: "right" }}
+				sx={{ minWidth: 350, mt: 2 }}
+			>
+				<Alert
+					onClose={clearAlert}
+					severity={alert.type}
+					sx={{ width: "100%" }}
+				>
+					<Typography variant="body1" color="initial">
+						{alert.message}
+					</Typography>
+				</Alert>
+			</Snackbar>
 			<Container sx={{ marginTop: "150px" }}>
 				<InfoFood />
 				<br></br>

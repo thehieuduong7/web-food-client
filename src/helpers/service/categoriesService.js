@@ -9,7 +9,9 @@ function createCategory(pros) {
 
 const getCategories = async () => {
 	try {
-		const res = await axiosPublic.get(`${API_CATEGORIES}`);
+		const params = { page: 0, size: 100 };
+		const query = "?" + new URLSearchParams(params).toString();
+		const res = await axiosPublic.get(`${API_CATEGORIES}${query}`);
 		return res.data.map(createCategory);
 	} catch (err) {
 		throw err.response.data
