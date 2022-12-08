@@ -29,6 +29,16 @@ Content-Type: application/json
     "cateName": "rice2",
     "image": "string"
 }
+###
+put  http://localhost:8080/api/categories/8 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjcwNDI3OTA5fQ.ZxegjQdP9GoWm0vCS3Qd9NmJDRoBD4LpsmVrRI8MoU0
+Content-Type: application/json
+
+{
+    "cateName": "mi tom",
+    "description": "ngon",
+    "image": "stringaaa 111"
+}
 
 ### categories
 get  http://localhost:8080/api/products/24 HTTP/1.1
@@ -134,4 +144,14 @@ api update carts
 }
 ###
 
-get http://localhost:8080/api/carts/customers/3
+post http://localhost:8080/api/carts
+Content-Type: application/json
+
+{
+  "customerId":3,
+  "productId":17,
+  "amount":2
+}
+
+###
+get http://localhost:8080/api/products?price=0&page=0&rating=0&priceOn=1000000&size=10

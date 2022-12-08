@@ -14,6 +14,7 @@ import ListRating from "../../components/rating/ListRating";
 import { useParams } from "react-router-dom";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import { CartsContext } from "../../helpers/context/CartsContext";
+import NotFoundPage from "../error/NotFoundPage";
 
 function DetailFoodPage() {
 	let { id } = useParams();
@@ -28,6 +29,12 @@ function DetailFoodPage() {
 		loadSpecific(id);
 		loadListFoods({ page: 0, size: 4 });
 	}, [id]);
+	if (foodSpecific.error)
+		return (
+			<>
+				<NotFoundPage />
+			</>
+		);
 	return (
 		<>
 			<Snackbar

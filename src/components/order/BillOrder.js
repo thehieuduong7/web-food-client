@@ -89,7 +89,7 @@ export default function BillOrder() {
 					borderColor: "#16802C",
 				}}
 			>
-				<strong>GO ORDER(5)</strong>
+				<strong>GO ORDER</strong>
 			</Button>
 		</>
 	);

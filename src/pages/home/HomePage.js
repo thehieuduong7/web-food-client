@@ -17,11 +17,11 @@ function HomePage() {
 	} = useContext(FoodsContext);
 	const { categoriesState } = useContext(CategoriesContext);
 
-	const { alert, clearAlert } = useContext(CartsContext);
-
 	useEffect(() => {
 		loadListFoods({ page: 0, size: 8 });
+		console.log("loading");
 	}, []);
+	console.log({ listFoods });
 	return (
 		<>
 			<Banner />
@@ -32,21 +32,6 @@ function HomePage() {
 				loading={categoriesState.loading}
 			/>
 			<Information />
-			<Snackbar
-				open={alert.show}
-				anchorOrigin={{ vertical: "top", horizontal: "right" }}
-				sx={{ minWidth: 350, mt: 2 }}
-			>
-				<Alert
-					onClose={clearAlert}
-					severity={alert.type}
-					sx={{ width: "100%" }}
-				>
-					<Typography variant="body1" color="initial">
-						{alert.message}
-					</Typography>
-				</Alert>
-			</Snackbar>
 		</>
 	);
 }

@@ -23,6 +23,7 @@ export function formatResponse(response) {
 		status,
 		categories,
 		images,
+		rating,
 	} = response;
 	categories = categories.map((e) => {
 		return { id: e.cateId, name: e.cateName };
@@ -38,6 +39,7 @@ export function formatResponse(response) {
 			price,
 			totalSold,
 			status: status,
+			rating,
 		},
 		categories,
 		images,
@@ -111,9 +113,11 @@ const updateFood = async (food) => {
 		throw ResponseError(err);
 	}
 };
-const getFoods = async (page, size) => {
-	const params = { page, size };
+const getFoods = async (page, size, filter) => {
+	const params = { page, size, category: filter.category };
+	if (!filter.category) delete params.category;
 	const query = "?" + new URLSearchParams(params).toString();
+	console.log({ query });
 	try {
 		const res = await axiosPublic.get(`${API_FOODS}${query}`);
 		return res.data.map(formatResponse);

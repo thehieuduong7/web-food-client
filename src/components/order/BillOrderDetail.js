@@ -102,7 +102,7 @@ export default function BillOrderDetail() {
 						borderColor: "#16802C",
 					}}
 				>
-					<strong>CHECK OUT(5)</strong>
+					<strong>CHECK OUT</strong>
 				</Button>
 			)}
 		</>

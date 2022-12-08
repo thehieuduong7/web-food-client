@@ -19,7 +19,6 @@ import UpdateCustomerPage from "./pages/customer/UpdateCustomerPage";
 import CreateCategoriesPage from "./pages/category/CreateCategoriesPage";
 import UpdateCategoriesPage from "./pages/category/UpdateCategoriesPage";
 import UpdateFoodsPage from "./pages/foods/UpdateFoodsPage";
-import AdminRouteRole from "./components/auth/AdminRouteRole";
 import UserRouteRole from "./components/auth/UserRouteRole";
 import OrderHistoryPAge from "./pages/order/OrderHistoryPage";
 import RatingPage from "./pages/rating/RatingPage";

@@ -1,8 +1,6 @@
-import Cookies from "universal-cookie";
 import { axiosPrivate } from "../config/axiosConnect";
 import { ResponseError } from "../ulti/ResponseError";
 
-const LOCAL_STORAGE_TOKEN_NAME = process.env.REACT_APP_LOCAL_STORAGE_TOKEN_NAME;
 const API_CATEGORY = "http://localhost:8080/api/categories";
 
 const getCategoryById = async (id) => {

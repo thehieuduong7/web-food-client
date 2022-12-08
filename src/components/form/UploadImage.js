@@ -4,7 +4,7 @@ import { Button, Col, Form, Image, Row } from "react-bootstrap";
 import { Chip, Avatar, Paper } from "@mui/material";
 import { ImageUtil } from "../../helpers/util/uploadImage";
 
-function UploadImage({ value, setState }) {
+function UploadImage({ value, setState, isSingle }) {
 	const InputFileRef = useRef();
 	const [selectedFile, setSelectedFile] = useState(null);
 
@@ -14,9 +14,11 @@ function UploadImage({ value, setState }) {
 		const { url } = res;
 		// const url = URL.createObjectURL(selectedFile[0]);
 		// const filename = selectedFile.name;
-
-		console.log("res", res);
-		setState((pre) => [...pre, { url }]);
+		if (isSingle) {
+			setState([{ url }]);
+		} else {
+			setState((pre) => [...pre, { url }]);
+		}
 		InputFileRef.current.value = "";
 		setSelectedFile(null);
 	};

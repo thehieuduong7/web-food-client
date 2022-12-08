@@ -10,6 +10,7 @@ function AddCart({ id }) {
 	const [value, setValue] = useState(0);
 	const { addCarts } = useContext(CartsContext);
 	const handleAddCart = () => {
+		// console.log({ value });
 		addCarts({ productId: id, amount: value });
 	};
 	return (

@@ -11,13 +11,38 @@ function MyFoodsPage() {
 		foodsState: { listFoods },
 		loadListFoods,
 	} = useContext(FoodsContext);
-	const { categoriesState } = useContext(CategoriesContext);
 
-	const { alert, clearAlert } = useContext(CartsContext);
-
+	const {
+		categoriesState: { loading, categories },
+		getCategories,
+	} = useContext(CategoriesContext);
+	const [categoriesChecked, setCategoriesChecked] = useState([]);
+	useEffect(() => {
+		getCategories();
+	}, []);
 	useEffect(() => {
 		loadListFoods({ page: 0, size: 8 });
 	}, []);
+	const handleChangePage = (e, page) => {
+		loadListFoods({
+			page: page - 1,
+			size: 8,
+			filter: {
+				category:
+					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
+			},
+		});
+	};
+	useEffect(() => {
+		loadListFoods({
+			page: 0,
+			size: 8,
+			filter: {
+				category:
+					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
+			},
+		});
+	}, [categoriesChecked]);
 
 	return (
 		<>
@@ -31,17 +56,30 @@ function MyFoodsPage() {
 			>
 				<Grid container>
 					<Grid item lg={2}>
-						<OptionViewFoods />
+						<OptionViewFoods
+							categoriesOption={{
+								loading,
+								categories,
+								categoriesChecked,
+								setCategoriesChecked,
+							}}
+						/>
 					</Grid>
+
 					<Grid item lg={10} justifyContent={"center"} gap={3} sx={{ pl: 2 }}>
-						<ListFoods data={listFoods.data} />
+						<Grid item minHeight={650}>
+							<ListFoods data={listFoods.data} />
+						</Grid>
 						<Grid container justifyContent={"end"}>
-							<Pagination page={0} onChange={null} count={MaxPage} />
+							<Pagination
+								page={listFoods.page}
+								onChange={handleChangePage}
+								count={MaxPage}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>
 			</Container>
-			<Grid sx={{ position: "fixed", bottom: "150px", right: "10%" }}></Grid>
 		</>
 	);
 }

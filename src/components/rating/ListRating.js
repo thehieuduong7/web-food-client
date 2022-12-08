@@ -12,10 +12,14 @@ function ListRating() {
 	} = useContext(FoodsContext);
 
 	useEffect(() => {
-		ProductService.getListRatingByProduct(foodSpecific.info.id).then((res) => {
-			setListRating(res);
-			console.log(res);
-		});
+		if (!foodSpecific.loading) {
+			ProductService.getListRatingByProduct(foodSpecific.info.id).then(
+				(res) => {
+					setListRating(res);
+					console.log(res);
+				}
+			);
+		}
 	}, [foodSpecific]);
 	if (foodSpecific.loading) return <Loading />;
 

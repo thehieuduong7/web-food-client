@@ -39,7 +39,7 @@ function FormFood({ edit }) {
 		categories,
 		images: imageURLs,
 	};
-	console.log(imageURLs);
+	console.log({ categories });
 
 	const option = edit ? (
 		<UpdateFood data={formFood} />

@@ -44,7 +44,7 @@ function InfoFood() {
 							<strong>Status:</strong> {info.status}
 						</Typography>
 						<Typography variant="h5">{info.price} $</Typography>
-						<AddCart />
+						<AddCart id={info.id} />
 					</Grid>
 				</Grid>
 			</Grid>

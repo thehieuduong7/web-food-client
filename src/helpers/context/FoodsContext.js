@@ -79,7 +79,11 @@ function FoodsContextProvider({ children }) {
 	const loadListFoods = async ({ page, size, filter }) => {
 		dispatch(foodsAction.setLoadingList(true));
 		try {
-			const data = await foodsService.getFoods(page, size);
+			const data = await foodsService.getFoods(
+				page,
+				size,
+				filter ? filter : {}
+			);
 			const list = {
 				data,
 				page,

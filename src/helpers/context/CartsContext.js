@@ -61,6 +61,8 @@ function CartsContextProvider({ children }) {
 				productId,
 				amount,
 			});
+			setAlertResponse({ type: "success", message: "add to cart success" });
+
 			dispatchCarts(cartsAction.appendAmount({ productId, amount }));
 		} catch (err) {
 			setAlertResponse({ type: "error", message: "require login" });

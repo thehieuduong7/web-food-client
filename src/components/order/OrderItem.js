@@ -66,7 +66,9 @@ export default function OrderItem({ cart }) {
 						component="div"
 						maxWidth={170}
 						overflow="hidden"
-					></Typography>
+					>
+						{cart.food.categories.map((e) => e.name).join("-")}
+					</Typography>
 				</CardContent>
 			</Box>
 

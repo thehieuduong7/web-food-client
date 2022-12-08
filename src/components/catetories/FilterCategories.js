@@ -9,40 +9,26 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 import Loading from "../layout/Loading";
 
-export default function FilterCategories() {
-	const {
-		categoriesState: { loading, error, categories },
-		getCategories,
-	} = React.useContext(CategoriesContext);
-	const [checked, setChecked] = React.useState([1]);
+export default function FilterCategories({
+	loading,
+	categories,
+	categoriesChecked,
+	setCategoriesChecked,
+}) {
 	const [open, setOpen] = React.useState(true);
-	React.useEffect(() => {
-		getCategories();
-	}, []);
+
 	if (loading) return <Loading />;
-	if (error)
-		return (
-			<Typography
-				variant="body1"
-				color="red"
-				justifyContent={"center"}
-				sx={{ width: "100%" }}
-			>
-				{error}
-			</Typography>
-		);
 
 	const handleToggle = (value) => () => {
-		const currentIndex = checked.indexOf(value);
-		const newChecked = [...checked];
+		const currentIndex = categoriesChecked.indexOf(value);
+		const newChecked = [...categoriesChecked];
 
 		if (currentIndex === -1) {
 			newChecked.push(value);
 		} else {
 			newChecked.splice(currentIndex, 1);
 		}
-
-		setChecked(newChecked);
+		setCategoriesChecked(newChecked);
 	};
 
 	return (
@@ -68,19 +54,19 @@ export default function FilterCategories() {
 								secondaryAction={
 									<Checkbox
 										edge="end"
-										// onChange={handleToggle(value)}
-										// checked={checked.indexOf(value) !== -1}
+										onChange={handleToggle(e.id)}
+										categoriesChecked={categoriesChecked.indexOf(e.id) !== -1}
 									/>
 								}
 							>
 								<ListItemButton>
 									<ListItemText>
 										{e.name}
-										<Badge
+										{/* <Badge
 											badgeContent={String(e.amount)}
 											color="error"
 											sx={{ ml: 2 }}
-										></Badge>
+										></Badge> */}
 									</ListItemText>
 								</ListItemButton>
 							</ListItem>

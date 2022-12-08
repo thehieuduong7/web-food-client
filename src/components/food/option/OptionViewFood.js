@@ -8,46 +8,52 @@ import {
 	Input,
 	InputAdornment,
 	Divider,
+	Paper,
 } from "@mui/material";
 
 import { SearchRounded } from "@mui/icons-material";
 import FilterCategories from "../../catetories/FilterCategories";
-import { CategoriesContext } from "../../../helpers/context/CategoriesContext";
-import { useContext } from "react";
-function OptionViewFoods() {
+
+function OptionViewFoods({ categoriesOption }) {
 	return (
 		<>
-			<Grid
-				container
-				direction="column"
-				alignItems="center"
-				sx={{ minHeight: "150px", border: 1 }}
-			>
-				<Typography variant="h5" component="h5">
-					My foods
-				</Typography>
-
-				<Divider />
-
-				<Grid container>
-					<FormControl
-						fullWidth
-						sx={{ borderRadius: "16px", px: 2 }}
-						variant="filled"
+			<Paper elevation={3}>
+				<Grid
+					container
+					direction="column"
+					alignItems="center"
+					sx={{ minHeight: "150px" }}
+				>
+					<Typography
+						variant="h5"
+						component="h5"
+						sx={{ mt: 2, fontWeight: "bold" }}
 					>
-						<Input
-							id="standard-adornment-amount"
-							startAdornment={
-								<InputAdornment position="start">
-									<SearchRounded />
-								</InputAdornment>
-							}
-						/>
-					</FormControl>
+						MENU
+					</Typography>
 
-					<FilterCategories />
+					<Divider />
+
+					<Grid container>
+						<FormControl
+							fullWidth
+							sx={{ borderRadius: "16px", px: 2 }}
+							variant="filled"
+						>
+							<Input
+								id="standard-adornment-amount"
+								startAdornment={
+									<InputAdornment position="start">
+										<SearchRounded />
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
+
+						<FilterCategories {...categoriesOption} />
+					</Grid>
 				</Grid>
-			</Grid>
+			</Paper>
 		</>
 	);
 }
