@@ -1,5 +1,6 @@
 const express = require("express");
 const chatsService = require("./src/services/chatsService");
+const notificationService = require("./src/services/notificationService");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -20,6 +21,13 @@ router.get("/rooms", async (req, res) => {
 router.get("/clear", async (req, res) => {
 	await chatsService.clear();
 	res.json({});
+});
+
+router.get("/notificate/:username", async (req, res) => {
+	const notif = await notificationService.getNotification({
+		to: req.query.username,
+	});
+	res.json(notif);
 });
 
 module.exports = router;

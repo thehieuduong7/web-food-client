@@ -103,7 +103,7 @@ Content-Type: application/json
 }
 ###
 put  http://localhost:8080/api/products/24 HTTP/1.1
-# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3NzE0ODgwfQ.UJ_Qdx3WnHagCctHCSAnoDO6Bg0kBQIGO5NWgXFYpkU
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjcwNjAyMDU1fQ.Mnq4WAcYAfcwTQdDYGStUSiNBDpvm7xQ8lnXM-bmxYU
 Content-Type: application/json
 
 {
@@ -113,7 +113,6 @@ Content-Type: application/json
     5
   ],
   "price": 22,
-  "status": "DELETED",
     "imageDtos": [
     {
       "imageURL": "string"
@@ -155,3 +154,5 @@ Content-Type: application/json
 
 ###
 get http://localhost:8080/api/products?price=0&page=0&rating=0&priceOn=1000000&size=10
+###
+get http://localhost:5000/notificate/thehieu

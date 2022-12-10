@@ -7,6 +7,7 @@ const { connect } = require("./src/config/mongoDBConnect");
 const router = require("./router");
 const chatsService = require("./src/services/chatsService");
 const storageSocket = require("./src/services/storageSockets");
+const notificationService = require("./src/services/notificationService");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
@@ -21,14 +22,15 @@ io.on("connect", (socket) => {
 		console.log({ id: socket.id, room, from });
 		try {
 			const sock = storageSocket.addSocket({ socketId: socket.id, room, from });
-			if (sock.from === "admin") {
-				socket.join("admin");
-			}
 			socket.join(room.id);
 			io.to(sock.room.id).emit("message", {
 				from: "app",
 				message: `wellcome ${sock.from}`,
 				createAt: Date.now(),
+			});
+			notificationService.clearUnseen({
+				roomId: sock.room.id,
+				to: from === "admin" ? sock.room.username : "admin",
 			});
 		} catch (err) {
 			onError(err);
@@ -57,6 +59,10 @@ io.on("connect", (socket) => {
 			console.log(err);
 			onError(err);
 		}
+	});
+
+	socket.on("init", async (username) => {
+		socket.join(username);
 	});
 
 	socket.on("disconnect", () => {

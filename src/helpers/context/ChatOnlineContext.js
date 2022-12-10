@@ -36,6 +36,9 @@ function ChatOnlineContextProvider({ children }) {
 		socketRef.current.off("connect");
 		socketRef.current.off("disconnection");
 		socketRef.current = null;
+		chatOnlineAction.setHistories({
+			room: null,
+		});
 	};
 	const joinRoom = async ({ room, from }) => {
 		await closeSocket();

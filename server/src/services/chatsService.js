@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const ChatHistories = require("../models/ChatHistories");
 const ChatRooms = require("../models/ChatRooms");
+const notificationService = require("./notificationService");
 async function findOrCreateRoom({ id, username }, session) {
 	let room;
 	try {
@@ -35,6 +36,13 @@ async function sendMessage({ room: { id, username }, message, from }) {
 				roomId: room._id,
 				from,
 				message,
+			},
+			session
+		);
+		notificationService.addUnseen(
+			{
+				roomId: room.id,
+				to: from === "admin" ? room.username : "admin",
 			},
 			session
 		);
