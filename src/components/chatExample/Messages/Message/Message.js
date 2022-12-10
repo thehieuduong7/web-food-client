@@ -3,9 +3,10 @@ import React from "react";
 import "./Message.css";
 
 import ReactEmoji from "react-emoji";
+import moment from "moment";
 
 const Message = ({ message: { message, from, createAt }, name }) => {
-	console.log({ from });
+	let create = moment(new Date(createAt)).format("hh:mm a");
 	if (from === "app") {
 		console.log({ from: true });
 		return (
@@ -25,7 +26,7 @@ const Message = ({ message: { message, from, createAt }, name }) => {
 	const time = new Date(createAt).toLocaleTimeString();
 	return isSentByCurrentUser ? (
 		<div className="messageContainer justifyEnd">
-			<p className="sentText pr-10">{time}</p>
+			<p className="sentText pr-10">{create}</p>
 			<div className="messageBox backgroundBlue">
 				<p className="messageText colorWhite">{ReactEmoji.emojify(message)}</p>
 			</div>
@@ -35,7 +36,7 @@ const Message = ({ message: { message, from, createAt }, name }) => {
 			<div className="messageBox backgroundLight">
 				<p className="messageText colorDark">{ReactEmoji.emojify(message)}</p>
 			</div>
-			<p className="sentText pl-10 ">{time}</p>
+			<p className="sentText pl-10 ">{create}</p>
 		</div>
 	);
 };
