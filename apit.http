@@ -41,10 +41,10 @@ Content-Type: application/json
 }
 
 ### categories
-get  http://localhost:8080/api/products/24 HTTP/1.1
+get  http://localhost:8080/api/products/ HTTP/1.1
 ### product
 put  http://localhost:8080/api/products/98 HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY5MTM3NDQ3fQ.7yhFBqeXyryvIBDL9y01HonubdZqAWQ2TAJFOYbuZ10
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjcyMDc1NDM2fQ.qO0zNiIzVdlrTiGXnofqmXXvywtIksBmdPG9ikyR2AU
 Content-Type: application/json
 
 {
@@ -55,10 +55,10 @@ Content-Type: application/json
    "amount": 0,
   "imageDtos": [
     {
-      "imageURL": "string"
+      "imageURL": "http://res.cloudinary.com/dk2peasgq/image/upload/v1669101541/qjwmh2e1piwuzvx6gavq.jpg"
     },
-     {
-      "imageURL": "string"
+    {
+      "imageURL": "http://res.cloudinary.com/dk2peasgq/image/upload/v1669101541/qjwmh2e1piwuzvx6gavq.jpg"
     }
   ]
 }
@@ -81,8 +81,7 @@ Content-Type: application/json
 }
 
 ###
-get http://localhost:8080/api/orders?page=0&size=3 HTTP/1.1
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3OTA4NjI1fQ.0gMsa5ih6DJXdgB25OQwG57gewSCq5Wnd9OQdrh9U_E
+get http://localhost:8080/api/products?page=0&size=8&name=222" HTTP/1.1
 ###?page=1&pageSize=3
 post http://localhost:8080/api/orders HTTP/1.1
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjY3ODkwNDg3fQ.HbJkQ_EJINKu54CuKNVCl9Yyt2iYvgBZGi77mpn6r50

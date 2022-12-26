@@ -14,7 +14,7 @@ import {
 import { SearchRounded } from "@mui/icons-material";
 import FilterCategories from "../../catetories/FilterCategories";
 
-function OptionViewFoods({ categoriesOption }) {
+function OptionViewFoods({ categoriesOption, searchName, onChangeSearchName }) {
 	return (
 		<>
 			<Paper elevation={3}>
@@ -42,6 +42,8 @@ function OptionViewFoods({ categoriesOption }) {
 						>
 							<Input
 								id="standard-adornment-amount"
+								value={searchName}
+								onChange={onChangeSearchName}
 								startAdornment={
 									<InputAdornment position="start">
 										<SearchRounded />

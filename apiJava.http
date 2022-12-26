@@ -5,3 +5,24 @@ Content-Type: application/json
     "username":"HieuPc",
     "password":"00000000"
 }
+
+###
+put  http://localhost:8080/api/products/98 HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNjcxMjIwNTYxfQ.hJpCIASZIzcADUzCXrMsoNWBUX3D2OMUZBFbuor82VA
+Content-Type: application/json
+
+{
+  "productName": "food5",
+  "description": "Trong ẩm thực Việt, có lẽ chẳng món ăn nào “dễ chịu” như gỏi cuốn. Dùng làm thức ăn nhẹ cũng được, mà ăn no căng bụng cũng không ngấy;",
+  "categoryIds": [5,8],
+  "price": 200,
+   "amount": 0,
+  "imageDtos": [
+    {
+      "imageURL": "string"
+    }
+  ]
+}
+
+###
+get  http://localhost:8080/api/products/98 HTTP/1.1

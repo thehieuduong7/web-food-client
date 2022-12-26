@@ -114,7 +114,7 @@ const updateFood = async (food) => {
 	}
 };
 const getFoods = async (page, size, filter) => {
-	const params = { page, size, category: filter.category };
+	const params = { page, size, ...filter };
 	if (!filter.category) delete params.category;
 	const query = "?" + new URLSearchParams(params).toString();
 	console.log({ query });

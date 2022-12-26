@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-let mongoDBString = process.env.MONGODBSTRING || "";
+let mongoDBString = process.env.MONGODB_STRING || "";
 
 async function connect() {
 	try {

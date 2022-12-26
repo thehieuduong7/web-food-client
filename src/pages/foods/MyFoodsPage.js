@@ -17,6 +17,8 @@ function MyFoodsPage() {
 		getCategories,
 	} = useContext(CategoriesContext);
 	const [categoriesChecked, setCategoriesChecked] = useState([]);
+	const [searchName, setSearchName] = useState("");
+
 	useEffect(() => {
 		getCategories();
 	}, []);
@@ -30,6 +32,7 @@ function MyFoodsPage() {
 			filter: {
 				category:
 					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
+				searchName,
 			},
 		});
 	};
@@ -40,9 +43,10 @@ function MyFoodsPage() {
 			filter: {
 				category:
 					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
+				searchName,
 			},
 		});
-	}, [categoriesChecked]);
+	}, [categoriesChecked, searchName]);
 
 	return (
 		<>
@@ -63,6 +67,8 @@ function MyFoodsPage() {
 								categoriesChecked,
 								setCategoriesChecked,
 							}}
+							searchName={searchName}
+							onChangeSearchName={(e) => setSearchName(e.target.value)}
 						/>
 					</Grid>
 
