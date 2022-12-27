@@ -76,19 +76,21 @@ function FoodsContextProvider({ children }) {
 	const refreshList = async () => {
 		await loadListFoods(foodsState.listFoods);
 	};
-	const loadListFoods = async ({ page, size, filter }) => {
+	const loadListFoods = async ({ page, size, filter, sortBy }) => {
 		dispatch(foodsAction.setLoadingList(true));
 		try {
 			const data = await foodsService.getFoods(
 				page,
 				size,
-				filter ? filter : {}
+				filter ? filter : {},
+				sortBy ? sortBy : null
 			);
 			const list = {
 				data,
 				page,
 				size,
 				filter,
+				sortBy,
 			};
 			dispatch(foodsAction.setList(list));
 		} catch (err) {

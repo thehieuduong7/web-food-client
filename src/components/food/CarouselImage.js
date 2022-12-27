@@ -29,8 +29,8 @@ function CarouselImage({ value }) {
 					return (
 						<Grid align="center" key={index}>
 							<img
-								width={"100%"}
-								height={"100%"}
+								width={"470px"}
+								height={"400px"}
 								style={{ borderRadius: "16px", minHeight: "350px" }}
 								src={e.url}
 								alt={"foods"}

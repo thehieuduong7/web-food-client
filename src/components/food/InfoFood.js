@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import Loading from "../layout/Loading";
@@ -25,29 +25,35 @@ function InfoFood() {
 
 	return (
 		<>
-			<Grid container spacing={3} sx={{ minHeight: "350px", paddingY: 5 }}>
-				<Grid item lg={5} md={5}>
-					<CarouselImage value={images} />
-				</Grid>
-				<Grid item lg={7} md={7} sx={{ pr: 5 }}>
-					<Grid container direction="column" gap={1}>
-						<Typography variant="h3" component="h3">
-							{info.name}
-						</Typography>
-						<p>{info.description}</p>
+			<Paper elevation={4}>
+				<Grid
+					container
+					spacing={3}
+					sx={{ minHeight: "350px", paddingY: 5, px: 2 }}
+				>
+					<Grid item lg={5} md={5}>
+						<CarouselImage value={images} />
+					</Grid>
+					<Grid item lg={7} md={7} sx={{ pr: 5 }}>
+						<Grid container direction="column" gap={1}>
+							<Typography variant="h3" component="h3">
+								{info.name}
+							</Typography>
+							<p>{info.description}</p>
 
-						<Typography>
-							<strong style={{ marginRight: "3px" }}>Category:</strong>
-							<span>{showCategories}</span>
-						</Typography>
-						<Typography>
-							<strong>Status:</strong> {info.status}
-						</Typography>
-						<Typography variant="h5">{info.price} $</Typography>
-						<AddCart id={info.id} />
+							<Typography>
+								<strong style={{ marginRight: "3px" }}>Category:</strong>
+								<span>{showCategories}</span>
+							</Typography>
+							<Typography>
+								<strong>Status:</strong> {info.status}
+							</Typography>
+							<Typography variant="h5">{info.price} $</Typography>
+							<AddCart id={info.id} />
+						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
+			</Paper>
 		</>
 	);
 }

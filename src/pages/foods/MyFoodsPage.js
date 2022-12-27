@@ -5,7 +5,35 @@ import { useState, useContext, useEffect } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import { CategoriesContext } from "../../helpers/context/CategoriesContext";
 import { CartsContext } from "../../helpers/context/CartsContext";
+import SelectSortFoods from "../../components/food/option/SelectSortFoods";
 const MaxPage = 5;
+const OPTIONS = [
+	{
+		id: 1,
+		value: "createdAt.desc",
+		label: "Newest arrivals",
+	},
+	{
+		id: 2,
+		value: "price.asc",
+		label: "Price: low to high",
+	},
+	{
+		id: 3,
+		value: "price.desc",
+		label: "Price: high to low",
+	},
+	{
+		id: 4,
+		value: "productName.asc",
+		label: "Name: A to Z",
+	},
+	{
+		id: 5,
+		value: "productName.desc",
+		label: "Name: Z to A",
+	},
+];
 function MyFoodsPage() {
 	const {
 		foodsState: { listFoods },
@@ -18,7 +46,7 @@ function MyFoodsPage() {
 	} = useContext(CategoriesContext);
 	const [categoriesChecked, setCategoriesChecked] = useState([]);
 	const [searchName, setSearchName] = useState("");
-
+	const [sortBy, setSortBy] = useState("createdAt.desc");
 	useEffect(() => {
 		getCategories();
 	}, []);
@@ -34,6 +62,7 @@ function MyFoodsPage() {
 					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
 				searchName,
 			},
+			sortBy,
 		});
 	};
 	useEffect(() => {
@@ -45,8 +74,9 @@ function MyFoodsPage() {
 					categoriesChecked.length === 0 ? null : categoriesChecked.join(","),
 				searchName,
 			},
+			sortBy,
 		});
-	}, [categoriesChecked, searchName]);
+	}, [categoriesChecked, searchName, sortBy]);
 
 	return (
 		<>
@@ -59,6 +89,13 @@ function MyFoodsPage() {
 				}}
 			>
 				<Grid container>
+					<Grid container justifyContent={"end"} mb={3}>
+						<SelectSortFoods
+							value={sortBy}
+							onChange={(e) => setSortBy(e.target.value)}
+							options={OPTIONS}
+						/>
+					</Grid>
 					<Grid item lg={2}>
 						<OptionViewFoods
 							categoriesOption={{
@@ -78,7 +115,7 @@ function MyFoodsPage() {
 						</Grid>
 						<Grid container justifyContent={"end"}>
 							<Pagination
-								page={listFoods.page}
+								page={listFoods.page + 1}
 								onChange={handleChangePage}
 								count={MaxPage}
 							/>

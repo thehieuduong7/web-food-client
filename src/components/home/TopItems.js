@@ -44,6 +44,7 @@ function TopItems({ dataTopFood, loading }) {
 						size={"large"}
 						fullWidth
 						onClick={onclickViewAll}
+						sx={{ fontWeight: "bold" }}
 					>
 						See more ...
 					</Button>
