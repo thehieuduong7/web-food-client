@@ -186,18 +186,12 @@ function DropRow({ children }) {
 	);
 }
 
-export default function GridFoods() {
-	const {
-		loadListOrders,
-		ordersState: { loading, data },
-	} = useContext(OrdersContext);
+export default function GridFoods({ loading, data }) {
 	const [sort, setSort] = useState({
 		field: null,
 		order: null,
 	});
-	useEffect(() => {
-		loadListOrders({ page: 0, size: 10 });
-	}, []);
+
 	let rows = [];
 	if (loading) return <Loading />;
 	else {

@@ -39,7 +39,7 @@ function OrdersContextProvider({ children }) {
 	const loadListOrders = async ({ page, size, filter }) => {
 		dispatch(ordersAction.setLoading(true));
 		try {
-			const data = await ordersService.getOrders(page, size);
+			const data = await ordersService.getOrders({ page, size, filter });
 			const list = {
 				data,
 				page,

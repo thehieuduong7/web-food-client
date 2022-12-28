@@ -3,15 +3,29 @@ import { Container } from "react-bootstrap";
 import CardStatistic from "../../components/order/CardStatistic";
 import GridListOrder from "../../components/order/GridListOrder";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { OrdersContext } from "../../helpers/context/OrdersContext";
 
 function AdminOrderPage() {
-	const [value, setValue] = useState(dayjs());
+	const {
+		loadListOrders,
+		ordersState: { loading, data },
+	} = useContext(OrdersContext);
+	const [value, setValue] = useState("");
+
+	useEffect(() => {
+		loadListOrders({
+			filter: {
+				date: value ? value.format("YYYY-MM-DD") : "",
+			},
+		});
+	}, [value]);
 
 	const handleChange = (newValue) => {
 		setValue(newValue);
 	};
+	console.log({ value });
 	return (
 		<>
 			<Paper levation={3} sx={{ mr: 3, px: 3, py: 2 }}>
@@ -39,7 +53,7 @@ function AdminOrderPage() {
 						<Grid container justifyContent={"end"}>
 							<DesktopDatePicker
 								label="Date"
-								inputFormat="MM/DD/YYYY"
+								inputFormat="YYYY-MM-DD"
 								value={value}
 								onChange={handleChange}
 								renderInput={(params) => (
@@ -48,7 +62,7 @@ function AdminOrderPage() {
 							/>
 						</Grid>
 
-						<GridListOrder />
+						<GridListOrder loading={loading} data={data} />
 					</Grid>
 				</Grid>
 			</Paper>

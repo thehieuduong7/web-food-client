@@ -61,8 +61,8 @@ const saveOrder = async (order) => {
 			  };
 	}
 };
-const getOrders = async (page, size) => {
-	const params = { page, size };
+const getOrders = async ({ filter }) => {
+	const params = { ...filter };
 	const query = "?" + new URLSearchParams(params).toString();
 	try {
 		const res = await axiosPrivate.get(`${API_ORDERS}${query}`);

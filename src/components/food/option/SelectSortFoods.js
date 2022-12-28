@@ -6,7 +6,10 @@ import Select from "@mui/material/Select";
 
 export default function SelectSortFoods({ value, onChange, options }) {
 	return (
-		<FormControl sx={{ m: 1, minWidth: 215 }} variant="standard">
+		<FormControl
+			sx={{ m: 1, minWidth: 180, textAlign: "center" }}
+			variant="standard"
+		>
 			<InputLabel id="demo-select-small">Sort by</InputLabel>
 			<Select
 				labelId="demo-select-small"

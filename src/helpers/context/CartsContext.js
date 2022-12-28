@@ -45,7 +45,7 @@ function CartsContextProvider({ children }) {
 	};
 
 	const {
-		authState: { isAuthenticated, user },
+		authState: { isAuthenticated, user, authorization },
 	} = useContext(AuthContext);
 	const {
 		ordersState: { orderSuccess },
@@ -122,6 +122,7 @@ function CartsContextProvider({ children }) {
 	};
 
 	useEffect(() => {
+		if (authorization === "admin") return;
 		loadCarts();
 	}, [isAuthenticated, orderSuccess]);
 

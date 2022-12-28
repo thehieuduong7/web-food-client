@@ -4,7 +4,6 @@ import OptionViewFoods from "../../components/food/option/OptionViewFood";
 import { useState, useContext, useEffect } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import { CategoriesContext } from "../../helpers/context/CategoriesContext";
-import { CartsContext } from "../../helpers/context/CartsContext";
 import SelectSortFoods from "../../components/food/option/SelectSortFoods";
 const MaxPage = 5;
 const OPTIONS = [
@@ -89,7 +88,7 @@ function MyFoodsPage() {
 				}}
 			>
 				<Grid container>
-					<Grid container justifyContent={"end"} mb={3}>
+					<Grid container justifyContent={"end"} mb={2}>
 						<SelectSortFoods
 							value={sortBy}
 							onChange={(e) => setSortBy(e.target.value)}
