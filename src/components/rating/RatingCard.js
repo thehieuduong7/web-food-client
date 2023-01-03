@@ -17,24 +17,21 @@ import { useNavigate } from "react-router-dom";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import Loading from "../layout/Loading";
 const initFood = {
-	point: 0,
+	point: 5,
 	content: "",
 };
-export default function RatingCard() {
+export default function RatingCard({ foodSpecific, reload }) {
 	const {
 		authState: { user },
 	} = React.useContext(AuthContext);
 	const [stateForm, setStateForm] = React.useState(initFood);
-	const {
-		foodsState: { foodSpecific },
-	} = React.useContext(FoodsContext);
+
 	const [loading, setLoading] = React.useState(false);
 	const [alert, setAlert] = React.useState({
 		type: "",
 		show: null,
 		message: "",
 	});
-	const nagivate = useNavigate();
 	const ratingChange = (event, value) => {
 		console.log(value);
 		setStateForm((pre) => {
@@ -62,6 +59,7 @@ export default function RatingCard() {
 				customerDtoId: user.id,
 				productDtoId: foodSpecific.info.id,
 			});
+			reload();
 			setAlert({
 				type: "success",
 				message: "rating success",
@@ -86,9 +84,11 @@ export default function RatingCard() {
 					minHeight: "350px",
 					border: 1,
 					borderRadius: 5,
-					paddingY: 1,
+					// paddingY: 1,
 					borderColor: "#E5E3E2",
+					marginX: 0,
 				}}
+				justifyContent={"center"}
 			>
 				<Stack
 					spacing={1}
@@ -107,7 +107,7 @@ export default function RatingCard() {
 					<Rating
 						precision={0.5}
 						name="size-large"
-						defaultValue={2}
+						defaultValue={stateForm["point"]}
 						size="large"
 						onChange={ratingChange}
 					/>

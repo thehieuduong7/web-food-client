@@ -5,11 +5,8 @@ import { ProductService } from "../../helpers/service/productService";
 import { useContext, useEffect, useState } from "react";
 import { FoodsContext } from "../../helpers/context/FoodsContext";
 import Loading from "../layout/Loading";
-function ListRating() {
+function ListRating({ foodSpecific }) {
 	const [ListRating, setListRating] = useState([]);
-	const {
-		foodsState: { foodSpecific },
-	} = useContext(FoodsContext);
 
 	useEffect(() => {
 		if (!foodSpecific.loading) {

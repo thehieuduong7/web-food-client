@@ -112,7 +112,7 @@ const getOrderByCustomer = async (id) => {
 				size: 8,
 			},
 		});
-		console.log(res);
+		console.log({ getOrder: res });
 		return res.data;
 	} catch (err) {
 		console.log("err", err, err.response);

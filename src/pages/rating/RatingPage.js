@@ -19,15 +19,19 @@ function RatingPage() {
 		loadSpecific(id);
 		loadListFoods({ page: 0, size: 4 });
 	}, []);
+	const reload = () => {
+		loadSpecific(id);
+		loadListFoods({ page: 0, size: 4 });
+	};
 	return (
 		<>
 			<Container sx={{ marginTop: "150px" }}>
 				<Grid container direction={"column"} gap={3}>
 					<InfoFood />
 					<br></br>
-					<ListRating />
+					<ListRating foodSpecific={foodSpecific} />
 					<br></br>
-					<RatingCard />
+					<RatingCard foodSpecific={foodSpecific} reload={reload} />
 				</Grid>
 			</Container>
 		</>

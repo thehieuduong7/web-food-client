@@ -88,7 +88,7 @@ function DetailFoodPage() {
 					</h3>
 				</Grid>
 				<br></br>
-				<ListRating />
+				<ListRating foodSpecific={foodSpecific} />
 			</Container>
 		</>
 	);

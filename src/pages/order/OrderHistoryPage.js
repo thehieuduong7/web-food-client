@@ -7,6 +7,7 @@ import { CustomersService } from "../../helpers/service/customerService";
 import { AuthContext } from "../../helpers/context/AuthContext";
 import { OrdersContext } from "../../helpers/context/OrdersContext";
 import Loading from "../../components/layout/Loading";
+import moment from "moment";
 
 function OrderHistoryPage() {
 	const { loadCarts } = useContext(CartsContext);
@@ -50,7 +51,11 @@ function OrderHistoryPage() {
 								<h5>
 									Đơn Hàng: {e.id} {format(e.status)}
 								</h5>
-								<p></p>
+								<p sx={{ float: "right" }}>
+									{moment(new Date(e.updatedAt)).format(
+										"MMMM Do YYYY, h:mm:ss a"
+									)}
+								</p>
 								{e.oderDetails.map((item) => {
 									return <OrderItemHitory cart={item} status={e.status} />;
 								})}
